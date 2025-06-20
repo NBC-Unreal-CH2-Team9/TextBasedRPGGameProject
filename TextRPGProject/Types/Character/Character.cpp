@@ -8,10 +8,7 @@ void Character::Attack(Actor& other)
 
 void Character::TakeDamage(int damage)
 {
-	health -= damage;
-	if (health < 0) {
-		// TODO : 전투 시스템의 게임 오버 처리 함수 호출
-	}
+	health -= damage;	
 }
 
 void Character::DisplayStatus()
@@ -29,24 +26,24 @@ void Character::LevelUp()
 	if (level < 10) {
 		level++;
 		std::cout << "Level Up!" << std::endl;		
-		UpdateHealth();
-		UpdateAttack();
+		OnLevelChangedHealth();
+		OnLevelChangedAttack();
 	}	
 }
 
-void Character::UpdateHealth()
+void Character::OnLevelChangedHealth()
 {
 	int newHealth = (maxHealth + level * 20);
 	health = newHealth;
 	maxHealth = newHealth;	
 }
 
-void Character::UpdateAttack()
+void Character::OnLevelChangedAttack()
 {
 	attack += (level * 5);		
 }
 
-void Character::UpdateExperience(int exp)
+void Character::AddExperience(int exp)
 {
 	int newExp = experience + exp; // 현재 경험치 + 추가 경험치
 	if(newExp >= 100) {		

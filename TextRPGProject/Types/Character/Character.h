@@ -25,15 +25,22 @@ public:
 		gold = value;
 	}
 
+	int GetLevel() {
+		return level;
+	}
+	void SetLevel(int value) {
+		level = value;
+	}
+
 	void DisplayStatus();
 
 	void LevelUp();
 
-	void UpdateHealth();
+	void OnLevelChangedHealth();
 
-	void UpdateAttack();
+	void OnLevelChangedAttack();
 
-	void UpdateExperience(int exp);	
+	void AddExperience(int exp);	
 
 protected:
 	Inventory inventory;
