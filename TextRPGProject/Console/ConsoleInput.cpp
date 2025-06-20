@@ -1,10 +1,10 @@
-#include "ConsoleInput.h"
+ï»¿#include "ConsoleInput.h"
 
 int SelectNumber(std::vector<std::string> options)
 {
-	int select;
+	std::string select;
 	while (true) {
-		// ÇÁ·ÒÇÁÆ® Ãâ·Â
+		// í”„ë¡¬í”„íŠ¸ ì¶œë ¥
 		for (int n = 0; n < options.size(); n++) {
 			std::cout << (n + 1) << ": " << options[n];
 			if (n != options.size() - 1) {
@@ -12,15 +12,37 @@ int SelectNumber(std::vector<std::string> options)
 			}
 		}
 		std::cout << std::endl;
-		std::cout << "¼±ÅÃ: ";
+		std::cout << "ì„ íƒ: ";
 		std::cin >> select;
 
-		if (1 <= select && select <= options.size()) {
-			break;
+		int number = std::stoi(select);
+
+		if (1 <= number && number <= options.size()) {
+			return number - 1;
 		}
 		else {
-			std::cout << "Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä." << std::endl;
+			std::cout << "ìž˜ëª»ëœ ìž…ë ¥ìž…ë‹ˆë‹¤. ë‹¤ì‹œ ìž…ë ¥í•˜ì„¸ìš”." << std::endl;
 		}
 	}
-	return select;
+	return -1;
+}
+
+bool SelectYesOrNo(std::string question)
+{
+	char input;
+	while (true) {
+
+		std::cout << question << " [Y/N]: ";
+		std::cin >> input;
+
+		if (input == 'Y' || input == 'y') {
+			return true;
+		}
+		else if (input == 'N' || input == 'n') {
+			return false;
+		}
+		else {
+			std::cout << "ìž˜ëª»ëœ ìž…ë ¥ìž…ë‹ˆë‹¤. ë‹¤ì‹œ ìž…ë ¥í•˜ì„¸ìš”." << std::endl;
+		}
+	}
 }
