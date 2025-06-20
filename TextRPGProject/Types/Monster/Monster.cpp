@@ -25,8 +25,8 @@ void Monster::TakeDamage(int damage)
 
 Monster* MonsterManager::CreateDragon(int characterLevel)
 {
-	int health = CalculateHealth(characterLevel);
-	int attack = CalculateAttack(characterLevel);
+	int health = CalculateHealth(characterLevel) * 1.5;
+	int attack = CalculateAttack(characterLevel) * 1.5;
 	Monster* dragon = new Dragon("µå·¡°ï", health, attack);
 	return dragon;
 }
@@ -57,10 +57,10 @@ Monster* MonsterManager::CreateGoblin(int characterLevel)
 
 int MonsterManager::CalculateHealth(int characterLevel)
 {
-	return (rand() % 11 + 20) * characterLevel * 1.5;;
+	return (rand() % 11 + 20) * characterLevel;
 }
 
 int MonsterManager::CalculateAttack(int characterLevel)
 {
-	return (rand() % 6 + 5) * characterLevel * 1.5;
+	return (rand() % 6 + 5) * characterLevel;
 }
