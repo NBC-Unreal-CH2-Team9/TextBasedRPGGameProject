@@ -1,4 +1,4 @@
-#include <vector>
+ï»¿#include <vector>
 #include <string>
 #include <iostream>
 
@@ -21,21 +21,21 @@ GameManager::~GameManager()
 void GameManager::CreateCharacter()
 {
 	// Temporal code
-	character = new Character("ÀÓ½Ã", 100, 10);
+	character = new Character("ì„ì‹œ", 100, 10);
 	character->SetGold(100);
 }
 
 BattleResult GameManager::Battle()
 {
-	// ÇÊ¼ö ±â´É [3]
-	// ÀüÅõ ½Ã½ºÅÛ
-	// Ä³¸¯ÅÍ »ı¼º Á÷ÈÄ, ±×¸®°í »óÁ¡ ¹æ¹®(¶Ç´Â ½ºÅµ) ÀÌÈÄ
+	// í•„ìˆ˜ ê¸°ëŠ¥ [3]
+	// ì „íˆ¬ ì‹œìŠ¤í…œ
+	// ìºë¦­í„° ìƒì„± ì§í›„, ê·¸ë¦¬ê³  ìƒì  ë°©ë¬¸(ë˜ëŠ” ìŠ¤í‚µ) ì´í›„
 
-	// ÇÊ¼ö ±â´É [4]
-	// ¸ó½ºÅÍ ¼³¸í
+	// í•„ìˆ˜ ê¸°ëŠ¥ [4]
+	// ëª¬ìŠ¤í„° ì„¤ëª…
 
-	// ÀüÅõ ·ÎÁ÷
-	// ÀüÅõ ·ÎÁ÷ ´ã´çÀÚ°¡ ±¸Çö
+	// ì „íˆ¬ ë¡œì§
+	// ì „íˆ¬ ë¡œì§ ë‹´ë‹¹ìê°€ êµ¬í˜„
 	// while () {
 	// ...
 	// }
@@ -62,7 +62,7 @@ public:
 
 const std::string GameManager::shopMessage = "";
 const std::vector<std::string> GameManager::shopPrompt = {
-	"¹°°Ç »ç±â", "¹°°Ç ÆÈ±â", "»óÁ¡ ³ª°¡±â"
+	"ë¬¼ê±´ ì‚¬ê¸°", "ë¬¼ê±´ íŒ”ê¸°", "ìƒì  ë‚˜ê°€ê¸°"
 };
 
 void GameManager::Shop()
@@ -83,7 +83,7 @@ void GameManager::Shop()
 			}
 			else {
 				// temp message
-				std::cout << "ÆÇ¸ÅÇÒ ¹°°ÇÀÌ ¾ø½À´Ï´Ù." << std::endl;
+				std::cout << "íŒë§¤í•  ë¬¼ê±´ì´ ì—†ìŠµë‹ˆë‹¤." << std::endl;
 			}
 			break;
 		case 2: // Exit 
@@ -105,11 +105,11 @@ void GameManager::ShopBuy()
 	int gold = character->GetGold();
 
 	// temp message
-	std::cout << "¼ÒÀ¯ °ñµå: " << character->GetGold() << std::endl;
+	std::cout << "ì†Œìœ  ê³¨ë“œ: " << character->GetGold() << std::endl;
 
 	std::vector<std::string> options;
 	for (int i = 0; i < shopItems.size(); i++) {
-		options.emplace_back(shopItems[i]->GetName() + ", (" + std::to_string(prices[i]) + "°ñµå)");
+		options.emplace_back(shopItems[i]->GetName() + ", (" + std::to_string(prices[i]) + "ê³¨ë“œ)");
 	}
 	
 	int buyIndex = SelectNumber(options);
@@ -131,13 +131,13 @@ void GameManager::ShopBuy()
 			character->SetGold(gold);
 
 			// temp message
-			std::cout << newItem->GetName() << "À»/¸¦ ±¸¸ÅÇß½À´Ï´Ù. "
-				<< "(³²Àº °ñµå: " << gold << ")" << std::endl;
+			std::cout << newItem->GetName() << "ì„/ë¥¼ êµ¬ë§¤í–ˆìŠµë‹ˆë‹¤. "
+				<< "(ë‚¨ì€ ê³¨ë“œ: " << gold << ")" << std::endl;
 		}
 	}
 	else {
 		// temp message
-		std::cout << "°ñµå°¡ ¸ğÀÚ¶ø´Ï´Ù" << std::endl;
+		std::cout << "ê³¨ë“œê°€ ëª¨ìëë‹ˆë‹¤" << std::endl;
 	}
 	
 }
@@ -157,11 +157,11 @@ void GameManager::ShopSell()
 	Item* item = character->GetInventory()->Get(sellIndex);
 	int price = 10;
 	// temp message
-	std::cout << item->GetName() << "À»/¸¦ " << price << "°ñµå¿¡ ÆÈ¾Ò½À´Ï´Ù." << std::endl;
+	std::cout << item->GetName() << "ì„/ë¥¼ " << price << "ê³¨ë“œì— íŒ”ì•˜ìŠµë‹ˆë‹¤." << std::endl;
 
 	character->GetInventory()->Remove(sellIndex);
 	character->SetGold(character->GetGold() + price);
 
 	// temp message
-	std::cout << "ÇöÀç ¼ÒÀ¯ °ñµå´Â " << character->GetGold() << " ÀÔ´Ï´Ù." << std::endl;
+	std::cout << "í˜„ì¬ ì†Œìœ  ê³¨ë“œëŠ” " << character->GetGold() << " ì…ë‹ˆë‹¤." << std::endl;
 }

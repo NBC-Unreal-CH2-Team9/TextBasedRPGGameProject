@@ -1,10 +1,10 @@
-#include "ConsoleInput.h"
+ï»¿#include "ConsoleInput.h"
 
 int SelectNumber(std::vector<std::string> options)
 {
 	std::string select;
 	while (true) {
-		// ÇÁ·ÒÇÁÆ® Ãâ·Â
+		// í”„ë¡¬í”„íŠ¸ ì¶œë ¥
 		for (int n = 0; n < options.size(); n++) {
 			std::cout << (n + 1) << ": " << options[n];
 			if (n != options.size() - 1) {
@@ -12,7 +12,7 @@ int SelectNumber(std::vector<std::string> options)
 			}
 		}
 		std::cout << std::endl;
-		std::cout << "¼±ÅÃ: ";
+		std::cout << "ì„ íƒ: ";
 		std::cin >> select;
 
 		int number = std::stoi(select);
@@ -21,7 +21,7 @@ int SelectNumber(std::vector<std::string> options)
 			return number - 1;
 		}
 		else {
-			std::cout << "Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä." << std::endl;
+			std::cout << "ìž˜ëª»ëœ ìž…ë ¥ìž…ë‹ˆë‹¤. ë‹¤ì‹œ ìž…ë ¥í•˜ì„¸ìš”." << std::endl;
 		}
 	}
 	return -1;
@@ -42,7 +42,7 @@ bool SelectYesOrNo(std::string question)
 			return false;
 		}
 		else {
-			std::cout << "Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä." << std::endl;
+			std::cout << "ìž˜ëª»ëœ ìž…ë ¥ìž…ë‹ˆë‹¤. ë‹¤ì‹œ ìž…ë ¥í•˜ì„¸ìš”." << std::endl;
 		}
 	}
 }
