@@ -19,7 +19,7 @@ public:
 	virtual void Attack(Actor& other) = 0;
 	virtual void TakeDamage(int damage) = 0;
 
-	std::string GetName();
+	std::string GetName() { return name; };
 	int GetHealth();
 	int GetAttack();
 

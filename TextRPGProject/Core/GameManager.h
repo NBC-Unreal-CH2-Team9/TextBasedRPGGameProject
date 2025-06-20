@@ -1,4 +1,6 @@
-#pragma once
+ï»¿#pragma once
+
+#include "../Types/Character/Character.h"
 
 #include "../Types/Monster.h""
 #include "../Types/Actor.h"
@@ -16,9 +18,10 @@ public:
 	GameManager();
 	~GameManager();
 
-	/* ÇÊ¿äÇÏ¸é return type Ãß°¡ */
-	void CreateCharacter(/*ÇÊ¿äÇÏ¸é parameter Ãß°¡*/);
+	/* í•„ìš”í•˜ë©´ return type ì¶”ê°€ */
+	void CreateCharacter(/*í•„ìš”í•˜ë©´ parameter ì¶”ê°€*/);
 
+<<<<<<< HEAD
 	void GenerateMonster(int characterLevel);
 
 	/* ÇÊ¿äÇÏ¸é return type º¯°æ */
@@ -37,4 +40,23 @@ private:
 	int totalMonsterAttack;
 	bool isMyTurn;
 	bool isFighting;
+=======
+	/* í•„ìš”í•˜ë©´ return type ë³€ê²½ */
+	BattleResult Battle(/*í•„ìš”í•˜ë©´ parameter ì¶”ê°€*/);
+
+	void Shop();
+	void ShopBuy();
+	void ShopSell();
+
+	Character* GetCharacter() {
+		return character;
+	}
+
+protected:
+	Character* character;
+
+private:
+	static const std::string shopMessage;
+	static const std::vector<std::string> shopPrompt;
+>>>>>>> f65649bf6c857c74f3b6030eb438625e0b70b32d
 };
