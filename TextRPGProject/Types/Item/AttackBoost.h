@@ -4,7 +4,7 @@
 
 class AttackBoost : public Item {
 public:
-	AttackBoost(int healthRestore)
+	AttackBoost(int attackincrease)
 		: Item("Attack Boost", 100), attackincrease(attackincrease) {
 	};
 
