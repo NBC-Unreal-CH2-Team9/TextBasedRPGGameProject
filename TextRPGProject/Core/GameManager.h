@@ -29,4 +29,8 @@ public:
 
 protected:
 	Character* character;
+
+private:
+	static const std::string shopMessage;
+	static const std::vector<std::string> shopPrompt;
 };

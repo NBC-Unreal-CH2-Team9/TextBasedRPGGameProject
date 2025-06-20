@@ -1,4 +1,8 @@
+#include <vector>
+#include <string>
+
 #include "GameManager.h"
+#include "../Console/ConsoleInput.h"
 
 GameManager::GameManager()
 {
@@ -37,6 +41,47 @@ BattleResult GameManager::Battle()
 	return result;
 }
 
+// Temporal Items for Shop TEST
+#include "../Types/Item/Item.h"
+class Potion : public Item {
+public:
+	Potion(std::string name) : Item(name) {}
+	virtual void Use(Character& user) override {}
+};
+class PowerUp : public Item {
+public:
+	PowerUp(std::string name) : Item(name) {}
+	virtual void Use(Character& user) override {}
+};
+
+
+const std::string GameManager::shopMessage = "";
+const std::vector<std::string> GameManager::shopPrompt = {
+	"물건 사기", "물건 팔기", "상점 나가기"
+};
+
 void GameManager::Shop()
 {
+	// List of Items
+	// Hardcoding..
+	std::vector<Item*> shopItems;
+	shopItems.push_back(new Potion("포션"));
+	shopItems.push_back(new Potion("파워업"));
+	std::vector<int> prices;
+	prices.push_back(10);
+	prices.push_back(100);
+
+	// options for print
+	std::vector<std::string> buyOptions;
+	std::vector<std::string> sellOptions;
+
+	int select = SelectNumber(shopPrompt);
+	switch (select) {
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	}
 }
