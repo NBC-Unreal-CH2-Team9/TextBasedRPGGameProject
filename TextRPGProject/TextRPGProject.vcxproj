@@ -177,6 +177,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AttackBoost.cpp" />
     <ClCompile Include="Console\ConsoleInput.cpp" />
     <ClCompile Include="Console\ConsoleOutput.cpp" />
     <ClCompile Include="Core\GameManager.cpp" />
@@ -189,13 +190,16 @@
     </ClCompile>
     <ClCompile Include="Types\Actor.cpp" />
     <ClCompile Include="Types\Character\Character.cpp" />
+    <ClCompile Include="Types\Item\HealthPotion.cpp" />
     <ClCompile Include="Types\Item\Item.cpp" />
     <ClCompile Include="Types\Monster\Monster.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttackBoost.h" />
     <ClInclude Include="Core\GameManager.h" />
     <ClInclude Include="Types\Actor.h" />
     <ClInclude Include="Types\Character\Character.h" />
+    <ClInclude Include="Types\Item\HealthPotion.h" />
     <ClInclude Include="Types\Item\Item.h" />
     <ClInclude Include="Types\Monster\Monster.h" />
   </ItemGroup>
