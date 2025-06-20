@@ -36,7 +36,7 @@ bool SelectYesOrNo(std::string question)
 		if (input == 'Y' || input == 'y') {
 			return true;
 		}
-		else if (input == 'X' || input == 'x') {
+		else if (input == 'N' || input == 'n') {
 			return false;
 		}
 		else {
