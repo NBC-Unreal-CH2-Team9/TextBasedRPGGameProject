@@ -2,7 +2,7 @@
 
 int SelectNumber(std::vector<std::string> options)
 {
-	int select;
+	std::string select;
 	while (true) {
 		// 프롬프트 출력
 		for (int n = 0; n < options.size(); n++) {
@@ -15,14 +15,16 @@ int SelectNumber(std::vector<std::string> options)
 		std::cout << "선택: ";
 		std::cin >> select;
 
-		if (1 <= select && select <= options.size()) {
-			break;
+		int number = std::stoi(select);
+
+		if (1 <= number && number <= options.size()) {
+			return number - 1;
 		}
 		else {
 			std::cout << "잘못된 입력입니다. 다시 입력하세요." << std::endl;
 		}
 	}
-	return select;
+	return -1;
 }
 
 bool SelectYesOrNo(std::string question)

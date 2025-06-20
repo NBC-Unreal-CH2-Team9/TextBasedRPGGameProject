@@ -74,10 +74,10 @@ void GameManager::Shop()
 	while (true) {
 		int select = SelectNumber(shopPrompt);
 		switch (select) {
-		case 1: // Buy
+		case 0: // Buy
 			ShopBuy();
 			break;
-		case 2: // Sell
+		case 1: // Sell
 			if (character->GetInventory()->Count() > 0) {
 				ShopSell();
 			}
@@ -86,7 +86,7 @@ void GameManager::Shop()
 				std::cout << "판매할 물건이 없습니다." << std::endl;
 			}
 			break;
-		case 3: // Exit 
+		case 2: // Exit 
 			return;
 		}
 	}
@@ -114,15 +114,15 @@ void GameManager::ShopBuy()
 	
 	int buyIndex = SelectNumber(options);
 
-	if (gold >= prices[buyIndex - 1]) {
-		gold -= prices[buyIndex - 1];
+	if (gold >= prices[buyIndex]) {
+		gold -= prices[buyIndex];
 		// TODO: refactoring...
 		Item* newItem = nullptr;
 		switch (buyIndex) {
-		case 1:
+		case 0:
 			newItem = new Potion();
 			break;
-		case 2:
+		case 1:
 			newItem = new PowerUp();
 			break;
 		}
@@ -154,12 +154,12 @@ void GameManager::ShopSell()
 	int sellIndex = SelectNumber(options);
 
 	// TODO: hard coding, refactoring, etc..
-	Item* item = character->GetInventory()->Get(sellIndex - 1);
+	Item* item = character->GetInventory()->Get(sellIndex);
 	int price = 10;
 	// temp message
 	std::cout << item->GetName() << "을/를 " << price << "골드에 팔았습니다." << std::endl;
 
-	character->GetInventory()->Remove(sellIndex - 1);
+	character->GetInventory()->Remove(sellIndex);
 	character->SetGold(character->GetGold() + price);
 
 	// temp message
