@@ -3,7 +3,29 @@
 
 #include <iostream>
 
+#include "../Console/ConsoleInput.h"
+#include "../Console/ConsoleOutput.h"
+
 int main() {
-	std::cout << "Hello, Test World!!!" << std::endl;
+	
+	std::vector<std::string> options;
+	options.emplace_back("사과");
+	options.emplace_back("바나나");
+	options.emplace_back("배");
+
+	// 간단한 입력 구현
+	int select = SelectNumber(options);
+
+	switch (select) {
+	case 1:
+		std::cout << "사과는 빨개" << std::endl;
+		break;
+	case 2:
+		std::cout << "바나나는 길어" << std::endl;
+		break;
+	case 3:
+		std::cout << "나주배" << std::endl;
+		break;
+	}
 	return 0;
 }
