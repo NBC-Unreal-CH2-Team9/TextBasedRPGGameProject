@@ -188,6 +188,7 @@
     <ClCompile Include="Types\Actor.cpp" />
     <ClCompile Include="Types\Character\Character.cpp" />
     <ClCompile Include="Types\Item\Item.cpp" />
+    <ClCompile Include="Types\Monster\Dragon.cpp" />
     <ClCompile Include="Types\Monster\Monster.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -195,7 +196,12 @@
     <ClInclude Include="Types\Actor.h" />
     <ClInclude Include="Types\Character\Character.h" />
     <ClInclude Include="Types\Item\Item.h" />
+    <ClInclude Include="Types\Monster\Dragon.h" />
+    <ClInclude Include="Types\Monster\Goblin.h" />
     <ClInclude Include="Types\Monster\Monster.h" />
+    <ClInclude Include="Types\Monster\Orc.h" />
+    <ClInclude Include="Types\Monster\Slime.h" />
+    <ClInclude Include="Types\Monster\Troll.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

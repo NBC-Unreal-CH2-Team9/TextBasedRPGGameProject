@@ -19,9 +19,11 @@ public:
 	virtual void Attack(Actor& other) = 0;
 	virtual void TakeDamage(int damage) = 0;
 
-	std::string GetName();
-	int GetHealth();
-	int GetAttack();
+	std::string GetName() {	return name; }
+
+	int GetHealth() { return health; }
+
+	int GetAttack() { return attack; }
 
 protected:
 	std::string name;

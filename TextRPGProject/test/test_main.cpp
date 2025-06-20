@@ -2,8 +2,44 @@
 // 코드를 테스트해야할 일이 있다면, 여기에서 테스트 바랍니다.
 
 #include <iostream>
+#include "../Types/Monster/Goblin.h"
+#include "../Types/Monster/Orc.h"
+#include "../Types/Monster/Dragon.h"
+
 
 int main() {
-	std::cout << "Hello, Test World!!!" << std::endl;
+	std::srand(std::time(nullptr));
+
+
+	//Goblin goblin(1);
+	Orc orc(1);
+	Dragon dragon(1);
+
+	std::cout << orc.GetName() << "체력: " << orc.GetHealth() << " 공격력: " << orc.GetAttack() << std::endl;
+	std::cout << dragon.GetName() << "체력: " << dragon.GetHealth() << " 공격력: " << dragon.GetAttack() << std::endl;
+	//std::cout << goblin.GetName() << "체력: " << goblin.GetHealth() << " 공격력: " << goblin.GetAttack() << std::endl;
+
+	int i = 5;
+	while(i > 0)
+	{
+		dragon.Attack(orc);
+		if (dragon.GetHealth() < 1 || orc.GetHealth() < 1)
+		{
+			std::cout << "전투 종료!" << std::endl;
+			break;
+		}
+		orc.Attack(dragon);
+		i--;
+		if (dragon.GetHealth() < 1 || orc.GetHealth() < 1)
+		{
+			std::cout << "전투 종료!" << std::endl;
+			break;
+		}
+	}
+
+
+	
+
+
 	return 0;
 }
