@@ -10,7 +10,7 @@
 
 class Item {
 public:
-	Item(std::string name) : name(name) {};
+	Item(std::string name, int pirce) : name(name), price(price) {};
 
 	virtual void Use(Character& user) = 0;
 
@@ -18,7 +18,9 @@ public:
 	// virtual void Use(Actor& user) = 0;
 
 	std::string GetName();
+	int GetPrice();
 
 protected:
 	std::string name;
+	int price;
 };
