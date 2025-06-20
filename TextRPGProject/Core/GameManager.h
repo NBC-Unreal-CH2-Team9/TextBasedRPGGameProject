@@ -23,10 +23,10 @@ public:
 	// 상점 로직
 	void Shop();
 
-	Character& GetCharacter() {
+	Character* GetCharacter() {
 		return character;
 	}
 
 protected:
-	Character character;
+	Character* character;
 };

@@ -2,10 +2,14 @@
 
 GameManager::GameManager()
 {
+	character == nullptr;
 }
 
 GameManager::~GameManager()
 {
+	if (character != nullptr) {
+		delete character;
+	}
 }
 
 void GameManager::CreateCharacter()
