@@ -8,3 +8,6 @@
 // 올바른 입력을 받으면, 그 숫자를 반환한다.
 // 잘못된 입력을 받으면, 올바른 입력을 받을 때 까지 반복한다.
 int SelectNumber(std::vector<std::string> options);
+
+// Y/N 입력
+bool SelectYesOrNo(std::string question);
