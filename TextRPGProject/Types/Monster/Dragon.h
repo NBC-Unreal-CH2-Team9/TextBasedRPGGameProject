@@ -6,7 +6,6 @@
 class Dragon : public Monster
 {
 public:
-	Dragon(int level) : Monster("µå·¡°ï", (rand() % 11 + 20) * level * 1.5, (rand() % 6 + 5) * level * 1.5) {}
-
+	Dragon(std::string name, int health, int attack) : Monster(name, health, attack) {}
 	void Attack(Actor& other) override;
 };

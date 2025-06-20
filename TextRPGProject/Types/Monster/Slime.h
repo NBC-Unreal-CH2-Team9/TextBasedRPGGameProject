@@ -4,5 +4,5 @@
 class Slime : public Monster
 {
 public:
-	Slime(int level) : Monster("ΩΩ∂Û¿”", (rand() % 11 + 20)* level, (rand() % 6 + 5)* level) {}
+	Slime(std::string name, int health, int attack) : Monster(name, health, attack) {}
 };

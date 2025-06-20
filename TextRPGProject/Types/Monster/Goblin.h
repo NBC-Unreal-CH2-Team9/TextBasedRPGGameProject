@@ -5,5 +5,5 @@
 class Goblin : public Monster
 {
 public:
-	Goblin(int level) : Monster("°íºí¸°", (rand() % 11 + 20) * level, (rand() % 6 + 5) * level) {}
+	Goblin(std::string name, int health, int attack) : Monster(name, health, attack) {}
 };

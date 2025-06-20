@@ -5,5 +5,5 @@
 class Orc : public Monster
 {
 public:
-	Orc(int level) : Monster("ø¿≈©", (rand() % 11 + 20) * level, (rand() % 6 + 5) * level) {}
+	Orc(std::string name, int health, int attack) : Monster(name, health, attack) {}
 };

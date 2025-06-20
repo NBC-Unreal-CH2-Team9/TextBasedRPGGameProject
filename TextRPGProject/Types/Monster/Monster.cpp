@@ -1,4 +1,8 @@
 #include "Monster.h"
+#include "Dragon.h"
+#include "Orc.h"
+#include "Goblin.h"
+#include "Slime.h"
 
 void Monster::Attack(Actor& other)
 {
@@ -17,4 +21,46 @@ void Monster::TakeDamage(int damage)
 	{
 		std::cout << name << "처치!" << std::endl;
 	}
+}
+
+Monster* MonsterManager::CreateDragon(int characterLevel)
+{
+	int health = CalculateHealth(characterLevel);
+	int attack = CalculateAttack(characterLevel);
+	Monster* dragon = new Dragon("드래곤", health, attack);
+	return dragon;
+}
+
+Monster* MonsterManager::CreateOrc(int characterLevel)
+{
+	int health = CalculateHealth(characterLevel);
+	int attack = CalculateAttack(characterLevel);
+	Monster* orc = new Orc("오크", health, attack);
+	return orc;
+}
+
+Monster* MonsterManager::CreateSlime(int characterLevel)
+{
+	int health = CalculateHealth(characterLevel);
+	int attack = CalculateAttack(characterLevel);
+	Monster* slime = new Slime("슬라임", health, attack);
+	return slime;
+}
+
+Monster* MonsterManager::CreateGoblin(int characterLevel)
+{
+	int health = CalculateHealth(characterLevel);
+	int attack = CalculateAttack(characterLevel);
+	Monster* goblin = new Goblin("고블린", health, attack);
+	return goblin;
+}
+
+int MonsterManager::CalculateHealth(int characterLevel)
+{
+	return (rand() % 11 + 20) * characterLevel * 1.5;;
+}
+
+int MonsterManager::CalculateAttack(int characterLevel)
+{
+	return (rand() % 6 + 5) * characterLevel * 1.5;
 }
