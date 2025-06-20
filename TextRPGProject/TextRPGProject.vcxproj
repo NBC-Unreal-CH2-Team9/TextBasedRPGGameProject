@@ -179,6 +179,7 @@
   <ItemGroup>
     <ClCompile Include="Console\ConsoleInput.cpp" />
     <ClCompile Include="Console\ConsoleOutput.cpp" />
+    <ClCompile Include="Core\GameManager.cpp" />
     <ClCompile Include="main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -186,6 +187,17 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Types\Actor.cpp" />
+    <ClCompile Include="Types\Character\Character.cpp" />
+    <ClCompile Include="Types\Item\Item.cpp" />
+    <ClCompile Include="Types\Monster\Monster.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\GameManager.h" />
+    <ClInclude Include="Types\Actor.h" />
+    <ClInclude Include="Types\Character\Character.h" />
+    <ClInclude Include="Types\Item\Item.h" />
+    <ClInclude Include="Types\Monster\Monster.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Console\ConsoleInput.h" />
