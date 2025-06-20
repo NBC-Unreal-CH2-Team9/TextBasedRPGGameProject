@@ -87,8 +87,8 @@ void GameManager::ShopBuy()
 	shopItems.push_back(new HealthPotion(50));
 	shopItems.push_back(new AttackBoost(10));
 	std::vector<int> prices;
-	prices.push_back(10);
-	prices.push_back(100);
+	prices.push_back(shopItems[0]->GetPrice());
+	prices.push_back(shopItems[1]->GetPrice());
 
 	int gold = character->GetGold();
 
@@ -143,7 +143,7 @@ void GameManager::ShopSell()
 
 	// TODO: hard coding, refactoring, etc..
 	Item* item = character->GetInventory()->Get(sellIndex);
-	int price = 10;
+	int price = item->GetPrice() * 60 / 100;
 	// temp message
 	std::cout << item->GetName() << "을/를 " << price << "골드에 팔았습니다." << std::endl;
 
