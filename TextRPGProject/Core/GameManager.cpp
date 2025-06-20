@@ -78,7 +78,13 @@ void GameManager::Shop()
 			ShopBuy();
 			break;
 		case 2: // Sell
-			ShopSell();
+			if (character->GetInventory()->Count() > 0) {
+				ShopSell();
+			}
+			else {
+				// temp message
+				std::cout << "판매할 물건이 없습니다." << std::endl;
+			}
 			break;
 		case 3: // Exit 
 			return;
@@ -139,4 +145,23 @@ void GameManager::ShopBuy()
 void GameManager::ShopSell()
 {
 	std::vector<Item*> items = character->GetInventory()->GetItems();
+
+	std::vector<std::string> options;
+	for (int i = 0; i < items.size(); i++) {
+		options.emplace_back(items[i]->GetName());
+	}
+
+	int sellIndex = SelectNumber(options);
+
+	// TODO: hard coding, refactoring, etc..
+	Item* item = character->GetInventory()->Get(sellIndex - 1);
+	int price = 10;
+	// temp message
+	std::cout << item->GetName() << "을/를 " << price << "골드에 팔았습니다." << std::endl;
+
+	character->GetInventory()->Remove(sellIndex - 1);
+	character->SetGold(character->GetGold() + price);
+
+	// temp message
+	std::cout << "현재 소유 골드는 " << character->GetGold() << " 입니다." << std::endl;
 }

@@ -20,3 +20,8 @@ Item* Inventory::operator[](unsigned int index)
 {
 	return items[index];
 }
+
+Item* Inventory::Get(unsigned int index)
+{
+	return items[index];
+}
