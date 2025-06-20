@@ -20,6 +20,12 @@ public:
 	void SetGold(int value) {
 		gold = value;
 	}
+	int GetHealth() { return health; }
+	void SetHealth(int newHealth) { health = newHealth; }
+
+	int GetAttack() { return attack; }
+	void SetAttack(int newAttack) { attack = newAttack; }
+
 
 protected:
 	Inventory inventory;
