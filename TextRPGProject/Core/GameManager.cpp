@@ -4,6 +4,8 @@
 
 #include "GameManager.h"
 #include "../Types/Item/Item.h"
+#include "../Types/Item/AttackBoost.h"
+#include "../Types/Item/HealthPotion.h"
 #include "../Console/ConsoleInput.h"
 
 GameManager::GameManager()
@@ -46,20 +48,6 @@ BattleResult GameManager::Battle()
 	return result;
 }
 
-// Temporal Items for Shop TEST
-#include "../Types/Item/Item.h"
-class Potion : public Item {
-public:
-	Potion() : Item("HP Potion") {}
-	virtual void Use(Character& user) override {}
-};
-class PowerUp : public Item {
-public:
-	PowerUp() : Item("Attack PowerUp") {}
-	virtual void Use(Character& user) override {}
-};
-
-
 const std::string GameManager::shopMessage = "";
 const std::vector<std::string> GameManager::shopPrompt = {
 	"물건 사기", "물건 팔기", "상점 나가기"
@@ -96,8 +84,8 @@ void GameManager::ShopBuy()
 {
 	// Hardcoding..
 	std::vector<Item*> shopItems;
-	shopItems.push_back(new Potion());
-	shopItems.push_back(new PowerUp());
+	shopItems.push_back(new HealthPotion(50));
+	shopItems.push_back(new AttackBoost(10));
 	std::vector<int> prices;
 	prices.push_back(10);
 	prices.push_back(100);
@@ -120,10 +108,10 @@ void GameManager::ShopBuy()
 		Item* newItem = nullptr;
 		switch (buyIndex) {
 		case 0:
-			newItem = new Potion();
+			newItem = new HealthPotion(50);
 			break;
 		case 1:
-			newItem = new PowerUp();
+			newItem = new AttackBoost(10);
 			break;
 		}
 		if (newItem != nullptr) {
