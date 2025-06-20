@@ -55,6 +55,13 @@
       <Filter>Source Files\Types</Filter>
     </ClCompile>
     <ClCompile Include="Types\Monster\Dragon.cpp">
+    <ClCompile Include="Console\ConsoleInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\ConsoleOutput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Types\Character\Inventory.cpp">
       <Filter>Source Files\Types</Filter>
     </ClCompile>
   </ItemGroup>
@@ -88,6 +95,14 @@
     </ClInclude>
     <ClInclude Include="Types\Monster\Dragon.h">
       <Filter>Header Files\Types\Monsters</Filter>
+    <ClInclude Include="Console\ConsoleInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsoleOutput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Types\Character\Inventory.h">
+      <Filter>Header Files\Types</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

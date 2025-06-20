@@ -1,8 +1,12 @@
-// ºôµå ¼³Á¤À» 'Debug', 'Release'°¡ ¾Æ´Ñ 'Test'À¸·Î ÁöÁ¤ÇÏ¸é, ¿©±â¿¡ ÀÖ´Â mainÀÌ ½ÇÇàµË´Ï´Ù.
-// ÄÚµå¸¦ Å×½ºÆ®ÇØ¾ßÇÒ ÀÏÀÌ ÀÖ´Ù¸é, ¿©±â¿¡¼­ Å×½ºÆ® ¹Ù¶ø´Ï´Ù.
+// ë¹Œë“œ ì„¤ì •ì„ 'Debug', 'Release'ê°€ ì•„ë‹Œ 'Test'ìœ¼ë¡œ ì§€ì •í•˜ë©´, ì—¬ê¸°ì— ìˆëŠ” mainì´ ì‹¤í–‰ë©ë‹ˆë‹¤.
+// ì½”ë“œë¥¼ í…ŒìŠ¤íŠ¸í•´ì•¼í•  ì¼ì´ ìˆë‹¤ë©´, ì—¬ê¸°ì—ì„œ í…ŒìŠ¤íŠ¸ ë°”ëë‹ˆë‹¤.
 
 #include <iostream>
 #include "../Types/Monster/Monster.h"
+
+#include "../Console/ConsoleInput.h"
+#include "../Console/ConsoleOutput.h"
+#include "../Core/GameManager.h"
 
 int main() {
 	std::srand(std::time(nullptr));
@@ -12,9 +16,9 @@ int main() {
 	Monster* orc = MonsterManager::CreateOrc(testCharacterLevel);
 	Monster* dragon = MonsterManager::CreateDragon(testCharacterLevel);
 
-	std::cout << orc->GetName() << "Ã¼·Â: " << orc->GetHealth() << " °ø°İ·Â: " << orc->GetAttack() << std::endl;
-	std::cout << dragon->GetName() << "Ã¼·Â: " << dragon->GetHealth() << " °ø°İ·Â: " << dragon->GetAttack() << std::endl;
-	//std::cout << goblin.GetName() << "Ã¼·Â: " << goblin.GetHealth() << " °ø°İ·Â: " << goblin.GetAttack() << std::endl;
+	std::cout << orc->GetName() << "ì²´ë ¥: " << orc->GetHealth() << " ê³µê²©ë ¥: " << orc->GetAttack() << std::endl;
+	std::cout << dragon->GetName() << "ì²´ë ¥: " << dragon->GetHealth() << " ê³µê²©ë ¥: " << dragon->GetAttack() << std::endl;
+	//std::cout << goblin.GetName() << "ì²´ë ¥: " << goblin.GetHealth() << " ê³µê²©ë ¥: " << goblin.GetAttack() << std::endl;
 
 	int i = 5;
 	while(i > 0)
@@ -22,14 +26,14 @@ int main() {
 		dragon->Attack(*orc);
 		if (dragon->GetHealth() < 1 || orc->GetHealth() < 1)
 		{
-			std::cout << "ÀüÅõ Á¾·á!" << std::endl;
+			std::cout << "ì „íˆ¬ ì¢…ë£Œ!" << std::endl;
 			break;
 		}
 		orc->Attack(*dragon);
 		i--;
 		if (dragon->GetHealth() < 1 || orc->GetHealth() < 1)
 		{
-			std::cout << "ÀüÅõ Á¾·á!" << std::endl;
+			std::cout << "ì „íˆ¬ ì¢…ë£Œ!" << std::endl;
 			break;
 		}
 	}
