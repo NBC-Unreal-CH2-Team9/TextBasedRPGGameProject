@@ -189,6 +189,7 @@
     </ClCompile>
     <ClCompile Include="Types\Actor.cpp" />
     <ClCompile Include="Types\Character\Character.cpp" />
+    <ClCompile Include="Types\Character\Inventory.cpp" />
     <ClCompile Include="Types\Item\Item.cpp" />
     <ClCompile Include="Types\Monster\Monster.cpp" />
   </ItemGroup>
@@ -196,6 +197,7 @@
     <ClInclude Include="Core\GameManager.h" />
     <ClInclude Include="Types\Actor.h" />
     <ClInclude Include="Types\Character\Character.h" />
+    <ClInclude Include="Types\Character\Inventory.h" />
     <ClInclude Include="Types\Item\Item.h" />
     <ClInclude Include="Types\Monster\Monster.h" />
   </ItemGroup>
