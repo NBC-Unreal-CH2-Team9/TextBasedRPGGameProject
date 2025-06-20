@@ -1,28 +1,41 @@
+ï»¿#include <vector>
+#include <string>
+#include <iostream>
+
 #include "GameManager.h"
+#include "../Types/Item/Item.h"
+#include "../Console/ConsoleInput.h"
 
 GameManager::GameManager()
 {
+	character == nullptr;
 }
 
 GameManager::~GameManager()
 {
+	if (character != nullptr) {
+		delete character;
+	}
 }
 
 void GameManager::CreateCharacter()
 {
+	// Temporal code
+	character = new Character("ì„ì‹œ", 100, 10);
+	character->SetGold(100);
 }
 
 BattleResult GameManager::Battle()
 {
-	// ÇÊ¼ö ±â´É [3]
-	// ÀüÅõ ½Ã½ºÅÛ
-	// Ä³¸¯ÅÍ »ı¼º Á÷ÈÄ, ±×¸®°í »óÁ¡ ¹æ¹®(¶Ç´Â ½ºÅµ) ÀÌÈÄ
+	// í•„ìˆ˜ ê¸°ëŠ¥ [3]
+	// ì „íˆ¬ ì‹œìŠ¤í…œ
+	// ìºë¦­í„° ìƒì„± ì§í›„, ê·¸ë¦¬ê³  ìƒì  ë°©ë¬¸(ë˜ëŠ” ìŠ¤í‚µ) ì´í›„
 
-	// ÇÊ¼ö ±â´É [4]
-	// ¸ó½ºÅÍ ¼³¸í
+	// í•„ìˆ˜ ê¸°ëŠ¥ [4]
+	// ëª¬ìŠ¤í„° ì„¤ëª…
 
-	// ÀüÅõ ·ÎÁ÷
-	// ÀüÅõ ·ÎÁ÷ ´ã´çÀÚ°¡ ±¸Çö
+	// ì „íˆ¬ ë¡œì§
+	// ì „íˆ¬ ë¡œì§ ë‹´ë‹¹ìê°€ êµ¬í˜„
 	// while () {
 	// ...
 	// }
@@ -33,6 +46,122 @@ BattleResult GameManager::Battle()
 	return result;
 }
 
+// Temporal Items for Shop TEST
+#include "../Types/Item/Item.h"
+class Potion : public Item {
+public:
+	Potion() : Item("HP Potion") {}
+	virtual void Use(Character& user) override {}
+};
+class PowerUp : public Item {
+public:
+	PowerUp() : Item("Attack PowerUp") {}
+	virtual void Use(Character& user) override {}
+};
+
+
+const std::string GameManager::shopMessage = "";
+const std::vector<std::string> GameManager::shopPrompt = {
+	"ë¬¼ê±´ ì‚¬ê¸°", "ë¬¼ê±´ íŒ”ê¸°", "ìƒì  ë‚˜ê°€ê¸°"
+};
+
 void GameManager::Shop()
 {
+	// options for print
+	std::vector<std::string> buyOptions;
+	std::vector<std::string> sellOptions;
+
+	while (true) {
+		int select = SelectNumber(shopPrompt);
+		switch (select) {
+		case 0: // Buy
+			ShopBuy();
+			break;
+		case 1: // Sell
+			if (character->GetInventory()->Count() > 0) {
+				ShopSell();
+			}
+			else {
+				// temp message
+				std::cout << "íŒë§¤í•  ë¬¼ê±´ì´ ì—†ìŠµë‹ˆë‹¤." << std::endl;
+			}
+			break;
+		case 2: // Exit 
+			return;
+		}
+	}
+}
+
+void GameManager::ShopBuy()
+{
+	// Hardcoding..
+	std::vector<Item*> shopItems;
+	shopItems.push_back(new Potion());
+	shopItems.push_back(new PowerUp());
+	std::vector<int> prices;
+	prices.push_back(10);
+	prices.push_back(100);
+
+	int gold = character->GetGold();
+
+	// temp message
+	std::cout << "ì†Œìœ  ê³¨ë“œ: " << character->GetGold() << std::endl;
+
+	std::vector<std::string> options;
+	for (int i = 0; i < shopItems.size(); i++) {
+		options.emplace_back(shopItems[i]->GetName() + ", (" + std::to_string(prices[i]) + "ê³¨ë“œ)");
+	}
+	
+	int buyIndex = SelectNumber(options);
+
+	if (gold >= prices[buyIndex]) {
+		gold -= prices[buyIndex];
+		// TODO: refactoring...
+		Item* newItem = nullptr;
+		switch (buyIndex) {
+		case 0:
+			newItem = new Potion();
+			break;
+		case 1:
+			newItem = new PowerUp();
+			break;
+		}
+		if (newItem != nullptr) {
+			character->GetInventory()->Insert(newItem);
+			character->SetGold(gold);
+
+			// temp message
+			std::cout << newItem->GetName() << "ì„/ë¥¼ êµ¬ë§¤í–ˆìŠµë‹ˆë‹¤. "
+				<< "(ë‚¨ì€ ê³¨ë“œ: " << gold << ")" << std::endl;
+		}
+	}
+	else {
+		// temp message
+		std::cout << "ê³¨ë“œê°€ ëª¨ìëë‹ˆë‹¤" << std::endl;
+	}
+	
+}
+
+void GameManager::ShopSell()
+{
+	std::vector<Item*> items = character->GetInventory()->GetItems();
+
+	std::vector<std::string> options;
+	for (int i = 0; i < items.size(); i++) {
+		options.emplace_back(items[i]->GetName());
+	}
+
+	int sellIndex = SelectNumber(options);
+
+	// TODO: hard coding, refactoring, etc..
+	Item* item = character->GetInventory()->Get(sellIndex);
+	int price = 10;
+	// temp message
+	std::cout << item->GetName() << "ì„/ë¥¼ " << price << "ê³¨ë“œì— íŒ”ì•˜ìŠµë‹ˆë‹¤." << std::endl;
+
+	character->GetInventory()->Remove(sellIndex);
+	character->SetGold(character->GetGold() + price);
+
+	// temp message
+	std::cout << "í˜„ì¬ ì†Œìœ  ê³¨ë“œëŠ” " << character->GetGold() << " ì…ë‹ˆë‹¤." << std::endl;
 }

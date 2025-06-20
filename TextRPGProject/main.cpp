@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Core/GameManager.h"
+#include "Console/ConsoleInput.h"
 
 int main() {
 	
@@ -60,7 +61,9 @@ int main() {
 		// 도전 기능 [2]
 		// 상점 시스템
 		// 전투 이후, 방문 여부를 선택
-		// gameMamager.Shop();
+		if (SelectYesOrNo("상점을 방문하시겠습니까?")) {
+			gameMamager.Shop();
+		}
 	}
 
 	// 게임 종료 처리
