@@ -1,4 +1,6 @@
-#pragma once
+ï»¿#pragma once
+
+#include "../Types/Character/Character.h"
 
 struct BattleResult {
 public:
@@ -12,12 +14,24 @@ public:
 	GameManager();
 	~GameManager();
 
-	/* ÇÊ¿äÇÏ¸é return type Ãß°¡ */
-	void CreateCharacter(/*ÇÊ¿äÇÏ¸é parameter Ãß°¡*/);
+	/* í•„ìš”í•˜ë©´ return type ì¶”ê°€ */
+	void CreateCharacter(/*í•„ìš”í•˜ë©´ parameter ì¶”ê°€*/);
 
-	/* ÇÊ¿äÇÏ¸é return type º¯°æ */
-	BattleResult Battle(/*ÇÊ¿äÇÏ¸é parameter Ãß°¡*/);
+	/* í•„ìš”í•˜ë©´ return type ë³€ê²½ */
+	BattleResult Battle(/*í•„ìš”í•˜ë©´ parameter ì¶”ê°€*/);
 
-	/* ÇÊ¿äÇÏ¸é return type º¯°æ */
-	void Shop(/*ÇÊ¿äÇÏ¸é parameter Ãß°¡*/);
+	void Shop();
+	void ShopBuy();
+	void ShopSell();
+
+	Character* GetCharacter() {
+		return character;
+	}
+
+protected:
+	Character* character;
+
+private:
+	static const std::string shopMessage;
+	static const std::vector<std::string> shopPrompt;
 };
