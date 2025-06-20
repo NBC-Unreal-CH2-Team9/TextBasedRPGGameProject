@@ -1,11 +1,14 @@
 #pragma once
 
+#include <vector>
 #include "../Actor.h"
+#include "Inventory.h"
 
 class Character : public Actor {
-	// ±¸Çö
-
 public:
 	virtual void Attack(Actor& other);
 	virtual void TakeDamage(int damage);
+
+protected:
+	Inventory inventory;
 };
