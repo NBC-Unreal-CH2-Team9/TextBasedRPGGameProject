@@ -17,6 +17,7 @@ void Character::TakeDamage(int damage)
 void Character::DisplayStatus()
 {
 	std::cout << "==Status==" << std::endl;
+	std::cout << "level:" << level << std::endl;
 	std::cout << "experience:" << experience << std::endl;
 	std::cout << "health:" << health << std::endl;
 	std::cout << "maxHealth:" << maxHealth << std::endl;
@@ -35,7 +36,7 @@ void Character::LevelUp()
 
 void Character::UpdateHealth()
 {
-	int newHealth = maxHealth + (health + level * 20);
+	int newHealth = (maxHealth + level * 20);
 	health = newHealth;
 	maxHealth = newHealth;	
 }
