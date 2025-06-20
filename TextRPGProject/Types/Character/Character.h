@@ -4,8 +4,10 @@
 
 class Character : public Actor {
 	// ±¸Çö
-
 public:
 
 	// 
+	void Foo() {
+		return;
+	}
 };
