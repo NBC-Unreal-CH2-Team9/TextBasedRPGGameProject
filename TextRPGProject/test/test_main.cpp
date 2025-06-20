@@ -2,29 +2,30 @@
 // 코드를 테스트해야할 일이 있다면, 여기에서 테스트 바랍니다.
 
 #include <iostream>
+#include "../Core/GameManager.h"
 
 #include "../Console/ConsoleInput.h"
 #include "../Console/ConsoleOutput.h"
 
-int main() {
+int main() 
+{
+	GameManager gm;
 	
 	std::vector<std::string> options;
-	options.emplace_back("사과");
-	options.emplace_back("바나나");
-	options.emplace_back("배");
+	options.emplace_back("몬스터 생성");
 
 	// 간단한 입력 구현
 	int select = SelectNumber(options);
 
 	switch (select) {
 	case 1:
-		std::cout << "사과는 빨개" << std::endl;
+		//gm.GenerateMonster(1);
 		break;
 	case 2:
-		std::cout << "바나나는 길어" << std::endl;
+		
 		break;
 	case 3:
-		std::cout << "나주배" << std::endl;
+		
 		break;
 	}
 	return 0;
