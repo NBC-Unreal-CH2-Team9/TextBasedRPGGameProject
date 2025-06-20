@@ -1,34 +1,31 @@
 ï»¿#include <vector>
 #include <string>
 #include <iostream>
-
 #include "GameManager.h"
-<<<<<<< HEAD
 #include <iostream>
-#include "../Types/Goblin.h"
-#include "../Types/Orc.h"
-#include "../Types/Troll.h"
-#include "../Types/Slime.h"
+//#include "../Types/Goblin.h"
+//#include "../Types/Orc.h"
+//#include "../Types/Troll.h"
+//#include "../Types/Slime.h"
 #include <random>
-=======
 #include "../Types/Item/Item.h"
 #include "../Console/ConsoleInput.h"
->>>>>>> f65649bf6c857c74f3b6030eb438625e0b70b32d
+
 
 GameManager::GameManager()
 {
+	//monsters[4] = { new Goblin("Goblin",200,100),new Orc("Orc",300,110),new Troll("Troll",400,120),new Slime("Slime",500,130)};
+
 	character == nullptr;
 }
 
 GameManager::~GameManager()
 {
-<<<<<<< HEAD
 	delete[] monsters;
-=======
+
 	if (character != nullptr) {
 		delete character;
 	}
->>>>>>> f65649bf6c857c74f3b6030eb438625e0b70b32d
 }
 
 void GameManager::CreateCharacter()
@@ -40,13 +37,8 @@ void GameManager::CreateCharacter()
 
 void GameManager::GenerateMonster(int characterLevel)
 {
-	//¸ó½ºÅÍ »ý¼º
-	monsters[4] = { new Goblin("Goblin",200,100),new Orc("Orc",300,110),new Troll("Troll",400,120),new Slime("Slime",500,130)};
-	isMyTurn = true;
-
-	//·£´ý ¼ýÀÚ »ý¼º(¸ó½ºÅÍ,¸ó½ºÅÍ °ø°Ý·Â,¸ó½ºÅÍ Ã¼·Â)
-	std::random_device rd;                // 1) ÇÏµå¿þ¾î ³­¼ö ½Ãµå
-	std::mt19937 gen(rd());               // 2) °í¼Ó ¿£Áø
+	std::random_device rd;                
+	std::mt19937 gen(rd());               
 	std::uniform_int_distribution<> monsterSizeRange(0, 3);
 	std::uniform_int_distribution<> monsterHealthRange(20, 30);
 	std::uniform_int_distribution<> monsterAttackRange(5, 10);
@@ -55,8 +47,8 @@ void GameManager::GenerateMonster(int characterLevel)
 	totalMonsterHealth = characterLevel * monsterHealthRange(gen);
 	totalMonsterAttack = characterLevel * monsterAttackRange(gen);
 
-	std::cout << "¸ó½ºÅÍ " << monsters[monsterNum]->GetName() << " µîÀå!";
-	std::cout<<"Ã¼·Â:" << totalMonsterHealth	<< ", °ø°Ý·Â : " << totalMonsterAttack <<"\n";
+	std::cout << " " << monsters[monsterNum]->GetName() << " ë“±ìž¥!";
+	std::cout<<"ì²´ë ¥:" << totalMonsterHealth	<< ", ê³µê²©ë ¥ : " << totalMonsterAttack <<"\n";
 
 }
 
@@ -69,19 +61,7 @@ BattleResult GameManager::Battle()
 	// í•„ìˆ˜ ê¸°ëŠ¥ [4]
 	// ëª¬ìŠ¤í„° ì„¤ëª…
 
-<<<<<<< HEAD
-	//¸ó½ºÅÍ »ý¼º
-	//GenerateMonster(character->GetLevel());
-	
-	//Å×½ºÆ®¿ë
-	GenerateMonster(2);
-=======
-	// ì „íˆ¬ ë¡œì§
-	// ì „íˆ¬ ë¡œì§ ë‹´ë‹¹ìžê°€ êµ¬í˜„
-	// while () {
-	// ...
-	// }
->>>>>>> f65649bf6c857c74f3b6030eb438625e0b70b32d
+	GenerateMonster(character->GetLevel());
 
 	BattleResult result;
 	result.isWin = false;
@@ -90,7 +70,6 @@ BattleResult GameManager::Battle()
 	isMyTurn = true;
 	isFighting = true;
 
-	//ÀüÅõ ·ÎÁ÷
 	while(isFighting)
 	{
 		if (isMyTurn)
@@ -159,10 +138,9 @@ void GameManager::Shop()
 	}
 }
 
-<<<<<<< HEAD
 void GameManager::FightUntilDeath(Actor* attacker,Actor* defender)
 {
-	std::cout << attacker->GetName() << "°¡ " << defender->GetName() << "À» °ø°ÝÇÕ´Ï´Ù! ";
+	std::cout << attacker->GetName() << "ê°€ " << defender->GetName() << "ë¥¼ ê³µê²©í•©ë‹ˆë‹¤! ";
 
 	Character* player = dynamic_cast<Character*>(defender);
 
@@ -182,17 +160,17 @@ void GameManager::FightUntilDeath(Actor* attacker,Actor* defender)
 
 	if (defenderHealth <= 0)
 	{
-		std::cout << defender->GetName() << " Ã³Ä¡!\n";
+		std::cout << defender->GetName() << " ì²˜ì¹˜!\n";
 		isFighting = false;
 	}
 	else
 	{
-		std::cout << defender->GetName() << " Ã¼·Â:" << defender->GetHealth() << "\n";
+		std::cout << defender->GetName() << " ì²´ë ¥:" << defender->GetHealth() << "\n";
 	}
 
 	isMyTurn = !isMyTurn;
 }
-=======
+
 void GameManager::ShopBuy()
 {
 	// Hardcoding..
@@ -266,4 +244,4 @@ void GameManager::ShopSell()
 	// temp message
 	std::cout << "í˜„ìž¬ ì†Œìœ  ê³¨ë“œëŠ” " << character->GetGold() << " ìž…ë‹ˆë‹¤." << std::endl;
 }
->>>>>>> f65649bf6c857c74f3b6030eb438625e0b70b32d
+
