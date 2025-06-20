@@ -15,6 +15,11 @@ public:
 	// Get item using index
 	Item* operator[](unsigned int index);
 
+	// Get all items
+	std::vector<Item*> GetItems() {
+		return items;
+	}
+
 private:
 	std::vector<Item*> items;
 };

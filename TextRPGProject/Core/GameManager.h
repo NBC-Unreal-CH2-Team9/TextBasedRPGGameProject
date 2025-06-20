@@ -20,8 +20,9 @@ public:
 	/* 필요하면 return type 변경 */
 	BattleResult Battle(/*필요하면 parameter 추가*/);
 
-	// 상점 로직
 	void Shop();
+	void ShopBuy();
+	void ShopSell();
 
 	Character* GetCharacter() {
 		return character;

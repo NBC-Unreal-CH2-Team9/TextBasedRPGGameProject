@@ -1,7 +1,9 @@
 #include <vector>
 #include <string>
+#include <iostream>
 
 #include "GameManager.h"
+#include "../Types/Item/Item.h"
 #include "../Console/ConsoleInput.h"
 
 GameManager::GameManager()
@@ -18,6 +20,9 @@ GameManager::~GameManager()
 
 void GameManager::CreateCharacter()
 {
+	// Temporal code
+	character = new Character("임시", 100, 10);
+	character->SetGold(100);
 }
 
 BattleResult GameManager::Battle()
@@ -45,12 +50,12 @@ BattleResult GameManager::Battle()
 #include "../Types/Item/Item.h"
 class Potion : public Item {
 public:
-	Potion(std::string name) : Item(name) {}
+	Potion() : Item("HP Potion") {}
 	virtual void Use(Character& user) override {}
 };
 class PowerUp : public Item {
 public:
-	PowerUp(std::string name) : Item(name) {}
+	PowerUp() : Item("Attack PowerUp") {}
 	virtual void Use(Character& user) override {}
 };
 
@@ -62,26 +67,76 @@ const std::vector<std::string> GameManager::shopPrompt = {
 
 void GameManager::Shop()
 {
-	// List of Items
-	// Hardcoding..
-	std::vector<Item*> shopItems;
-	shopItems.push_back(new Potion("포션"));
-	shopItems.push_back(new Potion("파워업"));
-	std::vector<int> prices;
-	prices.push_back(10);
-	prices.push_back(100);
-
 	// options for print
 	std::vector<std::string> buyOptions;
 	std::vector<std::string> sellOptions;
 
-	int select = SelectNumber(shopPrompt);
-	switch (select) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
+	while (true) {
+		int select = SelectNumber(shopPrompt);
+		switch (select) {
+		case 1: // Buy
+			ShopBuy();
+			break;
+		case 2: // Sell
+			ShopSell();
+			break;
+		case 3: // Exit 
+			return;
+		}
 	}
+}
+
+void GameManager::ShopBuy()
+{
+	// Hardcoding..
+	std::vector<Item*> shopItems;
+	shopItems.push_back(new Potion());
+	shopItems.push_back(new PowerUp());
+	std::vector<int> prices;
+	prices.push_back(10);
+	prices.push_back(100);
+
+	int gold = character->GetGold();
+
+	// temp message
+	std::cout << "소유 골드: " << character->GetGold() << std::endl;
+
+	std::vector<std::string> options;
+	for (int i = 0; i < shopItems.size(); i++) {
+		options.emplace_back(shopItems[i]->GetName() + ", (" + std::to_string(prices[i]) + "골드)");
+	}
+	
+	int buyIndex = SelectNumber(options);
+
+	if (gold >= prices[buyIndex - 1]) {
+		gold -= prices[buyIndex - 1];
+		// TODO: refactoring...
+		Item* newItem = nullptr;
+		switch (buyIndex) {
+		case 1:
+			newItem = new Potion();
+			break;
+		case 2:
+			newItem = new PowerUp();
+			break;
+		}
+		if (newItem != nullptr) {
+			character->GetInventory()->Insert(newItem);
+			character->SetGold(gold);
+
+			// temp message
+			std::cout << newItem->GetName() << "을/를 구매했습니다. "
+				<< "(남은 골드: " << gold << ")" << std::endl;
+		}
+	}
+	else {
+		// temp message
+		std::cout << "골드가 모자랍니다" << std::endl;
+	}
+	
+}
+
+void GameManager::ShopSell()
+{
+	std::vector<Item*> items = character->GetInventory()->GetItems();
 }
