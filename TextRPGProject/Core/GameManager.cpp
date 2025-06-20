@@ -1,18 +1,28 @@
 ﻿#include <vector>
 #include <string>
 #include <iostream>
-
 #include "GameManager.h"
+#include <iostream>
+//#include "../Types/Goblin.h"
+//#include "../Types/Orc.h"
+//#include "../Types/Troll.h"
+//#include "../Types/Slime.h"
+#include <random>
 #include "../Types/Item/Item.h"
 #include "../Console/ConsoleInput.h"
 
+
 GameManager::GameManager()
 {
+	//monsters[4] = { new Goblin("Goblin",200,100),new Orc("Orc",300,110),new Troll("Troll",400,120),new Slime("Slime",500,130)};
+
 	character == nullptr;
 }
 
 GameManager::~GameManager()
 {
+	delete[] monsters;
+
 	if (character != nullptr) {
 		delete character;
 	}
@@ -25,6 +35,23 @@ void GameManager::CreateCharacter()
 	character->SetGold(100);
 }
 
+void GameManager::GenerateMonster(int characterLevel)
+{
+	std::random_device rd;                
+	std::mt19937 gen(rd());               
+	std::uniform_int_distribution<> monsterSizeRange(0, 3);
+	std::uniform_int_distribution<> monsterHealthRange(20, 30);
+	std::uniform_int_distribution<> monsterAttackRange(5, 10);
+
+	monsterNum = monsterSizeRange(gen);
+	totalMonsterHealth = characterLevel * monsterHealthRange(gen);
+	totalMonsterAttack = characterLevel * monsterAttackRange(gen);
+
+	std::cout << " " << monsters[monsterNum]->GetName() << " 등장!";
+	std::cout<<"체력:" << totalMonsterHealth	<< ", 공격력 : " << totalMonsterAttack <<"\n";
+
+}
+
 BattleResult GameManager::Battle()
 {
 	// 필수 기능 [3]
@@ -34,15 +61,34 @@ BattleResult GameManager::Battle()
 	// 필수 기능 [4]
 	// 몬스터 설명
 
-	// 전투 로직
-	// 전투 로직 담당자가 구현
-	// while () {
-	// ...
-	// }
+	GenerateMonster(character->GetLevel());
 
 	BattleResult result;
 	result.isWin = false;
 	result.isBoss = false;
+
+	isMyTurn = true;
+	isFighting = true;
+
+	while(isFighting)
+	{
+		if (isMyTurn)
+		{
+			FightUntilDeath(character, monsters[monsterNum]);
+		}
+		else
+		{
+			FightUntilDeath(monsters[monsterNum], character);
+		}
+	}
+
+	if (character->GetHealth() > 0)
+	{
+		result.isWin = true;
+	}
+
+	delete[] monsters;
+
 	return result;
 }
 
@@ -90,6 +136,39 @@ void GameManager::Shop()
 			return;
 		}
 	}
+}
+
+void GameManager::FightUntilDeath(Actor* attacker,Actor* defender)
+{
+	std::cout << attacker->GetName() << "가 " << defender->GetName() << "를 공격합니다! ";
+
+	Character* player = dynamic_cast<Character*>(defender);
+
+	int defenderHealth;
+
+	if (player)
+	{
+		defender->TakeDamage(totalMonsterAttack);
+		defenderHealth = defender->GetHealth();
+	}
+	else
+	{
+		totalMonsterHealth = totalMonsterHealth - attacker->GetAttack();
+		defenderHealth = totalMonsterHealth;
+	}
+
+
+	if (defenderHealth <= 0)
+	{
+		std::cout << defender->GetName() << " 처치!\n";
+		isFighting = false;
+	}
+	else
+	{
+		std::cout << defender->GetName() << " 체력:" << defender->GetHealth() << "\n";
+	}
+
+	isMyTurn = !isMyTurn;
 }
 
 void GameManager::ShopBuy()
@@ -165,3 +244,4 @@ void GameManager::ShopSell()
 	// temp message
 	std::cout << "현재 소유 골드는 " << character->GetGold() << " 입니다." << std::endl;
 }
+

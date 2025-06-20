@@ -1,5 +1,8 @@
 ﻿#pragma once
 
+#include "../Types/Monster/Monster.h"
+#include "../Types/Character/Character.h"
+#include "../Types/Actor.h"
 #include "../Types/Character/Character.h"
 
 struct BattleResult {
@@ -16,6 +19,18 @@ public:
 
 	/* 필요하면 return type 추가 */
 	void CreateCharacter(/*필요하면 parameter 추가*/);
+
+private:
+	void GenerateMonster(int characterLevel);
+	void FightUntilDeath(Actor* attacker,Actor* defender);
+
+private:
+	Monster* monsters[4];
+	int monsterNum;
+	int totalMonsterHealth;
+	int totalMonsterAttack;
+	bool isMyTurn;
+	bool isFighting;
 
 	/* 필요하면 return type 변경 */
 	BattleResult Battle(/*필요하면 parameter 추가*/);
@@ -34,4 +49,5 @@ protected:
 private:
 	static const std::string shopMessage;
 	static const std::vector<std::string> shopPrompt;
+
 };
