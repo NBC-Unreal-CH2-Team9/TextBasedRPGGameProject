@@ -24,8 +24,7 @@ GameManager::GameManager()
 
 GameManager::~GameManager()
 {
-
-	delete[] monsters;
+	//delete[] monsters;
 
 	if (character != nullptr) {
 		delete character;
@@ -41,62 +40,61 @@ void GameManager::CreateCharacter()
 
 void GameManager::GenerateMonster(int characterLevel)
 {
-	//���� ����
-	//monsters[4] = { new Goblin("Goblin",200,100),new Orc("Orc",300,110),new Troll("Troll",400,120),new Slime("Slime",500,130)};
+	//몬스터 생성
+	monsters[0] = MonsterManager::CreateGoblin(characterLevel);
+	monsters[1] = MonsterManager::CreateOrc(characterLevel);
+	monsters[2] = MonsterManager::CreateSlime(characterLevel);
+	monsters[3] = MonsterManager::CreateDragon(characterLevel);
+	//monsters[4] = MonsterManager::CreateTroll(characterLevel);
+	
 	isMyTurn = true;
 
-	//���� ���� ����(����,���� ���ݷ�,���� ü��)
-	std::random_device rd;                // 1) �ϵ���� ���� �õ�
-	std::mt19937 gen(rd());               // 2) ��� ����
+	std::random_device rd;         
+	std::mt19937 gen(rd());        
 	std::uniform_int_distribution<> monsterSizeRange(0, 3);
-	std::uniform_int_distribution<> monsterHealthRange(20, 30);
-	std::uniform_int_distribution<> monsterAttackRange(5, 10);
 
 	monsterNum = monsterSizeRange(gen);
-	totalMonsterHealth = characterLevel * monsterHealthRange(gen);
-	totalMonsterAttack = characterLevel * monsterAttackRange(gen);
 
-	std::cout << "���� " << monsters[monsterNum]->GetName() << " ����!";
-	std::cout<<"ü��:" << totalMonsterHealth	<< ", ���ݷ� : " << totalMonsterAttack <<"\n";
+	std::cout << "몬스터 " << monsters[monsterNum]->GetName() << " 등장!";
+	std::cout<<"체력:" << totalMonsterHealth	<< ", 공격력 : " << totalMonsterAttack <<"\n";
 
 }
 
 BattleResult GameManager::Battle()
 {
-	// 필수 기능 [3]
-	// 전투 시스템
-	// 캐릭터 생성 직후, 그리고 상점 방문(또는 스킵) 이후
-
-	// 필수 기능 [4]
-	// 몬스터 설명
-
-	//���� ����
-	//GenerateMonster(character->GetLevel());
-
-	// 전투 로직
-	// 전투 로직 담당자가 구현
-	// while () {
-	// ...
-	// }
-
 	BattleResult result;
 	result.isWin = false;
 	result.isBoss = false;
 
-	isMyTurn = true;
-	isFighting = true;
+	bool isMyTurn = true;
+	bool isFighting = true;
 
-	//���� ����
+	GenerateMonster(character->GetLevel());
+
+	//전투중
 	while(isFighting)
 	{
 		if (isMyTurn)
 		{
-			FightUntilDeath(character, monsters[monsterNum]);
+			//FightUntilDeath(character, monsters[monsterNum]);
+			character->Attack(*monsters[monsterNum]);
+
+			if (monsters[monsterNum]->GetHealth() <= 0)
+			{
+				isFighting = false;
+			}
 		}
 		else
 		{
-			FightUntilDeath(monsters[monsterNum], character);
+			//FightUntilDeath(monsters[monsterNum], character);
+			monsters[monsterNum]->Attack(*character);
+			if (character->GetHealth() <= 0)
+			{
+				isFighting = false;
+			}
 		}
+
+		isMyTurn = !isMyTurn;
 	}
 
 	if (character->GetHealth() > 0)
@@ -108,6 +106,14 @@ BattleResult GameManager::Battle()
 
 	return result;
 }
+
+void GameManager::FightUntilDeath(Actor* attacker, Actor* defender)
+{
+	attacker->Attack(*defender);
+
+	//defender->TakeDamage(attacker->GetAttack());
+}
+
 
 const std::string GameManager::shopMessage = "";
 const std::vector<std::string> GameManager::shopPrompt = {
@@ -141,38 +147,6 @@ void GameManager::Shop()
 	}
 }
 
-void GameManager::FightUntilDeath(Actor* attacker,Actor* defender)
-{
-	std::cout << attacker->GetName() << "�� " << defender->GetName() << "�� �����մϴ�! ";
-
-	Character* player = dynamic_cast<Character*>(defender);
-
-	int defenderHealth;
-
-	if (player)
-	{
-		defender->TakeDamage(totalMonsterAttack);
-		defenderHealth = defender->GetHealth();
-	}
-	else
-	{
-		totalMonsterHealth = totalMonsterHealth - attacker->GetAttack();
-		defenderHealth = totalMonsterHealth;
-	}
-
-
-	if (defenderHealth <= 0)
-	{
-		std::cout << defender->GetName() << " óġ!\n";
-		isFighting = false;
-	}
-	else
-	{
-		std::cout << defender->GetName() << " ü��:" << defender->GetHealth() << "\n";
-	}
-
-	isMyTurn = !isMyTurn;
-}
 
 void GameManager::ShopBuy()
 {

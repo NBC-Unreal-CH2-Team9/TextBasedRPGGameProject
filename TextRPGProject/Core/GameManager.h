@@ -26,22 +26,12 @@ public:
 	/* �ʿ��ϸ� return type ���� */
 	BattleResult Battle(/*�ʿ��ϸ� parameter �߰�*/);
 
-	/* �ʿ��ϸ� return type ���� */
-	void Shop(/*�ʿ��ϸ� parameter �߰�*/);
-
-private:
-	void FightUntilDeath(Actor* attacker,Actor* defender);
 
 private:
 	Monster* monsters[4];
 	int monsterNum;
-	int totalMonsterHealth;
-	int totalMonsterAttack;
-	bool isMyTurn;
-	bool isFighting;
-
-	/* 필요하면 return type 변경 */
-	BattleResult Battle(/*필요하면 parameter 추가*/);
+	
+	void FightUntilDeath(Actor* attacker, Actor* defender);
 
 	void Shop();
 	void ShopBuy();
