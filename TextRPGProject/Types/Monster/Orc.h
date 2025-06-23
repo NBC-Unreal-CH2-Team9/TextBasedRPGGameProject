@@ -5,5 +5,5 @@
 class Orc : public Monster
 {
 public:
-	Orc(std::string name, int health, int attack) : Monster(name, health, attack) {}
+	Orc(std::string name, int health, int attack, int gold, int experience) : Monster(name, health, attack, gold, experience) {}
 };

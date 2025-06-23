@@ -4,6 +4,7 @@
 #include "../Core/GameManager.h"
 #include "../Console/ConsoleInput.h"
 #include "../Console/ConsoleOutput.h"
+#include "../Types/Monster/Monster.h"
 
 #include "../Types/Item/Item.h"
 
@@ -13,21 +14,36 @@ void testBattle() {
 	gameManager.Battle();
 }
 
+
+void testMonster()
+{
+	srand(time(nullptr));
+	int playerLevel = 1;
+	Monster* mon = MonsterManager::CreateOrc(playerLevel);
+
+	
+	std::cout << mon->GetCriticalAttack() << std::endl;
+	std::cout << mon->GetAttack() << std::endl;
+	for (int i = 0; i < 100; i++)
+	{
+		std::cout << mon->GetCriticalProbablily() << std::endl;
+	}
+
 void testShop() {
 	GameManager gameManager;
 	gameManager.CreateCharacter();
 
-	// Àåºñ¸¦ ¾ò¾ú´Ù°í °¡Á¤ÇÏ±â
+	// ìž¥ë¹„ë¥¼ ì–»ì—ˆë‹¤ê³  ê°€ì •í•˜ê¸°
 
 	Character* character = gameManager.GetCharacter();
-	character->GetEquipmentInventory()->Insert(new Equipment("ÀÓ½ÃÀåºñ1", 100));
-	character->GetEquipmentInventory()->Insert(new Equipment("ÀÓ½ÃÀåºñ2", 30));
+	character->GetEquipmentInventory()->Insert(new Equipment("ìž„ì‹œìž¥ë¹„1", 100));
+	character->GetEquipmentInventory()->Insert(new Equipment("ìž„ì‹œìž¥ë¹„2", 30));
 
 	gameManager.Shop();
+
 }
 
 int main() {
-	//testBattle();
-	testShop();
+  testMonster();
 }
 
