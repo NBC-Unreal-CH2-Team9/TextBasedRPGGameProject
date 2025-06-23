@@ -3,6 +3,15 @@
 #include <iostream>
 
 #include "GameManager.h"
+
+#include <iostream>
+#include "../Types/Monster/Dragon.h"
+#include "../Types/Monster/Goblin.h"
+#include "../Types/Monster/Orc.h"
+#include "../Types/Monster/Slime.h"
+#include "../Types/Monster/Troll.h"
+#include <random>
+
 #include "../Types/Item/Item.h"
 #include "../Types/Item/AttackBoost.h"
 #include "../Types/Item/HealthPotion.h"
@@ -27,24 +36,85 @@ void GameManager::CreateCharacter()
 	character->SetGold(100);
 }
 
+void GameManager::GenerateMonster(int characterLevel)
+{
+	//몬스터 생성
+	monsters[0] = MonsterManager::CreateGoblin(characterLevel);
+	monsters[1] = MonsterManager::CreateOrc(characterLevel);
+	monsters[2] = MonsterManager::CreateSlime(characterLevel);
+	monsters[3] = MonsterManager::CreateDragon(characterLevel);
+	monsters[4] = MonsterManager::CreateTroll(characterLevel);
+	
+	std::random_device rd;         
+	std::mt19937 gen(rd());        
+	std::uniform_int_distribution<> monsterSizeRange(0, 3);
+
+	monsterNum = monsterSizeRange(gen);
+
+	if (characterLevel >= 10)
+	{
+		std::cout << "보스 몬스터 " << monsters[monsterNum]->GetName() << " 등장!";
+	}
+	else
+	{
+		std::cout << "몬스터 " << monsters[monsterNum]->GetName() << " 등장!";
+	}
+
+	std::cout << "체력:" << monsters[monsterNum]->GetHealth() << ",공격력:" << monsters[monsterNum]->GetAttack() << std::endl;
+}
+
 BattleResult GameManager::Battle()
 {
-	// 필수 기능 [3]
-	// 전투 시스템
-	// 캐릭터 생성 직후, 그리고 상점 방문(또는 스킵) 이후
-
-	// 필수 기능 [4]
-	// 몬스터 설명
-
-	// 전투 로직
-	// 전투 로직 담당자가 구현
-	// while () {
-	// ...
-	// }
-
 	BattleResult result;
 	result.isWin = false;
 	result.isBoss = false;
+
+	bool isMyTurn = true;
+	bool isFighting = true;
+
+	GenerateMonster(character->GetLevel());
+
+	//전투중
+	while(isFighting)
+	{
+		if (isMyTurn)
+		{
+			character->Attack(*monsters[monsterNum]);
+
+			if (monsters[monsterNum]->GetHealth() <= 0)
+			{
+				isFighting = false;
+			}
+		}
+		else
+		{
+			monsters[monsterNum]->Attack(*character);
+
+			if (character->GetHealth() <= 0)
+			{
+				isFighting = false;
+			}
+		}
+
+		isMyTurn = !isMyTurn;
+	}
+
+	if (character->GetHealth() > 0)
+	{
+		result.isWin = true;
+	}
+
+	if (character->GetLevel() >= 10)
+	{
+		result.isBoss = true;
+	}
+
+	for (Monster* monster : monsters)
+	{
+		delete monster;
+		monster = nullptr;
+	}
+
 	return result;
 }
 
@@ -79,6 +149,7 @@ void GameManager::Shop()
 		}
 	}
 }
+
 
 void GameManager::ShopBuy()
 {
@@ -153,3 +224,4 @@ void GameManager::ShopSell()
 	// temp message
 	std::cout << "현재 소유 골드는 " << character->GetGold() << " 입니다." << std::endl;
 }
+
