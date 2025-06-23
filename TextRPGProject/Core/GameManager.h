@@ -2,7 +2,7 @@
 
 #include "../Types/Character/Character.h"
 
-#include "../Types/Monster.h""
+#include "../Types/Monster/Monster.h"
 #include "../Types/Actor.h"
 #include "../Types/Character/Character.h"
 
@@ -21,14 +21,13 @@ public:
 	/* í•„ìš”í•˜ë©´ return type ì¶”ê°€ */
 	void CreateCharacter(/*í•„ìš”í•˜ë©´ parameter ì¶”ê°€*/);
 
-<<<<<<< HEAD
 	void GenerateMonster(int characterLevel);
 
-	/* ÇÊ¿äÇÏ¸é return type º¯°æ */
-	BattleResult Battle(/*ÇÊ¿äÇÏ¸é parameter Ãß°¡*/);
+	/* ï¿½Ê¿ï¿½ï¿½Ï¸ï¿½ return type ï¿½ï¿½ï¿½ï¿½ */
+	BattleResult Battle(/*ï¿½Ê¿ï¿½ï¿½Ï¸ï¿½ parameter ï¿½ß°ï¿½*/);
 
-	/* ÇÊ¿äÇÏ¸é return type º¯°æ */
-	void Shop(/*ÇÊ¿äÇÏ¸é parameter Ãß°¡*/);
+	/* ï¿½Ê¿ï¿½ï¿½Ï¸ï¿½ return type ï¿½ï¿½ï¿½ï¿½ */
+	void Shop(/*ï¿½Ê¿ï¿½ï¿½Ï¸ï¿½ parameter ï¿½ß°ï¿½*/);
 
 private:
 	void FightUntilDeath(Actor* attacker,Actor* defender);
@@ -40,7 +39,7 @@ private:
 	int totalMonsterAttack;
 	bool isMyTurn;
 	bool isFighting;
-=======
+
 	/* í•„ìš”í•˜ë©´ return type ë³€ê²½ */
 	BattleResult Battle(/*í•„ìš”í•˜ë©´ parameter ì¶”ê°€*/);
 
@@ -58,5 +57,5 @@ protected:
 private:
 	static const std::string shopMessage;
 	static const std::vector<std::string> shopPrompt;
->>>>>>> f65649bf6c857c74f3b6030eb438625e0b70b32d
+
 };

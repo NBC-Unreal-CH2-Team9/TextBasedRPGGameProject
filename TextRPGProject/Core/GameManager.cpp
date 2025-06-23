@@ -3,17 +3,19 @@
 #include <iostream>
 
 #include "GameManager.h"
-<<<<<<< HEAD
+
 #include <iostream>
-#include "../Types/Goblin.h"
-#include "../Types/Orc.h"
-#include "../Types/Troll.h"
-#include "../Types/Slime.h"
+#include "../Types/Monster/Dragon.h"
+#include "../Types/Monster/Goblin.h"
+#include "../Types/Monster/Orc.h"
+#include "../Types/Monster/Slime.h"
+#include "../Types/Monster/Troll.h"
 #include <random>
-=======
+
 #include "../Types/Item/Item.h"
+#include "../Types/Item/AttackBoost.h"
+#include "../Types/Item/HealthPotion.h"
 #include "../Console/ConsoleInput.h"
->>>>>>> f65649bf6c857c74f3b6030eb438625e0b70b32d
 
 GameManager::GameManager()
 {
@@ -22,13 +24,12 @@ GameManager::GameManager()
 
 GameManager::~GameManager()
 {
-<<<<<<< HEAD
+
 	delete[] monsters;
-=======
+
 	if (character != nullptr) {
 		delete character;
 	}
->>>>>>> f65649bf6c857c74f3b6030eb438625e0b70b32d
 }
 
 void GameManager::CreateCharacter()
@@ -40,13 +41,13 @@ void GameManager::CreateCharacter()
 
 void GameManager::GenerateMonster(int characterLevel)
 {
-	//¸ó½ºÅÍ »ý¼º
-	monsters[4] = { new Goblin("Goblin",200,100),new Orc("Orc",300,110),new Troll("Troll",400,120),new Slime("Slime",500,130)};
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	//monsters[4] = { new Goblin("Goblin",200,100),new Orc("Orc",300,110),new Troll("Troll",400,120),new Slime("Slime",500,130)};
 	isMyTurn = true;
 
-	//·£´ý ¼ýÀÚ »ý¼º(¸ó½ºÅÍ,¸ó½ºÅÍ °ø°Ý·Â,¸ó½ºÅÍ Ã¼·Â)
-	std::random_device rd;                // 1) ÇÏµå¿þ¾î ³­¼ö ½Ãµå
-	std::mt19937 gen(rd());               // 2) °í¼Ó ¿£Áø
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½,ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½)
+	std::random_device rd;                // 1) ï¿½Ïµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ãµï¿½
+	std::mt19937 gen(rd());               // 2) ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	std::uniform_int_distribution<> monsterSizeRange(0, 3);
 	std::uniform_int_distribution<> monsterHealthRange(20, 30);
 	std::uniform_int_distribution<> monsterAttackRange(5, 10);
@@ -55,8 +56,8 @@ void GameManager::GenerateMonster(int characterLevel)
 	totalMonsterHealth = characterLevel * monsterHealthRange(gen);
 	totalMonsterAttack = characterLevel * monsterAttackRange(gen);
 
-	std::cout << "¸ó½ºÅÍ " << monsters[monsterNum]->GetName() << " µîÀå!";
-	std::cout<<"Ã¼·Â:" << totalMonsterHealth	<< ", °ø°Ý·Â : " << totalMonsterAttack <<"\n";
+	std::cout << "ï¿½ï¿½ï¿½ï¿½ " << monsters[monsterNum]->GetName() << " ï¿½ï¿½ï¿½ï¿½!";
+	std::cout<<"Ã¼ï¿½ï¿½:" << totalMonsterHealth	<< ", ï¿½ï¿½ï¿½Ý·ï¿½ : " << totalMonsterAttack <<"\n";
 
 }
 
@@ -69,19 +70,14 @@ BattleResult GameManager::Battle()
 	// í•„ìˆ˜ ê¸°ëŠ¥ [4]
 	// ëª¬ìŠ¤í„° ì„¤ëª…
 
-<<<<<<< HEAD
-	//¸ó½ºÅÍ »ý¼º
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	//GenerateMonster(character->GetLevel());
-	
-	//Å×½ºÆ®¿ë
-	GenerateMonster(2);
-=======
+
 	// ì „íˆ¬ ë¡œì§
 	// ì „íˆ¬ ë¡œì§ ë‹´ë‹¹ìžê°€ êµ¬í˜„
 	// while () {
 	// ...
 	// }
->>>>>>> f65649bf6c857c74f3b6030eb438625e0b70b32d
 
 	BattleResult result;
 	result.isWin = false;
@@ -90,7 +86,7 @@ BattleResult GameManager::Battle()
 	isMyTurn = true;
 	isFighting = true;
 
-	//ÀüÅõ ·ÎÁ÷
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	while(isFighting)
 	{
 		if (isMyTurn)
@@ -112,20 +108,6 @@ BattleResult GameManager::Battle()
 
 	return result;
 }
-
-// Temporal Items for Shop TEST
-#include "../Types/Item/Item.h"
-class Potion : public Item {
-public:
-	Potion() : Item("HP Potion") {}
-	virtual void Use(Character& user) override {}
-};
-class PowerUp : public Item {
-public:
-	PowerUp() : Item("Attack PowerUp") {}
-	virtual void Use(Character& user) override {}
-};
-
 
 const std::string GameManager::shopMessage = "";
 const std::vector<std::string> GameManager::shopPrompt = {
@@ -159,10 +141,9 @@ void GameManager::Shop()
 	}
 }
 
-<<<<<<< HEAD
 void GameManager::FightUntilDeath(Actor* attacker,Actor* defender)
 {
-	std::cout << attacker->GetName() << "°¡ " << defender->GetName() << "À» °ø°ÝÇÕ´Ï´Ù! ";
+	std::cout << attacker->GetName() << "ï¿½ï¿½ " << defender->GetName() << "ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½! ";
 
 	Character* player = dynamic_cast<Character*>(defender);
 
@@ -187,21 +168,21 @@ void GameManager::FightUntilDeath(Actor* attacker,Actor* defender)
 	}
 	else
 	{
-		std::cout << defender->GetName() << " Ã¼·Â:" << defender->GetHealth() << "\n";
+		std::cout << defender->GetName() << " Ã¼ï¿½ï¿½:" << defender->GetHealth() << "\n";
 	}
 
 	isMyTurn = !isMyTurn;
 }
-=======
+
 void GameManager::ShopBuy()
 {
 	// Hardcoding..
 	std::vector<Item*> shopItems;
-	shopItems.push_back(new Potion());
-	shopItems.push_back(new PowerUp());
+	shopItems.push_back(new HealthPotion(50));
+	shopItems.push_back(new AttackBoost(10));
 	std::vector<int> prices;
-	prices.push_back(10);
-	prices.push_back(100);
+	prices.push_back(shopItems[0]->GetPrice());
+	prices.push_back(shopItems[1]->GetPrice());
 
 	int gold = character->GetGold();
 
@@ -221,10 +202,10 @@ void GameManager::ShopBuy()
 		Item* newItem = nullptr;
 		switch (buyIndex) {
 		case 0:
-			newItem = new Potion();
+			newItem = new HealthPotion(50);
 			break;
 		case 1:
-			newItem = new PowerUp();
+			newItem = new AttackBoost(10);
 			break;
 		}
 		if (newItem != nullptr) {
@@ -256,7 +237,7 @@ void GameManager::ShopSell()
 
 	// TODO: hard coding, refactoring, etc..
 	Item* item = character->GetInventory()->Get(sellIndex);
-	int price = 10;
+	int price = item->GetPrice() * 60 / 100;
 	// temp message
 	std::cout << item->GetName() << "ì„/ë¥¼ " << price << "ê³¨ë“œì— íŒ”ì•˜ìŠµë‹ˆë‹¤." << std::endl;
 
@@ -266,4 +247,4 @@ void GameManager::ShopSell()
 	// temp message
 	std::cout << "í˜„ìž¬ ì†Œìœ  ê³¨ë“œëŠ” " << character->GetGold() << " ìž…ë‹ˆë‹¤." << std::endl;
 }
->>>>>>> f65649bf6c857c74f3b6030eb438625e0b70b32d
+

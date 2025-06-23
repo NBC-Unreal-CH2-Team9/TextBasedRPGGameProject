@@ -1,7 +1,6 @@
-// ºôµå ¼³Á¤À» 'Debug', 'Release'°¡ ¾Æ´Ñ 'Test'À¸·Î ÁöÁ¤ÇÏ¸é, ¿©±â¿¡ ÀÖ´Â mainÀÌ ½ÇÇàµË´Ï´Ù.
-// ÄÚµå¸¦ Å×½ºÆ®ÇØ¾ßÇÒ ÀÏÀÌ ÀÖ´Ù¸é, ¿©±â¿¡¼­ Å×½ºÆ® ¹Ù¶ø´Ï´Ù.
-
+// ë¹Œë“œ ì„¤ì •ì„ 'Debug', 'Release'ê°€ ì•„ë‹Œ 'Test'ìœ¼ë¡œ ì§€ì •í•˜ë©´, ì—¬ê¸°ì— ìˆëŠ” mainì´ ì‹¤í–‰ë©ë‹ˆë‹¤.
 #include <iostream>
+<<<<<<< HEAD
 #include "../Core/GameManager.h"
 
 #include "../Console/ConsoleInput.h"
@@ -103,5 +102,8 @@ int main() {
 	}
 
 	// °ÔÀÓ Á¾·á Ã³¸®
+=======
+int main() {
+>>>>>>> 9552658dbfafaa7c3ce48ede21096655928293d1
 	return 0;
 }
