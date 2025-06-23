@@ -6,6 +6,6 @@
 class Dragon : public Monster
 {
 public:
-	Dragon(std::string name, int health, int attack) : Monster(name, health, attack) {}
+	Dragon(std::string name, int health, int attack, int gold, int experience) : Monster(name, health, attack, gold, experience) {}
 	void Attack(Actor& other) override;
 };
