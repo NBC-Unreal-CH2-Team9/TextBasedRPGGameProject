@@ -1,15 +1,11 @@
-// ºôµå ¼³Á¤À» 'Debug', 'Release'°¡ ¾Æ´Ñ 'Test'À¸·Î ÁöÁ¤ÇÏ¸é, ¿©±â¿¡ ÀÖ´Â mainÀÌ ½ÇÇàµË´Ï´Ù.
-// ÄÚµå¸¦ Å×½ºÆ®ÇØ¾ßÇÒ ÀÏÀÌ ÀÖ´Ù¸é, ¿©±â¿¡¼­ Å×½ºÆ® ¹Ù¶ø´Ï´Ù.
-
+// ë¹Œë“œ ì„¤ì •ì„ 'Debug', 'Release'ê°€ ì•„ë‹Œ 'Test'ìœ¼ë¡œ ì§€ì •í•˜ë©´, ì—¬ê¸°ì— ìˆëŠ” mainì´ ì‹¤í–‰ë©ë‹ˆë‹¤.
 #include <iostream>
-#include "../Core/GameManager.h"
 
+#include "../Core/GameManager.h"
 #include "../Console/ConsoleInput.h"
 #include "../Console/ConsoleOutput.h"
-#include "../Core/GameManager.h"
 
 int main() 
 {
-	
 	return 0;
 }

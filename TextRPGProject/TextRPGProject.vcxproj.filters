@@ -28,6 +28,9 @@
     <Filter Include="Header Files\Types">
       <UniqueIdentifier>{525118ea-1739-4347-adab-a0b289809666}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Types\Monsters">
+      <UniqueIdentifier>{f61ccb27-a6b0-4f29-8cac-0bc3e81bd6fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,6 +54,7 @@
     <ClCompile Include="Types\Monster\Monster.cpp">
       <Filter>Source Files\Types</Filter>
     </ClCompile>
+    <ClCompile Include="Types\Monster\Dragon.cpp">
     <ClCompile Include="Console\ConsoleInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -77,6 +81,20 @@
     <ClInclude Include="Types\Monster\Monster.h">
       <Filter>Header Files\Types</Filter>
     </ClInclude>
+    <ClInclude Include="Types\Monster\Orc.h">
+      <Filter>Header Files\Types\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Types\Monster\Goblin.h">
+      <Filter>Header Files\Types\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Types\Monster\Troll.h">
+      <Filter>Header Files\Types\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Types\Monster\Slime.h">
+      <Filter>Header Files\Types\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Types\Monster\Dragon.h">
+      <Filter>Header Files\Types\Monsters</Filter>
     <ClInclude Include="Console\ConsoleInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>

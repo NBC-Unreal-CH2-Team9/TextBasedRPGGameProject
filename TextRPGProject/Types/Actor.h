@@ -1,27 +1,26 @@
 #pragma once
 #include <string>
 
-// ÀÎÅÍÆäÀÌ½º [1]
-// ÀüÅõ ½Ã½ºÅÛÀ» À§ÇÑ ÀÎÅÍÆäÀÌ½º, Actor
+// ì¸í„°í˜ì´ìŠ¤ [1]
+// ì „íˆ¬ ì‹œìŠ¤í…œì„ ìœ„í•œ ì¸í„°í˜ì´ìŠ¤, Actor
 
-// Character¿Í MonsterÀÇ °øÅë ºÎºĞÀ» ¸ğ¾Æ¼­ ¸¸µç Å¬·¡½º
-// ÀÌÁ¦ ÀüÅõ ½Ã½ºÅÛÀº Actor¿Í Actor »çÀÌ¿¡¼­ ÀÏ¾î³ª´Â ÀÏÀÌ µÇ¾úÀ¸¹Ç·Î
-// ÀüÅõ ½Ã½ºÅÛÀ» ±¸ÇöÇÏ´Â »ç¶÷Àº, Monster¿Í CharacterÀÇ ±¸Ã¼ÀûÀÎ ±¸Çö ³»¿ëÀ» ¾ËÁö ¾Ê¾Æµµ µÈ´Ù.
+// Characterì™€ Monsterì˜ ê³µí†µ ë¶€ë¶„ì„ ëª¨ì•„ì„œ ë§Œë“  í´ë˜ìŠ¤
+// ì´ì œ ì „íˆ¬ ì‹œìŠ¤í…œì€ Actorì™€ Actor ì‚¬ì´ì—ì„œ ì¼ì–´ë‚˜ëŠ” ì¼ì´ ë˜ì—ˆìœ¼ë¯€ë¡œ
+// ì „íˆ¬ ì‹œìŠ¤í…œì„ êµ¬í˜„í•˜ëŠ” ì‚¬ëŒì€, Monsterì™€ Characterì˜ êµ¬ì²´ì ì¸ êµ¬í˜„ ë‚´ìš©ì„ ì•Œì§€ ì•Šì•„ë„ ëœë‹¤.
 // 
-// ¿¹¸¦ µé¾î,
-// Character°¡ ½ºÅ³À» °¡Áö°í ÀÖ¾îµµ, ÀüÅõ ½Ã½ºÅÛÀ» ±¸ÇöÇÑ »ç¶÷Àº 'Attack()'¸¸ È£ÃâÇÏ¸é µÈ´Ù.
-// Monster°¡ ¹æ¾î·ÂÀ» °¡Áö°í ÀÖ¾îµµ, ÀüÅõ ½Ã½ºÅÛÀ» ±¸ÇöÇÑ »ç¶÷Àº 'TakeDamage()'¸¸ È£ÃâÇÏ¸é µÈ´Ù.
-// Actor¸¦ ¼öÁ¤ÇØ¾ß ÇÒ ÀÏÀÌ ÀÖ´Ù¸é, ±×°Ç ±âÈ¹ÀÌ Actor ±¸Çö¿¡ ¹İ¿µµÇÁö ¸øÇÑ °ÍÀÌ´Ù.
+// ì˜ˆë¥¼ ë“¤ì–´,
+// Characterê°€ ìŠ¤í‚¬ì„ ê°€ì§€ê³  ìˆì–´ë„, ì „íˆ¬ ì‹œìŠ¤í…œì„ êµ¬í˜„í•œ ì‚¬ëŒì€ 'Attack()'ë§Œ í˜¸ì¶œí•˜ë©´ ëœë‹¤.
+// Monsterê°€ ë°©ì–´ë ¥ì„ ê°€ì§€ê³  ìˆì–´ë„, ì „íˆ¬ ì‹œìŠ¤í…œì„ êµ¬í˜„í•œ ì‚¬ëŒì€ 'TakeDamage()'ë§Œ í˜¸ì¶œí•˜ë©´ ëœë‹¤.
+// Actorë¥¼ ìˆ˜ì •í•´ì•¼ í•  ì¼ì´ ìˆë‹¤ë©´, ê·¸ê±´ ê¸°íšì´ Actor êµ¬í˜„ì— ë°˜ì˜ë˜ì§€ ëª»í•œ ê²ƒì´ë‹¤.
 
 class Actor {
 public:
 	Actor(std::string name, int health, int attack) : name(name), health(health), attack(attack) {}
 	virtual void Attack(Actor& other) = 0;
 	virtual void TakeDamage(int damage) = 0;
-
-	std::string GetName() { return name; };
-	int GetHealth();
-	int GetAttack();
+	std::string GetName() {	return name; }
+	int GetHealth() { return health; }
+	int GetAttack() { return attack; }
 
 protected:
 	std::string name;
