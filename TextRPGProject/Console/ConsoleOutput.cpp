@@ -2,7 +2,7 @@
 #include <iostream>
 
 // 캐릭터 현재 상태를 출력하는 함수
-void ShowCharacterStatus(const int level, int experience, int health, int maxHealth, int attackpower) {
+void ShowCharacterStatus(int level, int experience, int health, int maxHealth, int attackpower) {
 	std::cout << "--캐릭터 현재 상태-- " << std::endl;
 	std::cout << "레벨: " << level << std::endl;
 	std::cout << "경험치: " << experience << std::endl;
@@ -13,7 +13,9 @@ void ShowCharacterStatus(const int level, int experience, int health, int maxHea
 
 // 캐릭터의 골드를 출력하는 함수
 void ShowCharacterGold(int gold) {
+	std::cout << "--캐릭터 지갑-- " << std::endl;
 	std::cout << "현재 골드: " << gold << std::endl;
+	std::cout << "----------------" << std::endl;
 }
 
 // 몬스터의 상태를 출력하는 함수
