@@ -27,16 +27,17 @@ public:
 
 	void Shop();
 
+	Character* GetCharacter() {
+		return character;
+	}
+
 private:
 	Monster* monsters[5];
 	int monsterNum;
 
-	void ShopBuy();
-	void ShopSell();
-
-	Character* GetCharacter() {
-		return character;
-	}
+	void ShopBuyItem();
+	void ShopSellItem();
+	void ShopSellEquipment();
 
 protected:
 	Character* character;

@@ -1,8 +1,10 @@
 #pragma once
 
 #include "../Actor.h"
-#include "../Item/Item.h"
 #include "Inventory.h"
+
+class Item;
+class Equipment;
 
 class Character : public Actor {
 public:
@@ -16,6 +18,9 @@ public:
 
 	Inventory<Item>* GetItemInventory() {
 		return &itemInventory;
+	}
+	Inventory<Equipment>* GetEquipmentInventory() {
+		return &equipmentInventory;
 	}
 
 	int GetGold() {
@@ -50,6 +55,7 @@ public:
 
 protected:
 	Inventory<Item> itemInventory;
+	Inventory<Equipment> equipmentInventory;
 	int gold;
 	int level;
 	int maxHealth;

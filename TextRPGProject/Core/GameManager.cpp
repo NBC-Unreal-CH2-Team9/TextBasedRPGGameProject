@@ -4,7 +4,6 @@
 
 #include "GameManager.h"
 
-#include <iostream>
 #include "../Types/Monster/Dragon.h"
 #include "../Types/Monster/Goblin.h"
 #include "../Types/Monster/Orc.h"
@@ -126,17 +125,17 @@ const std::vector<std::string> GameManager::shopPrompt = {
 void GameManager::Shop()
 {
 	// 상점에 방문했을 때, 사용하지 않는 모든 장비를 판매함
-
+	ShopSellEquipment();
 
 	while (true) {
 		int select = SelectNumber(shopPrompt);
 		switch (select) {
 		case 0: // Buy
-			ShopBuy();
+			ShopBuyItem();
 			break;
 		case 1: // Sell
 			if (character->GetItemInventory()->Count() > 0) {
-				ShopSell();
+				ShopSellItem();
 			}
 			else {
 				// temp message
@@ -150,7 +149,7 @@ void GameManager::Shop()
 }
 
 
-void GameManager::ShopBuy()
+void GameManager::ShopBuyItem()
 {
 	// Hardcoding..
 	std::vector<Item*> shopItems;
@@ -200,7 +199,7 @@ void GameManager::ShopBuy()
 	
 }
 
-void GameManager::ShopSell()
+void GameManager::ShopSellItem()
 {
 	std::vector<Item*> items = character->GetItemInventory()->GetItems();
 
@@ -222,5 +221,23 @@ void GameManager::ShopSell()
 
 	// temp message
 	std::cout << "현재 소유 골드는 " << character->GetGold() << " 입니다." << std::endl;
+}
+
+void GameManager::ShopSellEquipment()
+{
+	// 가지고 있는 모든 장비 판매하기
+	std::vector<Equipment*> eqiupments = character->GetEquipmentInventory()->GetItems();
+	int gain = 0;
+	int old_glod = character->GetGold();
+	for (auto& equipment : eqiupments) {
+		// temp message
+		std::cout << equipment->GetName() << "를 " << equipment->GetPrice() << " 에 팔았습니다.." << std::endl;
+		gain += equipment->GetPrice();
+	}
+	int new_gold = old_glod + gain;
+	character->SetGold(new_gold);
+
+	// temp message
+	std::cout << "현재 골드: " << character->GetGold() << " (+" << gain << ")" << std::endl;
 }
 
