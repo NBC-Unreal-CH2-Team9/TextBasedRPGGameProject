@@ -1,6 +1,16 @@
 #include "Actor.h"
 
-bool Actor::GetCriticalProbablily()
+int Actor::GetAttack()
+{
+    if (isCriticalHit())
+    {
+        return attack * criticalAttack;
+    }
+    
+    return attack;
+}
+
+bool Actor::isCriticalHit()
 {
     if (rand() % 100 < criticalProbablily)
     {
