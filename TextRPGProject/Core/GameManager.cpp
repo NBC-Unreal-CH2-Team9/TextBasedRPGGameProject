@@ -94,7 +94,7 @@ BattleResult GameManager::Battle()
 		result.isWin = true;
 	}
 
-	delete[] monsters;
+	//delete[] monsters;
 
 	return result;
 }
