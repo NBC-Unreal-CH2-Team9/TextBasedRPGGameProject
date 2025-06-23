@@ -148,16 +148,29 @@ void GameManager::Shop()
 	}
 }
 
+Item* GameManager::MakeShopItem(ShopItems index) {
+	Item* shopItem = nullptr;
+	int shop_healthRestore = 50;
+	int shop_attackincrease = 4;
+	switch (index) {
+	case ShopHealthPotion:
+		shopItem = new HealthPotion(shop_healthRestore);
+		break;
+	case ShopAttackBoost:
+		shopItem = new AttackBoost(shop_attackincrease);
+		break;
+	default: 
+		shopItem = nullptr;
+		break;
+	}
+	return shopItem;
+}
 
 void GameManager::ShopBuyItem()
 {
-	// Hardcoding..
 	std::vector<Item*> shopItems;
-	shopItems.push_back(new HealthPotion(50));
-	shopItems.push_back(new AttackBoost(10));
-	std::vector<int> prices;
-	prices.push_back(shopItems[0]->GetPrice());
-	prices.push_back(shopItems[1]->GetPrice());
+	shopItems.push_back(MakeShopItem(ShopItems::ShopHealthPotion));
+	shopItems.push_back(MakeShopItem(ShopItems::ShopAttackBoost));
 
 	int gold = character->GetGold();
 
@@ -166,21 +179,20 @@ void GameManager::ShopBuyItem()
 
 	std::vector<std::string> options;
 	for (int i = 0; i < shopItems.size(); i++) {
-		options.emplace_back(shopItems[i]->GetName() + ", (" + std::to_string(prices[i]) + "골드)");
+		options.emplace_back(shopItems[i]->GetName() + ", (" + std::to_string(shopItems[i]->GetPrice()) + "골드)");
 	}
 	
 	int buyIndex = SelectNumber(options);
 
-	if (gold >= prices[buyIndex]) {
-		gold -= prices[buyIndex];
-		// TODO: refactoring...
+	if (gold >= shopItems[buyIndex]->GetPrice()) {
+		gold -= shopItems[buyIndex]->GetPrice();
 		Item* newItem = nullptr;
 		switch (buyIndex) {
 		case 0:
-			newItem = new HealthPotion(50);
+			newItem = MakeShopItem(ShopItems::ShopHealthPotion);
 			break;
 		case 1:
-			newItem = new AttackBoost(10);
+			newItem = MakeShopItem(ShopItems::ShopAttackBoost);
 			break;
 		}
 		if (newItem != nullptr) {
