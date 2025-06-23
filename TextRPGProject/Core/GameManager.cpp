@@ -43,7 +43,7 @@ void GameManager::GenerateMonster(int characterLevel)
 	monsters[1] = MonsterManager::CreateOrc(characterLevel);
 	monsters[2] = MonsterManager::CreateSlime(characterLevel);
 	monsters[3] = MonsterManager::CreateDragon(characterLevel);
-	//monsters[4] = MonsterManager::CreateTroll(characterLevel);
+	monsters[4] = MonsterManager::CreateTroll(characterLevel);
 	
 	std::random_device rd;         
 	std::mt19937 gen(rd());        
@@ -117,8 +117,6 @@ BattleResult GameManager::Battle()
 
 	return result;
 }
-
-
 
 const std::string GameManager::shopMessage = "";
 const std::vector<std::string> GameManager::shopPrompt = {

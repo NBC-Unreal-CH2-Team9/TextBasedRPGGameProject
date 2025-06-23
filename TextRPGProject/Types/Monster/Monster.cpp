@@ -55,6 +55,15 @@ Monster* MonsterManager::CreateGoblin(int characterLevel)
 	return goblin;
 }
 
+Monster* MonsterManager::CreateTroll(int characterLevel)
+{
+	int health = CalculateHealth(characterLevel) * 1.5;
+	int attack = CalculateAttack(characterLevel) * 1.5;
+	Monster* dragon = new Dragon("µå·¡°ï", health, attack);
+	return dragon;
+}
+
+
 int MonsterManager::CalculateHealth(int characterLevel)
 {
 	return (rand() % 11 + 20) * characterLevel;

@@ -26,7 +26,7 @@ public:
 	BattleResult Battle();
 
 private:
-	Monster* monsters[4];
+	Monster* monsters[5];
 	int monsterNum;
 
 	void Shop();
