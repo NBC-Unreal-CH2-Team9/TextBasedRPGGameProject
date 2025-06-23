@@ -1,8 +1,10 @@
 #pragma once
 
 #include "../Actor.h"
-#include "../Item/Item.h"
 #include "Inventory.h"
+
+class Item;
+class Equipment;
 
 class Character : public Actor {
 public:
@@ -14,8 +16,11 @@ public:
 	virtual void Attack(Actor& other);
 	virtual void TakeDamage(int damage);
 
-	Inventory* GetInventory() {
-		return &inventory;
+	Inventory<Item>* GetItemInventory() {
+		return &itemInventory;
+	}
+	Inventory<Equipment>* GetEquipmentInventory() {
+		return &equipmentInventory;
 	}
 
 	int GetGold() {
@@ -53,7 +58,8 @@ public:
 	void GetRandomItem(Item* item); // ¿¸≈ıΩ¬∏ÆΩ√ æ∆¿Ã≈€ »πµÊ
 
 protected:
-	Inventory inventory;
+	Inventory<Item> itemInventory;
+	Inventory<Equipment> equipmentInventory;
 	int gold;
 	int level;
 	int maxHealth;

@@ -5,7 +5,7 @@
 #include "../Console/ConsoleInput.h"
 #include "../Console/ConsoleOutput.h"
 
-#include "../Types/Character/Character.h"
+#include "../Types/Item/Item.h"
 
 void testBattle() {
 	GameManager gameManager;
@@ -13,18 +13,21 @@ void testBattle() {
 	gameManager.Battle();
 }
 
-void testCharacter() {
+void testShop() {
 	GameManager gameManager;
-	Character* c = gameManager.CreateCharacter();
-	gameManager.Battle();
+	gameManager.CreateCharacter();
 
-	c->DisplayStatus();
-	for(int i = 0; i < 10; ++i) {
-		c->AddExperience(100);
-	}
+	// 장비를 얻었다고 가정하기
+
+	Character* character = gameManager.GetCharacter();
+	character->GetEquipmentInventory()->Insert(new Equipment("임시장비1", 100));
+	character->GetEquipmentInventory()->Insert(new Equipment("임시장비2", 30));
+
+	gameManager.Shop();
 }
 
 int main() {
-	testCharacter();
+	//testBattle();
+	testShop();
 }
 

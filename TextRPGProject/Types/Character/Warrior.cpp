@@ -6,7 +6,7 @@ void Warrior::OnLevelChangedHealth() {
 
 	int newHealth = (maxHealth + level * 20);
 	health = newHealth;
-	maxHealth = newHealth;	
+	maxHealth = newHealth;
 }
 
 void Warrior::OnLevelChangedAttack() {

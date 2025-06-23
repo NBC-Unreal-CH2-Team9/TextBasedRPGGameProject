@@ -4,7 +4,6 @@
 
 #include "../Types/Monster/Monster.h"
 #include "../Types/Actor.h"
-#include "../Types/Character/Character.h"
 
 struct BattleResult {
 public:
@@ -24,23 +23,33 @@ public:
 
 	BattleResult Battle();
 
-private:
-	Monster* monsters[5];
-	int monsterNum;
-
 	void Shop();
-	void ShopBuy();
-	void ShopSell();
 
 	Character* GetCharacter() {
 		return character;
 	}
 
+private:
+	Monster* monsters[5];
+	int monsterNum;
+
+	void ShopBuyItem();
+	void ShopSellItem();
+	void ShopSellEquipment();
+
 protected:
 	Character* character;
 
 private:
+	// 상점에서 사용하는 정적 변수 모음
 	static const std::string shopMessage;
 	static const std::vector<std::string> shopPrompt;
 
+	// 상점에서 사용하는 정적 함수 모음
+	// 상점에서 판매하는 아이템 생성
+	enum ShopItems {
+		ShopHealthPotion = 0,
+		ShopAttackBoost = 1,
+	};
+	static Item* MakeShopItem(ShopItems index);
 };
