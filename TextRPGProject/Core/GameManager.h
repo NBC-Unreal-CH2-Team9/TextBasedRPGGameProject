@@ -23,15 +23,11 @@ public:
 
 	void GenerateMonster(int characterLevel);
 
-	/* �ʿ��ϸ� return type ���� */
-	BattleResult Battle(/*�ʿ��ϸ� parameter �߰�*/);
-
+	BattleResult Battle();
 
 private:
 	Monster* monsters[4];
 	int monsterNum;
-	
-	void FightUntilDeath(Actor* attacker, Actor* defender);
 
 	void Shop();
 	void ShopBuy();

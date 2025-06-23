@@ -24,8 +24,6 @@ GameManager::GameManager()
 
 GameManager::~GameManager()
 {
-	//delete[] monsters;
-
 	if (character != nullptr) {
 		delete character;
 	}
@@ -47,16 +45,21 @@ void GameManager::GenerateMonster(int characterLevel)
 	monsters[3] = MonsterManager::CreateDragon(characterLevel);
 	//monsters[4] = MonsterManager::CreateTroll(characterLevel);
 	
-	isMyTurn = true;
-
 	std::random_device rd;         
 	std::mt19937 gen(rd());        
 	std::uniform_int_distribution<> monsterSizeRange(0, 3);
 
 	monsterNum = monsterSizeRange(gen);
 
-	std::cout << "몬스터 " << monsters[monsterNum]->GetName() << " 등장!";
-	std::cout<<"체력:" << totalMonsterHealth	<< ", 공격력 : " << totalMonsterAttack <<"\n";
+	if (characterLevel >= 10)
+	{
+		std::cout << "보스 몬스터 " << monsters[monsterNum]->GetName() << " 등장!";
+	}
+	else
+	{
+		std::cout << "몬스터 " << monsters[monsterNum]->GetName() << " 등장!";
+	}
+
 
 }
 
@@ -76,7 +79,6 @@ BattleResult GameManager::Battle()
 	{
 		if (isMyTurn)
 		{
-			//FightUntilDeath(character, monsters[monsterNum]);
 			character->Attack(*monsters[monsterNum]);
 
 			if (monsters[monsterNum]->GetHealth() <= 0)
@@ -86,8 +88,8 @@ BattleResult GameManager::Battle()
 		}
 		else
 		{
-			//FightUntilDeath(monsters[monsterNum], character);
 			monsters[monsterNum]->Attack(*character);
+
 			if (character->GetHealth() <= 0)
 			{
 				isFighting = false;
@@ -102,17 +104,16 @@ BattleResult GameManager::Battle()
 		result.isWin = true;
 	}
 
-	delete[] monsters;
+	if (character->GetLevel() >= 10)
+	{
+		result.isBoss = true;
+	}
+
+	delete monsters;
 
 	return result;
 }
 
-void GameManager::FightUntilDeath(Actor* attacker, Actor* defender)
-{
-	attacker->Attack(*defender);
-
-	//defender->TakeDamage(attacker->GetAttack());
-}
 
 
 const std::string GameManager::shopMessage = "";
