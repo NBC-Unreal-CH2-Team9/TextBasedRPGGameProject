@@ -97,12 +97,7 @@ int MonsterManager::CalculateAttack(int characterLevel, int minAttack, int maxAt
 	return (rand() % andAttack + minAttack) * characterLevel;
 }
 
-int MonsterManager::CalculateGold(int value)
-{
-	return rand() % 11 + value;
-}
-
-int MonsterManager::RandGold(int minGold)
+int MonsterManager::CalculateGold(int minGold)
 {
 	return rand() % 11 + minGold;
 }

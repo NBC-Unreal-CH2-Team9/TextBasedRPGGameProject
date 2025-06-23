@@ -31,8 +31,6 @@ public:
 private:
 	static int CalculateHealth(int characterLevel, int minHealth, int maxHealth);
 	static int CalculateAttack(int characterLevel, int minAttack, int maxAttack);
-	static int CalculateGold(int value);
-
-	int RandGold(int minGold);
+	static int CalculateGold(int minGold);
 
 };
