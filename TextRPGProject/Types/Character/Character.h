@@ -58,9 +58,9 @@ public:
 	void EquipArmor(Armor* newArmor);
 	void Equip(Equipment* newEquip);
 
-	void UseRandomItem(); // ÀüÅõÁß ·£´ýÇÏ°Ô »ç¿ë
+	void UseRandomItem(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½
 
-	void GetRandomItem(Item* item); // ÀüÅõ½Â¸®½Ã ¾ÆÀÌÅÛ È¹µæ
+	void GetRandomItem(Item* item); // ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¹ï¿½ï¿½
 
 protected:
 	Inventory<Item> itemInventory;

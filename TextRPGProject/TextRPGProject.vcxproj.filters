@@ -14,6 +14,9 @@
     <ClCompile Include="Types\Item\Item.cpp" />
     <ClCompile Include="Types\Monster\Dragon.cpp" />
     <ClCompile Include="Types\Monster\Monster.cpp" />
+	<ClCompile Include="Types\Character\Warrior.cpp" />
+	<ClCompile Include="Types\Character\Mage.cpp" />
+	<ClCompile Include="Types\Character\Tanker.cpp" />
     <ClCompile Include="Types\Equipment\Equipment.cpp" />
     <ClCompile Include="Types\Equipment\Sword.cpp" />
     <ClCompile Include="Types\Equipment\Armor.cpp" />
@@ -34,6 +37,9 @@
     <ClInclude Include="Types\Monster\Troll.h" />
     <ClInclude Include="Console\ConsoleInput.h" />
     <ClInclude Include="Console\ConsoleOutput.h" />
+	<ClInclude Include="Types\Character\Warrior.h" />
+	<ClInclude Include="Types\Character\Mage.h" />
+	<ClInclude Include="Types\Character\Tanker.h" />
     <ClInclude Include="Types\Equipment\Equipment.h" />
     <ClInclude Include="Types\Equipment\Sword.h" />
     <ClInclude Include="Types\Equipment\Armor.h" />
