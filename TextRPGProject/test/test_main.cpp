@@ -5,7 +5,14 @@
 #include "../Console/ConsoleInput.h"
 #include "../Console/ConsoleOutput.h"
 
+void TestBattle() {
+	GameManager gameManager;
+	gameManager.CreateCharacter();
+	gameManager.Battle();
+}
+
 int main() 
 {
+	TestBattle();
 	return 0;
 }
