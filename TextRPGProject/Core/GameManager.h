@@ -3,7 +3,6 @@
 #include "../Types/Monster/Monster.h"
 #include "../Types/Character/Character.h"
 #include "../Types/Actor.h"
-#include "../Types/Character/Character.h"
 
 struct BattleResult {
 public:
