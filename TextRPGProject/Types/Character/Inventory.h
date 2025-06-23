@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <vector>
 
@@ -23,6 +23,10 @@ public:
 	// Get item count
 	size_t Count() {
 		return items.size();
+	}
+
+	void Clear() {
+		items.clear();
 	}
 
 private:

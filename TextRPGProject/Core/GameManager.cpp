@@ -248,6 +248,9 @@ void GameManager::ShopSellEquipment()
 		std::cout << equipment->GetName() << "를 " << equipment->GetPrice() << " 에 팔았습니다.." << std::endl;
 		gain += equipment->GetPrice();
 	}
+	
+	character->GetEquipmentInventory()->Clear(); // 인벤토리 비우기
+
 	int new_gold = old_glod + gain;
 	character->SetGold(new_gold);
 
