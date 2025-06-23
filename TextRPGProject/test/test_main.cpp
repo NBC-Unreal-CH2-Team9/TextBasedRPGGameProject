@@ -1,5 +1,33 @@
-// ë¹Œë“œ ì„¤ì •ì„ 'Debug', 'Release'ê°€ ì•„ë‹Œ 'Test'ìœ¼ë¡œ ì§€ì •í•˜ë©´, ì—¬ê¸°ì— ìˆëŠ” mainì´ ì‹¤í–‰ë©ë‹ˆë‹¤.
 #include <iostream>
-int main() {
-	return 0;
+#include <string>
+
+#include "../Core/GameManager.h"
+#include "../Console/ConsoleInput.h"
+#include "../Console/ConsoleOutput.h"
+
+#include "../Types/Item/Item.h"
+
+void testBattle() {
+	GameManager gameManager;
+	gameManager.CreateCharacter();
+	gameManager.Battle();
 }
+
+void testShop() {
+	GameManager gameManager;
+	gameManager.CreateCharacter();
+
+	// Àåºñ¸¦ ¾ò¾ú´Ù°í °¡Á¤ÇÏ±â
+
+	Character* character = gameManager.GetCharacter();
+	character->GetEquipmentInventory()->Insert(new Equipment("ÀÓ½ÃÀåºñ1", 100));
+	character->GetEquipmentInventory()->Insert(new Equipment("ÀÓ½ÃÀåºñ2", 30));
+
+	gameManager.Shop();
+}
+
+int main() {
+	//testBattle();
+	testShop();
+}
+

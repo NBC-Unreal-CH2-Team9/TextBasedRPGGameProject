@@ -2,6 +2,9 @@
 
 #include "../Types/Character/Character.h"
 
+#include "../Types/Monster/Monster.h"
+#include "../Types/Actor.h"
+
 struct BattleResult {
 public:
 	bool isWin;
@@ -17,21 +20,37 @@ public:
 	/* 필요하면 return type 추가 */
 	void CreateCharacter(/*필요하면 parameter 추가*/);
 
-	/* 필요하면 return type 변경 */
-	BattleResult Battle(/*필요하면 parameter 추가*/);
+	void GenerateMonster(int characterLevel);
+
+	BattleResult Battle();
 
 	void Shop();
-	void ShopBuy();
-	void ShopSell();
 
 	Character* GetCharacter() {
 		return character;
 	}
 
+private:
+	Monster* monsters[5];
+	int monsterNum;
+
+	void ShopBuyItem();
+	void ShopSellItem();
+	void ShopSellEquipment();
+
 protected:
 	Character* character;
 
 private:
+	// 상점에서 사용하는 정적 변수 모음
 	static const std::string shopMessage;
 	static const std::vector<std::string> shopPrompt;
+
+	// 상점에서 사용하는 정적 함수 모음
+	// 상점에서 판매하는 아이템 생성
+	enum ShopItems {
+		ShopHealthPotion = 0,
+		ShopAttackBoost = 1,
+	};
+	static Item* MakeShopItem(ShopItems index);
 };

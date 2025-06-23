@@ -18,7 +18,7 @@ public:
 	static Monster* CreateSlime(int characterLevel);
 	static Monster* CreateGoblin(int characterLevel);
 	static Monster* CreateTroll(int characterLevel);
-	
+
 private:
 	static int CalculateHealth(int characterLevel);
 	static int CalculateAttack(int characterLevel);
