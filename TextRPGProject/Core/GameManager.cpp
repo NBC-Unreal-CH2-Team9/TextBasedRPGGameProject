@@ -38,29 +38,47 @@ void GameManager::CreateCharacter()
 
 void GameManager::GenerateMonster(int characterLevel)
 {
-	//몬스터 생성
-	monsters[0] = MonsterManager::CreateGoblin(characterLevel);
-	monsters[1] = MonsterManager::CreateOrc(characterLevel);
-	monsters[2] = MonsterManager::CreateSlime(characterLevel);
-	monsters[3] = MonsterManager::CreateDragon(characterLevel);
-	monsters[4] = MonsterManager::CreateTroll(characterLevel);
-	
-	std::random_device rd;         
-	std::mt19937 gen(rd());        
-	std::uniform_int_distribution<> monsterSizeRange(0, 3);
+	//다른 확률 몬스터 생성
 
-	monsterNum = monsterSizeRange(gen);
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> monsterRandNum(0, 99);
+
+	int randNum = monsterRandNum(gen);
+
+	//30,25,20,15,10
+	if (randNum < 30)
+	{
+		monster = MonsterManager::CreateGoblin(characterLevel);
+	}
+	else if (randNum < 55)
+	{
+		monster = MonsterManager::CreateOrc(characterLevel);
+	}
+	else if (randNum < 75)
+	{
+		monster = MonsterManager::CreateSlime(characterLevel);
+	}
+	else if(randNum<90)
+	{
+		monster = MonsterManager::CreateTroll(characterLevel);
+	}
+	else if(randNum<100)
+	{
+		monster = MonsterManager::CreateDragon(characterLevel);
+	}
+
 
 	if (characterLevel >= 10)
 	{
-		std::cout << "보스 몬스터 " << monsters[monsterNum]->GetName() << " 등장!";
+		std::cout << "보스 몬스터 " << monster->GetName() << " 등장!";
 	}
 	else
 	{
-		std::cout << "몬스터 " << monsters[monsterNum]->GetName() << " 등장!";
+		std::cout << "몬스터 " << monster->GetName() << " 등장!";
 	}
 
-	std::cout << "체력:" << monsters[monsterNum]->GetHealth() << ",공격력:" << monsters[monsterNum]->GetAttack() << std::endl;
+	std::cout << "체력:" << monster->GetHealth() << ",공격력:" << monster->GetAttack() << std::endl;
 }
 
 BattleResult GameManager::Battle()
@@ -79,16 +97,16 @@ BattleResult GameManager::Battle()
 	{
 		if (isMyTurn)
 		{
-			character->Attack(*monsters[monsterNum]);
+			character->Attack(*monster);
 
-			if (monsters[monsterNum]->GetHealth() <= 0)
+			if (monster->GetHealth() <= 0)
 			{
 				isFighting = false;
 			}
 		}
 		else
 		{
-			monsters[monsterNum]->Attack(*character);
+			monster->Attack(*character);
 
 			if (character->GetHealth() <= 0)
 			{
@@ -109,11 +127,7 @@ BattleResult GameManager::Battle()
 		result.isBoss = true;
 	}
 
-	for (Monster* monster : monsters)
-	{
-		delete monster;
-		monster = nullptr;
-	}
+	delete monster;
 
 	return result;
 }
