@@ -125,10 +125,6 @@ const std::vector<std::string> GameManager::shopPrompt = {
 
 void GameManager::Shop()
 {
-	// options for print
-	std::vector<std::string> buyOptions;
-	std::vector<std::string> sellOptions;
-
 	while (true) {
 		int select = SelectNumber(shopPrompt);
 		switch (select) {

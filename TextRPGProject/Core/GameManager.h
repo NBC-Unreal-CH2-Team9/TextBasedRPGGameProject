@@ -25,11 +25,12 @@ public:
 
 	BattleResult Battle();
 
+	void Shop();
+
 private:
 	Monster* monsters[5];
 	int monsterNum;
 
-	void Shop();
 	void ShopBuy();
 	void ShopSell();
 
