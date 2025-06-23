@@ -28,7 +28,7 @@ GameManager::GameManager()
 
 GameManager::~GameManager()
 {
-	delete[] monsters;
+	//delete[] monsters;
 
 	if (character != nullptr) {
 		delete character;
