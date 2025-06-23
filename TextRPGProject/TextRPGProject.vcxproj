@@ -177,9 +177,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Types\Equipment\Armor.cpp" />
     <ClCompile Include="Console\ConsoleInput.cpp" />
     <ClCompile Include="Console\ConsoleOutput.cpp" />
     <ClCompile Include="Core\GameManager.cpp" />
+    <ClCompile Include="Types\Equipment\Sword.cpp" />
+    <ClCompile Include="Types\Equipment\Equipment.cpp" />
     <ClCompile Include="main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -197,7 +200,10 @@
     <ClCompile Include="Types\Monster\Monster.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Types\Equipment\Armor.h" />
     <ClInclude Include="Core\GameManager.h" />
+    <ClInclude Include="Types\Equipment\Sword.h" />
+    <ClInclude Include="Types\Equipment\Equipment.h" />
     <ClInclude Include="Types\Actor.h" />
     <ClInclude Include="Types\Character\Character.h" />
     <ClInclude Include="Types\Character\Inventory.h" />
