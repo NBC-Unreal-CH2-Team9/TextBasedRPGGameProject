@@ -16,6 +16,10 @@
 #include "../Types/Item/HealthPotion.h"
 #include "../Console/ConsoleInput.h"
 
+#include "../Types/Character/Warrior.h"
+#include "../Types/Character/Mage.h"
+#include "../Types/Character/Tanker.h"
+
 GameManager::GameManager()
 {
 	character == nullptr;
@@ -28,11 +32,35 @@ GameManager::~GameManager()
 	}
 }
 
-void GameManager::CreateCharacter()
+Character* GameManager::CreateCharacter()
 {
-	// Temporal code
-	character = new Character("임시", 100, 10);
-	character->SetGold(100);
+	std::cout << "캐릭터 이름을 입력하세요: ";
+	std::string name;
+	std::cin >> name;
+
+	std::cout << "캐릭터 직업을 선택하세요(1번, 2번, 3번) " << std::endl;
+	std::cout << "1. 검사" << std::endl;
+	std::cout << "2. 마법사" << std::endl;
+	std::cout << "3. 탱커" << std::endl;
+	int jobChoice;
+	std::cin >> jobChoice;
+
+	switch (jobChoice)
+	{
+	case 1:
+		character = new Warrior(1, name, 200, 30, 0);
+		break;
+	case 2:
+		character = new Mage(1, name, 100, 45, 0);
+		break;
+	case 3:
+		character = new Tanker(1, name, 350, 15, 0);
+		break;
+	default:
+		break;
+	}		
+
+	return character;
 }
 
 void GameManager::GenerateMonster(int characterLevel)
