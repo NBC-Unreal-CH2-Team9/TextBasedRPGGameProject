@@ -99,38 +99,6 @@ BattleResult GameManager::Battle()
 	return result;
 }
 
-const std::string GameManager::shopMessage = "";
-const std::vector<std::string> GameManager::shopPrompt = {
-	"물건 사기", "물건 팔기", "상점 나가기"
-};
-
-void GameManager::Shop()
-{
-	// options for print
-	std::vector<std::string> buyOptions;
-	std::vector<std::string> sellOptions;
-
-	while (true) {
-		int select = SelectNumber(shopPrompt);
-		switch (select) {
-		case 0: // Buy
-			ShopBuy();
-			break;
-		case 1: // Sell
-			if (character->GetInventory()->Count() > 0) {
-				ShopSell();
-			}
-			else {
-				// temp message
-				std::cout << "판매할 물건이 없습니다." << std::endl;
-			}
-			break;
-		case 2: // Exit 
-			return;
-		}
-	}
-}
-
 void GameManager::FightUntilDeath(Actor* attacker,Actor* defender)
 {
 	std::cout << attacker->GetName() << "가 " << defender->GetName() << "를 공격합니다! ";
@@ -162,6 +130,38 @@ void GameManager::FightUntilDeath(Actor* attacker,Actor* defender)
 	}
 
 	isMyTurn = !isMyTurn;
+}
+
+const std::string GameManager::shopMessage = "";
+const std::vector<std::string> GameManager::shopPrompt = {
+	"물건 사기", "물건 팔기", "상점 나가기"
+};
+
+void GameManager::Shop()
+{
+	// options for print
+	std::vector<std::string> buyOptions;
+	std::vector<std::string> sellOptions;
+
+	while (true) {
+		int select = SelectNumber(shopPrompt);
+		switch (select) {
+		case 0: // Buy
+			ShopBuy();
+			break;
+		case 1: // Sell
+			if (character->GetInventory()->Count() > 0) {
+				ShopSell();
+			}
+			else {
+				// temp message
+				std::cout << "판매할 물건이 없습니다." << std::endl;
+			}
+			break;
+		case 2: // Exit 
+			return;
+		}
+	}
 }
 
 void GameManager::ShopBuy()
