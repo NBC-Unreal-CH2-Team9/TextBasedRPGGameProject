@@ -2,12 +2,13 @@
 #include <string>
 #include <iostream>
 #include "GameManager.h"
-#include <iostream>
-//#include "../Types/Goblin.h"
-//#include "../Types/Orc.h"
-//#include "../Types/Troll.h"
-//#include "../Types/Slime.h"
 #include <random>
+
+#include "../Types/Monster/Goblin.h"
+#include "../Types/Monster/Orc.h"
+#include "../Types/Monster/Troll.h"
+#include "../Types/Monster/Slime.h"
+
 #include "../Types/Item/Item.h"
 #include "../Types/Item/AttackBoost.h"
 #include "../Types/Item/HealthPotion.h"
@@ -17,7 +18,11 @@
 GameManager::GameManager()
 {
 	//monsters[4] = { new Goblin("Goblin",200,100),new Orc("Orc",300,110),new Troll("Troll",400,120),new Slime("Slime",500,130)};
-
+	int temp_characterLevel = 1; // 임시 값
+	monsters[0] = MonsterManager::CreateGoblin(temp_characterLevel);
+	monsters[1] = MonsterManager::CreateOrc(temp_characterLevel);
+	monsters[2] = MonsterManager::CreateTroll(temp_characterLevel);
+	monsters[3] = MonsterManager::CreateSlime(temp_characterLevel);
 	character == nullptr;
 }
 
@@ -39,8 +44,8 @@ void GameManager::CreateCharacter()
 
 void GameManager::GenerateMonster(int characterLevel)
 {
-	std::random_device rd;                
-	std::mt19937 gen(rd());               
+	std::random_device rd;
+	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> monsterSizeRange(0, 3);
 	std::uniform_int_distribution<> monsterHealthRange(20, 30);
 	std::uniform_int_distribution<> monsterAttackRange(5, 10);

@@ -1,4 +1,4 @@
-#include "Monster.h"
+ï»¿#include "Monster.h"
 #include "Dragon.h"
 #include "Orc.h"
 #include "Goblin.h"
@@ -6,7 +6,7 @@
 
 void Monster::Attack(Actor& other)
 {
-	std::cout << name << "ÀÌ(°¡) " << other.GetName() << "À»(¸¦) °ø°ÝÇÕ´Ï´Ù! ";
+	std::cout << name << "ì´(ê°€) " << other.GetName() << "ì„(ë¥¼) ê³µê²©í•©ë‹ˆë‹¤! ";
 	other.TakeDamage(attack);
 }
 
@@ -15,11 +15,11 @@ void Monster::TakeDamage(int damage)
 	health -= damage;
 	if (health > 0)
 	{
-		std::cout << name << "Ã¼·Â: " << health << std::endl;
+		std::cout << name << "ì²´ë ¥: " << health << std::endl;
 	}
 	else
 	{
-		std::cout << name << "Ã³Ä¡!" << std::endl;
+		std::cout << name << "ì²˜ì¹˜!" << std::endl;
 	}
 }
 
@@ -27,7 +27,7 @@ Monster* MonsterManager::CreateDragon(int characterLevel)
 {
 	int health = CalculateHealth(characterLevel) * 1.5;
 	int attack = CalculateAttack(characterLevel) * 1.5;
-	Monster* dragon = new Dragon("µå·¡°ï", health, attack);
+	Monster* dragon = new Dragon("ë“œëž˜ê³¤", health, attack);
 	return dragon;
 }
 
@@ -35,7 +35,7 @@ Monster* MonsterManager::CreateOrc(int characterLevel)
 {
 	int health = CalculateHealth(characterLevel);
 	int attack = CalculateAttack(characterLevel);
-	Monster* orc = new Orc("¿ÀÅ©", health, attack);
+	Monster* orc = new Orc("ì˜¤í¬", health, attack);
 	return orc;
 }
 
@@ -43,7 +43,7 @@ Monster* MonsterManager::CreateSlime(int characterLevel)
 {
 	int health = CalculateHealth(characterLevel);
 	int attack = CalculateAttack(characterLevel);
-	Monster* slime = new Slime("½½¶óÀÓ", health, attack);
+	Monster* slime = new Slime("ìŠ¬ë¼ìž„", health, attack);
 	return slime;
 }
 
@@ -51,8 +51,16 @@ Monster* MonsterManager::CreateGoblin(int characterLevel)
 {
 	int health = CalculateHealth(characterLevel);
 	int attack = CalculateAttack(characterLevel);
-	Monster* goblin = new Goblin("°íºí¸°", health, attack);
+	Monster* goblin = new Goblin("ê³ ë¸”ë¦°", health, attack);
 	return goblin;
+}
+
+Monster* MonsterManager::CreateTroll(int characterLevel)
+{
+	int health = CalculateHealth(characterLevel);
+	int attack = CalculateAttack(characterLevel);
+	Monster* troll = new Goblin("íŠ¸ë¡¤", health, attack);
+	return troll;
 }
 
 int MonsterManager::CalculateHealth(int characterLevel)
