@@ -60,7 +60,7 @@ void GameManager::GenerateMonster(int characterLevel)
 		std::cout << "몬스터 " << monsters[monsterNum]->GetName() << " 등장!";
 	}
 
-
+	std::cout << "체력:" << monsters[monsterNum]->GetHealth() << ",공격력:" << monsters[monsterNum]->GetAttack() << std::endl;
 }
 
 BattleResult GameManager::Battle()
@@ -109,7 +109,11 @@ BattleResult GameManager::Battle()
 		result.isBoss = true;
 	}
 
-	delete monsters;
+	for (Monster* monster : monsters)
+	{
+		delete monster;
+		monster = nullptr;
+	}
 
 	return result;
 }
