@@ -11,7 +11,14 @@ void testBattle() {
 	gameManager.Battle();
 }
 
+void testShop() {
+	GameManager gameManager;
+	gameManager.CreateCharacter();
+	gameManager.Shop();
+}
+
 int main() {
-	testBattle();
+	//testBattle();
+	testShop();
 }
 

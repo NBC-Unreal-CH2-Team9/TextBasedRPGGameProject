@@ -125,6 +125,9 @@ const std::vector<std::string> GameManager::shopPrompt = {
 
 void GameManager::Shop()
 {
+	// 상점에 방문했을 때, 사용하지 않는 모든 장비를 판매함
+
+
 	while (true) {
 		int select = SelectNumber(shopPrompt);
 		switch (select) {
@@ -132,7 +135,7 @@ void GameManager::Shop()
 			ShopBuy();
 			break;
 		case 1: // Sell
-			if (character->GetInventory()->Count() > 0) {
+			if (character->GetItemInventory()->Count() > 0) {
 				ShopSell();
 			}
 			else {
@@ -182,7 +185,7 @@ void GameManager::ShopBuy()
 			break;
 		}
 		if (newItem != nullptr) {
-			character->GetInventory()->Insert(newItem);
+			character->GetItemInventory()->Insert(newItem);
 			character->SetGold(gold);
 
 			// temp message
@@ -199,7 +202,7 @@ void GameManager::ShopBuy()
 
 void GameManager::ShopSell()
 {
-	std::vector<Item*> items = character->GetInventory()->GetItems();
+	std::vector<Item*> items = character->GetItemInventory()->GetItems();
 
 	std::vector<std::string> options;
 	for (int i = 0; i < items.size(); i++) {
@@ -209,12 +212,12 @@ void GameManager::ShopSell()
 	int sellIndex = SelectNumber(options);
 
 	// TODO: hard coding, refactoring, etc..
-	Item* item = character->GetInventory()->Get(sellIndex);
+	Item* item = character->GetItemInventory()->Get(sellIndex);
 	int price = item->GetPrice() * 60 / 100;
 	// temp message
 	std::cout << item->GetName() << "을/를 " << price << "골드에 팔았습니다." << std::endl;
 
-	character->GetInventory()->Remove(sellIndex);
+	character->GetItemInventory()->Remove(sellIndex);
 	character->SetGold(character->GetGold() + price);
 
 	// temp message

@@ -14,8 +14,8 @@ public:
 	virtual void Attack(Actor& other);
 	virtual void TakeDamage(int damage);
 
-	Inventory* GetInventory() {
-		return &inventory;
+	Inventory<Item>* GetItemInventory() {
+		return &itemInventory;
 	}
 
 	int GetGold() {
@@ -49,7 +49,7 @@ public:
 	void AddExperience(int exp);	
 
 protected:
-	Inventory inventory;
+	Inventory<Item> itemInventory;
 	int gold;
 	int level;
 	int maxHealth;
