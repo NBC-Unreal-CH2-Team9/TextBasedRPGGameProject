@@ -8,10 +8,16 @@
 void testBattle() {
 	GameManager gameManager;
 	gameManager.CreateCharacter();
-	gameManager.Battle();
+	
+	while (1)
+	{
+		gameManager.Battle();
+	}
+	
 }
 
 int main() {
 	testBattle();
+	//TestUseHealthPotion();
 }
 

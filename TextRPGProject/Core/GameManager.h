@@ -28,6 +28,8 @@ public:
 private:
 	Monster* monster;
 
+	void CheckHealthPotionAndUse();
+
 	void Shop();
 	void ShopBuy();
 	void ShopSell();

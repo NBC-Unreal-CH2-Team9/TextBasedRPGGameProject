@@ -111,6 +111,8 @@ BattleResult GameManager::Battle()
 		}
 		else
 		{
+			CheckHealthPotionAndUse();
+
 			monster->Attack(*character);
 
 			if (character->GetHealth() <= 0)
@@ -125,9 +127,14 @@ BattleResult GameManager::Battle()
 	if (character->GetHealth() > 0)
 	{
 		result.isWin = true;
-		character->SetGold(character->GetGold()/* + monster->GetGold()*/);
-		//character->AddExperience(monster->GetExperience);
+		std::cout << "전투에서 승리했습니다!";
+		//character->SetGold(character->GetGold() + monster->GetGold());
+		//character->AddExperience(monster->GetExperience());
+		//std::cout << monster->GetExperience() << " EXP와 " << monster->GetGold() << "를 획득했습니다.\n";	
 	}
+
+	ShopBuy();
+	//ShopSell();
 
 	delete monster;
 
@@ -138,6 +145,36 @@ const std::string GameManager::shopMessage = "";
 const std::vector<std::string> GameManager::shopPrompt = {
 	"물건 사기", "물건 팔기", "상점 나가기"
 };
+
+void GameManager::CheckHealthPotionAndUse()
+{
+	//회복 포션 유무 확인
+	if (character->GetInventory()->Count())
+	{
+		std::vector<Item*> Items = character->GetInventory()->GetItems();
+
+		int healthPotionIndex = -1;
+
+		for (int i = 0; i < Items.size(); i++)
+		{
+			if (Items[i] && Items[i]->GetName() == "Health Potion")
+			{
+				std::string option = "포션 사용 여부";
+				if (SelectYesOrNo(option))
+				{
+					std::cout << "포션을 사용하였습니다!\n";
+					Items[i]->Use(*character);
+					character->GetInventory()->Remove(i);
+
+					//test
+					//std::cout << character->GetHealth();
+				}
+
+				break;
+			}
+		}
+	}
+}
 
 void GameManager::Shop()
 {
