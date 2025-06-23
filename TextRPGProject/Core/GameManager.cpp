@@ -92,6 +92,11 @@ BattleResult GameManager::Battle()
 
 	GenerateMonster(character->GetLevel());
 
+	if (character->GetLevel() >= 10)
+	{
+		result.isBoss = true;
+	}
+
 	//전투중
 	while(isFighting)
 	{
@@ -120,11 +125,8 @@ BattleResult GameManager::Battle()
 	if (character->GetHealth() > 0)
 	{
 		result.isWin = true;
-	}
-
-	if (character->GetLevel() >= 10)
-	{
-		result.isBoss = true;
+		character->SetGold(character->GetGold()/* + monster->GetGold()*/);
+		//character->AddExperience(monster->GetExperience);
 	}
 
 	delete monster;
