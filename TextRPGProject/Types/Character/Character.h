@@ -52,6 +52,7 @@ protected:
 	Inventory inventory;
 	int gold;
 	int level;
+	
 	int maxHealth;
 	int experience;
 };

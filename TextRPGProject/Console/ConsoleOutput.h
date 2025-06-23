@@ -1,17 +1,48 @@
 #pragma once
-#include <string>
+#include "../Types/Character/Character.h"
+#include "../Types/Actor.h"
+#include "../Types/Monster/Monster.h"
+//#include "../Types/Item/Item.h"
+//#include "../Types/Item/AttackBoost.h"
+//#include "../Types/Item/HealthPotion.h"
+
 
 class ConsoleOutput
 {
 public:
-	static void ShowCharacterStatusvoid(int level, int experience, int health, int maxHealth, int attackpower);
-	static void ShowCharacterGold(int gold);
+	//캐릭터 생성
+	static void ShowCreateCharacterIntro();
+	static void ShowCreateCharacterName();
+	static void ShowSelectJob();
 
-	static void ShowMonsterStatus(int level, int health);
+	
+	// 캐릭터 상태 
+	static void ShowCharacterStatus(Character& Character);
+	static void ShowCharacterGold(Character& character);
 
-	static void MonsterAttack(std::string monster, std::string charactor);
-	static void CharactorAttack(std::string Charactor, std::string monster);
+	
+	// 몬스터 상태
+	static void ShowMonsterStatus(Monster& monster);
 
-	static void DieMonster();
+	
+	// 공격과 피해, 크리티컬
+	static void ShowAttackMessage(Actor& attacker, Actor& target);
+	static void ShowDamageMessage(Actor* who, int damage);
+	static void ShowCriticalHit();
 
+	
+	// 몬스터 사망
+	static void ShowDieMonster();
+
+	
+	// 승리 시 아이템, 경험치 획득
+
+	
+	// 상점
+	static void ShowAskEnterShop();
+	static void ShowEnterShop();
+	// 상점 판매 아이템 출력
+	// 구매, 판매, 나가기 UI 출력
+	static void ShowAskExitShop();
+	static void ShowExitShop();
 };
