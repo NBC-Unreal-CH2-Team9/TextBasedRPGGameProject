@@ -17,8 +17,19 @@ void BossMonster::Attack(Actor& other)
 
 void BossMonster::UseSkill(Actor& other, std::string name)
 {
-
-	if (name == "보스 고블린" || name == "보스 트롤")
+	if (name == "보스 드래곤")
+	{
+		if (GetHealth() > GetMaxHealth() / 2)
+		{
+			AttackSkill(other);
+		}
+		else
+		{
+			HealSkill();
+		}
+		
+	}
+	else if (name == "보스 고블린" || name == "보스 트롤")
 	{
 		AttackSkill(other);
 	}

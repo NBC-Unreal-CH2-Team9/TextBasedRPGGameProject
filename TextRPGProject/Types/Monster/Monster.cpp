@@ -19,12 +19,12 @@ int Monster::GetExperience()
 
 Monster* MonsterManager::CreateDragon(int characterLevel)
 {
-	int health = CalculateHealth(characterLevel, 100, 150) * 1.5;
-	int attack = CalculateAttack(characterLevel, 15, 20) * 1.5;
+	int health = CalculateHealth(characterLevel, 100, 150);
+	int attack = CalculateAttack(characterLevel, 15, 20);
 	int gold = CalculateGold(100, 150);
 	int experience = 100;
 	Monster* dragon = new Dragon("드래곤", health, attack, gold, experience);
-	return dragon;
+	return CreateBoss(*dragon);
 }
 
 Monster* MonsterManager::CreateOrc(int characterLevel)
