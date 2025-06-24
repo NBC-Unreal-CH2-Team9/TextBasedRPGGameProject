@@ -66,7 +66,6 @@ Character* GameManager::CreateCharacter()
 void GameManager::GenerateMonster(int characterLevel)
 {
 	//다른 확률 몬스터 생성
-
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> monsterRandNum(0, 99);
@@ -155,9 +154,9 @@ BattleResult GameManager::Battle()
 	{
 		result.isWin = true;
 		std::cout << "전투에서 승리했습니다!";
-		//character->SetGold(character->GetGold() + monster->GetGold());
-		//character->AddExperience(monster->GetExperience());
-		//std::cout << monster->GetExperience() << " EXP와 " << monster->GetGold() << "를 획득했습니다.\n";	
+		character->SetGold(character->GetGold() + monster->GetGold());
+		character->AddExperience(monster->GetExperience());
+		std::cout << monster->GetExperience() << " EXP와 " << monster->GetGold() << "를 획득했습니다.\n";	
 	}
 
 	delete monster;
