@@ -18,11 +18,7 @@ public:
 	~GameManager();
 	
 	Character* CreateCharacter();
-
-	void GenerateMonster(int characterLevel);
-
 	BattleResult Battle();
-
 	void Shop();
 
 	Character* GetCharacter() {
@@ -30,18 +26,17 @@ public:
 	}
 
 	void DropEquip();
-private:
-	Monster* monsters[5];
-	int monsterNum;
-
+protected:
 	void ShopBuyItem();
 	void ShopSellItem();
 	void ShopSellEquipment();
-
-protected:
+	
 	Character* character;
 
 private:
+	Monster* GenerateMonster(int characterLevel, bool isBossBattle);
+	void CheckHealthPotionAndUse();
+
 	// 상점에서 사용하는 정적 변수 모음
 	static const std::string shopMessage;
 	static const std::vector<std::string> shopPrompt;

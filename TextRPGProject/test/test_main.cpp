@@ -16,9 +16,14 @@
 void testBattle() {
 	GameManager gameManager;
 	gameManager.CreateCharacter();
-	gameManager.Battle();
-}
 
+	std::string s = "Continue Battle ? ";
+	while(SelectYesOrNo(s))
+	{
+		gameManager.Battle();
+	}
+	
+}
 
 void testMonster()
 {

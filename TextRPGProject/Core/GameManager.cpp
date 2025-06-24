@@ -64,31 +64,50 @@ Character* GameManager::CreateCharacter()
 	return character;
 }
 
-void GameManager::GenerateMonster(int characterLevel)
+Monster* GameManager::GenerateMonster(int characterLevel, bool isBossBattle = false)
 {
-	//몬스터 생성
-	monsters[0] = MonsterManager::CreateGoblin(characterLevel);
-	monsters[1] = MonsterManager::CreateOrc(characterLevel);
-	monsters[2] = MonsterManager::CreateSlime(characterLevel);
-	monsters[3] = MonsterManager::CreateDragon(characterLevel);
-	monsters[4] = MonsterManager::CreateTroll(characterLevel);
-	
-	std::random_device rd;         
-	std::mt19937 gen(rd());        
-	std::uniform_int_distribution<> monsterSizeRange(0, 3);
+	//다른 확률 몬스터 생성
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> monsterRandNum(0, 99);
+	int randNum = monsterRandNum(gen);
 
-	monsterNum = monsterSizeRange(gen);
+	Monster* monster = nullptr;
 
-	if (characterLevel >= 10)
+	//30,25,20,15,10
+	if (randNum < 30)
 	{
-		std::cout << "보스 몬스터 " << monsters[monsterNum]->GetName() << " 등장!";
+		monster = MonsterManager::CreateGoblin(characterLevel);
+	}
+	else if (randNum < 55)
+	{
+		monster = MonsterManager::CreateOrc(characterLevel);
+	}
+	else if (randNum < 75)
+	{
+		monster = MonsterManager::CreateSlime(characterLevel);
+	}
+	else if(randNum<90)
+	{
+		monster = MonsterManager::CreateTroll(characterLevel);
+	}
+	else // if(randNum<100)
+	{
+		monster = MonsterManager::CreateDragon(characterLevel);
+	}
+
+	if (isBossBattle)
+	{
+		std::cout << "보스 몬스터 " << monster->GetName() << " 등장!";
 	}
 	else
 	{
-		std::cout << "몬스터 " << monsters[monsterNum]->GetName() << " 등장!";
+		std::cout << "몬스터 " << monster->GetName() << " 등장!";
 	}
 
-	std::cout << "체력:" << monsters[monsterNum]->GetHealth() << ",공격력:" << monsters[monsterNum]->GetAttack() << std::endl;
+	std::cout << "체력:" << monster->GetHealth() << ",공격력:" << monster->GetAttack() << std::endl;
+
+	return monster;
 }
 
 
@@ -101,23 +120,29 @@ BattleResult GameManager::Battle()
 	bool isMyTurn = true;
 	bool isFighting = true;
 
-	GenerateMonster(character->GetLevel());
+	if (character->GetLevel() >= 10)
+	{
+		result.isBoss = true;
+	}
+	Monster* monster = GenerateMonster(character->GetLevel(), result.isBoss);
 
 	//전투중
 	while(isFighting)
 	{
 		if (isMyTurn)
 		{
-			character->Attack(*monsters[monsterNum]);
+			CheckHealthPotionAndUse();
 
-			if (monsters[monsterNum]->GetHealth() <= 0)
+			character->Attack(*monster);
+
+			if (monster->GetHealth() <= 0)
 			{
 				isFighting = false;
 			}
 		}
 		else
 		{
-			monsters[monsterNum]->Attack(*character);
+			monster->Attack(*character);
 
 			if (character->GetHealth() <= 0)
 			{
@@ -131,18 +156,13 @@ BattleResult GameManager::Battle()
 	if (character->GetHealth() > 0)
 	{
 		result.isWin = true;
+		std::cout << "전투에서 승리했습니다!";
+		character->SetGold(character->GetGold() + monster->GetGold());
+		character->AddExperience(monster->GetExperience());
+		std::cout << monster->GetExperience() << " EXP와 " << monster->GetGold() << "를 획득했습니다.\n";	
 	}
 
-	if (character->GetLevel() >= 10)
-	{
-		result.isBoss = true;
-	}
-
-	for (Monster* monster : monsters)
-	{
-		delete monster;
-		monster = nullptr;
-	}
+	delete monster;
 
 	return result;
 }
@@ -151,6 +171,31 @@ const std::string GameManager::shopMessage = "";
 const std::vector<std::string> GameManager::shopPrompt = {
 	"물건 사기", "물건 팔기", "상점 나가기"
 };
+
+void GameManager::CheckHealthPotionAndUse()
+{
+	//체력 절반 이하 포션 사용
+	if (character->GetHealth() > character->GetMaxHealth()/2)	return;
+
+	//회복 포션 유무 확인
+	if (!character->GetItemInventory()->Count())	return;
+	
+	std::vector<Item*> Items = character->GetItemInventory()->GetItems();
+
+	int healthPotionIndex = -1;
+
+	for (int i = 0; i < Items.size(); i++)
+	{
+		if (Items[i] && Items[i]->GetName() == "Health Potion")
+		{
+			std::cout << character->GetName() << "은(는) 체력이 50이하이며 포션을 사용하였습니다!\n";
+			Items[i]->Use(*character);
+			character->GetItemInventory()->Remove(i);
+
+			break;
+		}
+	}
+}
 
 void GameManager::Shop()
 {
@@ -289,6 +334,8 @@ void GameManager::ShopSellEquipment()
 
 	int new_gold = old_glod + gain;
 	character->SetGold(new_gold);
+
+	// TODO: 장비 인벤토리 비우는 코드가 구현이 되어있지 않음
 
 	// temp message
 	std::cout << "현재 골드: " << character->GetGold() << " (+" << gain << ")" << std::endl;
