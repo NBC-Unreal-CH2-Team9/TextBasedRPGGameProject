@@ -4,6 +4,7 @@
 #include "Goblin.h"
 #include "Slime.h"
 #include "Troll.h"
+#include "BossMonster.h"
 
 int Monster::GetGold()
 {
@@ -63,6 +64,18 @@ Monster* MonsterManager::CreateTroll(int characterLevel)
 	int experience = 60;
 	Monster* troll = new Troll("트롤", health, attack, gold, experience);
 	return troll;
+}
+
+Monster* MonsterManager::CreateBoss(Monster monster)
+{
+	std::string name = "보스 " + monster.GetName();
+	int health = monster.GetHealth() * 1.5;
+	int attack = monster.GetAttack() * 1.5;
+	int gold = monster.GetGold() * 1.5;
+	int experience = monster.GetExperience() * 1.5;
+	Monster* bossMonster = new BossMonster(name, health, attack, gold, experience);
+
+	return bossMonster;
 }
 
 

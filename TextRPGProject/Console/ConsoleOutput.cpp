@@ -41,6 +41,25 @@ void ConsoleOutput::PrintBox(std::string text, int length, Color boxColor)
 
 void ConsoleOutput::PrintProgressBar(int value, int max)
 {
+	int length = 10;
+	int fill = value * length / max;
+	int empty = length - fill;
+	if (value < 0) {
+		fill = 0;
+		empty = 10;
+	}
+	
+	ResetColor();
+	std::cout << "[";
+	SetColor(Color::GRAY, Color::GRAY);
+	for (int n = 0; n < fill; n++) {
+		std::cout << "|";
+	}
+	ResetColor();
+	for (int n = 0; n < empty; n++) {
+		std::cout << "-";
+	}
+	std::cout << "]";
 }
 
 void ConsoleOutput::ShowIntro()
@@ -153,7 +172,7 @@ void ConsoleOutput::ShowDamageMessage(Actor& who, int damage) {
 
 void ConsoleOutput::ShowCriticalHit()
 {
-	SetTextColor(Color::BLUE);
+	SetTextColor(Color::PINK);
 	std::cout << "크리티컬!!\n";
 	ResetColor();
 }
@@ -174,14 +193,14 @@ void ConsoleOutput::ShowMonsterTurn()
 
 void ConsoleOutput::ShowBattleProgress(Character& character, Monster& monster)
 {
-
-	SetTextColor(Color::GREEN);
+	std::cout << "HP:";
+	PrintProgressBar(character.GetHealth(), character.GetMaxHealth());
 	std::cout << character.GetName() << "\n";
-	ResetColor();
 
-	SetTextColor(Color::RED);
+	std::cout << "HP:";
+	PrintProgressBar(monster.GetHealth(), monster.GetMaxHealth());
 	std::cout << monster.GetName() << "\n";
-	ResetColor();
+	std::cout << "\n";
 }
 
 void ConsoleOutput::ShowUseHealthPotion(Character& character, HealthPotion& potion)

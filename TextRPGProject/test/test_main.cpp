@@ -27,16 +27,18 @@ void testBattle() {
 
 void testMonster()
 {
-    srand(time(nullptr));
-    int playerLevel = 1;
-    Monster* mon = MonsterManager::CreateOrc(playerLevel);
-
-	//std::cout << mon->GetCriticalAttack() << std::endl;
-	std::cout << mon->GetAttack() << std::endl;
-	for (int i = 0; i < 100; i++)
-	{
-		//std::cout << mon->GetCriticalProbablily() << std::endl;
-	}
+	srand(time(nullptr));
+	int playerLevel = 1;
+	Monster* mon = MonsterManager::CreateOrc(playerLevel);
+	Monster* mon2 = MonsterManager::CreateSlime(playerLevel);
+	Monster* bossMon = MonsterManager::CreateBoss(*mon);
+	std::cout << "name: " << mon->GetName() << " health: " << mon->GetHealth() << 
+		" attack: " << mon->GetAttack() << " gold: " << mon->GetGold() << 
+		" experience: " << mon->GetExperience() << std::endl;
+	std::cout << "name: " << bossMon->GetName() << " health: " << bossMon->GetHealth() << 
+		" attack: " << bossMon->GetAttack() << " gold: " << bossMon->GetGold() << 
+		" experience: " << bossMon->GetExperience() << std::endl;
+	mon->Attack(*mon2);
 }
 
 void testShop() {
@@ -186,5 +188,6 @@ static void dropTest() {
 
 
 int main() {
-    dropTest();
+	//testBattle();
+	//testMonster();
 }

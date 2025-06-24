@@ -25,7 +25,9 @@ public:
 		return character;
 	}
 
+
 	void DropEquip();
+
 protected:
 	void ShopBuyItem();
 	void ShopSellItem();
