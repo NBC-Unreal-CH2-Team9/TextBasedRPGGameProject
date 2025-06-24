@@ -43,6 +43,8 @@ public:
 
 	// 아이템 사용
 	static void ShowUseHealthPotion(Character& character, HealthPotion& potion);
+	static void ShowUseAttackBoost(Character& character, AttackBoost& boost);
+	static void ShowUseItem(Character& character, Item& item);
 
 	
 	// 몬스터 사망

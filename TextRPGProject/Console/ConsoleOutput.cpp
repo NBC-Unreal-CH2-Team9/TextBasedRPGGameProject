@@ -217,6 +217,17 @@ void ConsoleOutput::ShowUseHealthPotion(Character& character, HealthPotion& poti
 	std::cout << "현재 체력: " << character.GetHealth() << "(+" << potion.GetHealthRestore() << ")\n";
 }
 
+void ConsoleOutput::ShowUseAttackBoost(Character& character, AttackBoost& boost)
+{
+	std::cout << character.GetName() << "공격력 강화 아이템을 사용했습니다!\n";
+	std::cout << "현재 체력: " << character.GetAttack() << "(+" << boost.GetAttackincrease() << ")\n";
+}
+
+void ConsoleOutput::ShowUseItem(Character& character, Item& item)
+{
+	std::cout << character.GetName() << "이/가" << item.GetName() << "을 사용하였습니다.\n";
+}
+
 void ConsoleOutput::ShowDieMonster() {
 	std::cout << "몬스터를 처치했습니다! 전투에서 승리하셨습니다.\n";
 }
