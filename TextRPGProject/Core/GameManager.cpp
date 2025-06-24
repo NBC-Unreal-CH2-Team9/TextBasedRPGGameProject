@@ -127,6 +127,7 @@ BattleResult GameManager::Battle()
 	{
 		if (isMyTurn)
 		{
+			ConsoleOutput::ShowCharacterTurn();
 			UseItemRandom("Health Potion", character->GetHealth() < character->GetMaxHealth() / 2);
 			UseItemRandom("Attack Boost", rand()%100<50);
 			character->Attack(*monster);
