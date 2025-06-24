@@ -90,8 +90,7 @@ void Character::EquipArmor(Armor* newArmor)
 	{
 		// 기존 갑옷이 있다면 인벤토리에 추가
 		if (equipArmor != nullptr) {
-			int newMaxHealth = maxHealth - equipArmor->GetStat();
-			SetHealth(newMaxHealth);
+			maxHealth = maxHealth - equipArmor->GetStat();
 			equipmentInventory.Insert(new Armor(*equipArmor));  // 복사본 삽입
 			delete equipArmor;  // 기존 장비 메모리 해제
 		}
@@ -99,12 +98,13 @@ void Character::EquipArmor(Armor* newArmor)
 		equipArmor = newArmor;
 
 		// 최대 체력 재계산: 기본 maxHealth + 갑옷 스탯
-		int newMaxHealth = maxHealth + equipArmor->GetStat();
-		SetHealth(newMaxHealth);
-
-		// 현재 체력은 최대 체력 이하로 조정 가능 (옵션)
-		if (GetHealth() > newMaxHealth)
-			SetHealth(newMaxHealth);
+		maxHealth = maxHealth + equipArmor->GetStat();
+		health = health + equipArmor->GetStat();
+		// 현재 체력이 maxHealth를 초과하면 maxHealth로 조정
+		if (health > maxHealth) {
+			health = maxHealth;
+		}
+			
 	}
 	else
 	{

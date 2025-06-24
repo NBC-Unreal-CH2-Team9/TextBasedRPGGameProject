@@ -166,15 +166,17 @@ static void dropTest() {
 
     gameManager.DropEquip();
     std::cout << "\n[장비 1회 드랍 후 스텟]" << std::endl;
-    std::cout << "현재 공격력: " << character->GetAttack() << " 체력 : " << character->GetHealth() << std::endl;
+    std::cout << "현재 공격력: " << character->GetAttack() << " 최대 체력 : " << character->GetMaxHealth() << " 현재 체력 : " << character->GetHealth() << std::endl;
+
+    character->TakeDamage(100);
 
     gameManager.DropEquip();
     std::cout << "\n[장비 2회 드랍 후 스텟]" << std::endl;
-    std::cout << "현재 공격력: " << character->GetAttack() << " 체력 : " << character->GetHealth() << std::endl;
+    std::cout << "현재 공격력: " << character->GetAttack() << " 최대 체력 : " << character->GetMaxHealth() << " 현재 체력 : " << character->GetHealth() << std::endl;
 
     gameManager.DropEquip();
     std::cout << "\n[장비 3회 드랍 후 스텟]" << std::endl;
-    std::cout << "현재 공격력: " << character->GetAttack() << " 체력 : " << character->GetHealth() << std::endl;
+    std::cout << "현재 공격력: " << character->GetAttack() << " 최대 체력 : " << character->GetMaxHealth() << " 현재 체력 : " << character->GetHealth() << std::endl;
 
     std::cout << "\n[인벤토리 목록 출력]" << std::endl;
     items = character->GetEquipmentInventory()->GetItems();
