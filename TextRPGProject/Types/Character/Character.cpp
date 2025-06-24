@@ -1,4 +1,5 @@
 #include "Character.h"
+#include "Inventory.h"
 #include <iostream>
 
 void Character::Attack(Actor& other)
@@ -9,11 +10,16 @@ void Character::Attack(Actor& other)
 void Character::TakeDamage(int damage)
 {
 	health -= damage;	
+	// hp가 10이하로 떨어지는 경우 랜덤하게 아이템 사용
+	if (health > 0 && health <= 10) {
+		UseRandomItem();
+	}
 }
 
 void Character::DisplayStatus()
 {
 	std::cout << "==Status==" << std::endl;
+	std::cout << "name:" << name << std::endl;
 	std::cout << "level:" << level << std::endl;
 	std::cout << "experience:" << experience << std::endl;
 	std::cout << "health:" << health << std::endl;
@@ -31,17 +37,9 @@ void Character::LevelUp()
 	}	
 }
 
-void Character::OnLevelChangedHealth()
-{
-	int newHealth = (maxHealth + level * 20);
-	health = newHealth;
-	maxHealth = newHealth;	
-}
+void Character::OnLevelChangedHealth() {}
 
-void Character::OnLevelChangedAttack()
-{
-	attack += (level * 5);		
-}
+void Character::OnLevelChangedAttack() {}
 
 void Character::AddExperience(int exp)
 {
@@ -50,4 +48,15 @@ void Character::AddExperience(int exp)
 		LevelUp();
 		experience = 0; // 레벨업 후 경험치를 초기화
 	}
+}
+
+void Character::UseRandomItem()
+{
+	// TODO: 랜덤하게 아이템 사용
+	std::vector<Item*> items = itemInventory.GetItems();
+}
+
+void Character::GetRandomItem(Item* item)
+{
+	itemInventory.Insert(item);
 }

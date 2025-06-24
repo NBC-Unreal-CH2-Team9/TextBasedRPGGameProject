@@ -190,6 +190,9 @@
     <ClCompile Include="Types\Actor.cpp" />
     <ClCompile Include="Types\Character\Character.cpp" />
     <ClCompile Include="Types\Character\Inventory.cpp" />
+    <ClCompile Include="Types\Character\Mage.cpp" />
+    <ClCompile Include="Types\Character\Tanker.cpp" />
+    <ClCompile Include="Types\Character\Warrior.cpp" />
     <ClCompile Include="Types\Item\AttackBoost.cpp" />
     <ClCompile Include="Types\Item\HealthPotion.cpp" />
     <ClCompile Include="Types\Item\Item.cpp" />
@@ -201,6 +204,9 @@
     <ClInclude Include="Types\Actor.h" />
     <ClInclude Include="Types\Character\Character.h" />
     <ClInclude Include="Types\Character\Inventory.h" />
+    <ClInclude Include="Types\Character\Mage.h" />
+    <ClInclude Include="Types\Character\Tanker.h" />
+    <ClInclude Include="Types\Character\Warrior.h" />
     <ClInclude Include="Types\Item\AttackBoost.h" />
     <ClInclude Include="Types\Item\HealthPotion.h" />
     <ClInclude Include="Types\Item\Item.h" />
