@@ -1,39 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="Types\Equipment\EquipmentManager.cpp" />
+    <ClCompile Include="Types\Equipment\Armor.cpp" />
     <ClCompile Include="Console\ConsoleInput.cpp" />
     <ClCompile Include="Console\ConsoleOutput.cpp" />
     <ClCompile Include="Core\GameManager.cpp" />
+    <ClCompile Include="Types\Equipment\Sword.cpp" />
+    <ClCompile Include="Types\Equipment\Equipment.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test\test_main.cpp" />
     <ClCompile Include="Types\Actor.cpp" />
     <ClCompile Include="Types\Character\Character.cpp" />
     <ClCompile Include="Types\Character\Inventory.cpp" />
+    <ClCompile Include="Types\Character\Mage.cpp" />
+    <ClCompile Include="Types\Character\Tanker.cpp" />
+    <ClCompile Include="Types\Character\Warrior.cpp" />
     <ClCompile Include="Types\Item\AttackBoost.cpp" />
     <ClCompile Include="Types\Item\HealthPotion.cpp" />
     <ClCompile Include="Types\Item\Item.cpp" />
+    <ClCompile Include="Types\Monster\BossMonster.cpp" />
     <ClCompile Include="Types\Monster\Dragon.cpp" />
     <ClCompile Include="Types\Monster\Monster.cpp" />
-    <ClCompile Include="Types\Character\Warrior.cpp" />
-    <ClCompile Include="Types\Character\Mage.cpp" />
-    <ClCompile Include="Types\Character\Tanker.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="Types\Equipment\Equipment.cpp" />
-    <ClCompile Include="Types\Equipment\Sword.cpp" />
-    <ClCompile Include="Types\Equipment\Armor.cpp" />
-    <ClCompile Include="Types\Equipment\EquipmentManager.cpp" />
-=======
-    <ClCompile Include="Types\Monster\BossMonster.cpp" />
->>>>>>> bossMon
+    <ClCompile Include="Types\Item\ItemManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Types\Equipment\EquipmentManager.h" />
+    <ClInclude Include="Types\Equipment\Armor.h" />
     <ClInclude Include="Core\GameManager.h" />
+    <ClInclude Include="Types\Equipment\Sword.h" />
+    <ClInclude Include="Types\Equipment\Equipment.h" />
     <ClInclude Include="Types\Actor.h" />
     <ClInclude Include="Types\Character\Character.h" />
     <ClInclude Include="Types\Character\Inventory.h" />
+    <ClInclude Include="Types\Character\Mage.h" />
+    <ClInclude Include="Types\Character\Tanker.h" />
+    <ClInclude Include="Types\Character\Warrior.h" />
     <ClInclude Include="Types\Item\AttackBoost.h" />
     <ClInclude Include="Types\Item\HealthPotion.h" />
     <ClInclude Include="Types\Item\Item.h" />
+    <ClInclude Include="Types\Monster\BossMonster.h" />
     <ClInclude Include="Types\Monster\Dragon.h" />
     <ClInclude Include="Types\Monster\Goblin.h" />
     <ClInclude Include="Types\Monster\Monster.h" />
@@ -42,16 +48,6 @@
     <ClInclude Include="Types\Monster\Troll.h" />
     <ClInclude Include="Console\ConsoleInput.h" />
     <ClInclude Include="Console\ConsoleOutput.h" />
-    <ClInclude Include="Types\Character\Warrior.h" />
-    <ClInclude Include="Types\Character\Mage.h" />
-    <ClInclude Include="Types\Character\Tanker.h" />
-<<<<<<< HEAD
-    <ClInclude Include="Types\Equipment\Equipment.h" />
-    <ClInclude Include="Types\Equipment\Sword.h" />
-    <ClInclude Include="Types\Equipment\Armor.h" />
-    <ClInclude Include="Types\Equipment\EquipmentManager.h" />
-=======
-    <ClInclude Include="Types\Monster\BossMonster.h" />
->>>>>>> bossMon
+    <ClInclude Include="Types\Item\ItemManager.h" />
   </ItemGroup>
 </Project>

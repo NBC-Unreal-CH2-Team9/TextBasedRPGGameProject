@@ -9,6 +9,11 @@ public:
 	int GetPrice() {
 		return price;
 	}
+
+	Equipment(const Equipment& other)
+		: name(other.name), price(other.price) {
+	}
+
 	std::string GetName() {
 		return name;
 	}
