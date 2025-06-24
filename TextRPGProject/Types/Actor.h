@@ -20,7 +20,7 @@ public:
 	virtual void TakeDamage(int damage) = 0;
 	std::string GetName() {	return name; }
 	int GetHealth() { return health; }
-	int GetAttack();
+	int GetAttack() { return attack; }
 	
 
 protected:
