@@ -21,6 +21,7 @@ public:
 		return name;
 	}
 
+
 protected:
 	std::string name;
 	int price;

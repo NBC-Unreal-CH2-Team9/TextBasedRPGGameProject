@@ -15,6 +15,7 @@
 #include "../Types/Item/Item.h"
 #include "../Types/Item/AttackBoost.h"
 #include "../Types/Item/HealthPotion.h"
+#include "../Types/Item/ItemManager.h"
 #include "../Types/Equipment/EquipmentManager.h"
 
 #include "../Console/ConsoleInput.h"
@@ -161,6 +162,8 @@ BattleResult GameManager::Battle()
 		ConsoleOutput::ShowGetGold(*character, *monster);
 		ConsoleOutput::ShowGetExp(*character, *monster);
 
+		RandomGetItem();
+
 		if (isLevelUp) {
 			ConsoleOutput::ShowLevelUp(*character);
 		}
@@ -272,6 +275,37 @@ void GameManager::DropEquip()
 {
 	Equipment* dropEquip = EquipmentManager::GenerateRandomEquipment();
 	character->Equip(dropEquip);
+}
+
+void GameManager::DropItem()
+{
+	Item* dropItem = ItemManager::GenerateRandomItem();
+	character->GetRandomItem(dropItem);
+}
+
+void GameManager::RandomGetItem()
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dist(1, 100);
+
+	int itemRoll = dist(gen);
+	int equipRoll = dist(gen);
+	
+
+	if (itemRoll <= 30)
+	{
+		DropItem();
+		//테스트 확인용
+		//std::cout << "\n 아이템 얻음" << std::endl;
+	}
+
+	if (equipRoll <= 10)
+	{
+		DropEquip();
+		//테스트 확인용
+		//std::cout << "\n 장비 얻음" << std::endl;
+	}
 }
 
 void GameManager::ShopBuyItem()
