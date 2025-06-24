@@ -71,6 +71,13 @@ void testMonster()
         std::cout << dragon->GetName() << "health: " << dragon->GetHealth() << std::endl;
         dragon->Attack(*mon);
         std::cout << mon->GetName() << "health: " << mon->GetHealth() << std::endl;
+    
+        if (dragon->GetMaxHealth() / 3 > dragon->GetHealth())
+        {
+            std::cout << "체력 절반!!!!!" << std::endl;
+            std::cout << dragon->GetAttack() << std::endl;
+            std::cout << mon->GetAttack() << std::endl;
+        }
     }
 }
 

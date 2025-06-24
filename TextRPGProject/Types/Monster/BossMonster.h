@@ -13,5 +13,8 @@ private:
 	void UseSkill(Actor& other, std::string name);
 	void HealSkill();
 	void AttackSkill(Actor& other);
+	void PassiveSkill();
+
+	bool passiveSkill = true;
 
 };

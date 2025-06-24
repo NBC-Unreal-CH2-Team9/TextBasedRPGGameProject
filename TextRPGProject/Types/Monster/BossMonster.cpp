@@ -2,6 +2,11 @@
 
 void BossMonster::Attack(Actor& other)
 {
+	if (name == "º¸½º µå·¡°ï" && GetHealth() < GetMaxHealth() / 3 && passiveSkill)
+	{
+		PassiveSkill();
+	}
+
 	
 	if (rand() % 10 < 2)
 	{
@@ -57,4 +62,10 @@ void BossMonster::AttackSkill(Actor& other)
 {
 	int damage = ApplyCriticalAttack() * 2;
 	other.TakeDamage(damage);
+}
+
+void BossMonster::PassiveSkill()
+{
+	attack += 20;
+	passiveSkill = false;
 }
