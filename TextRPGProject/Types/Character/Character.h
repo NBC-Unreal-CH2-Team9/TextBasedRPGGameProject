@@ -69,6 +69,7 @@ protected:
 	Armor* equipArmor;
 	int gold;
 	int level;
+	
 	int maxHealth;
 	int experience;
 };
