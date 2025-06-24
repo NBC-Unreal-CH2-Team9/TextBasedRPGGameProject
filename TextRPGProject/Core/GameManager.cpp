@@ -75,29 +75,30 @@ Monster* GameManager::GenerateMonster(int characterLevel, bool isBossBattle = fa
 
 	Monster* monster = nullptr;
 
-	if (!isBossBattle)
+	//40,30,20,10
+	if (randNum < 40)
 	{
-		//40,30,20,10
-		if (randNum < 40)
-		{
-			monster = MonsterManager::CreateGoblin(characterLevel);
-		}
-		else if (randNum < 70)
-		{
-			monster = MonsterManager::CreateOrc(characterLevel);
-		}
-		else if (randNum < 90)
-		{
-			monster = MonsterManager::CreateSlime(characterLevel);
-		}
-		else
-		{
-			monster = MonsterManager::CreateTroll(characterLevel);
-		}
+		monster = MonsterManager::CreateGoblin(characterLevel);
+	}
+	else if (randNum < 70)
+	{
+		monster = MonsterManager::CreateOrc(characterLevel);
+	}
+	else if (randNum < 90)
+	{
+		monster = MonsterManager::CreateSlime(characterLevel);
 	}
 	else
 	{
-		monster = MonsterManager::CreateDragon(characterLevel);
+		monster = MonsterManager::CreateTroll(characterLevel);
+	}
+
+	if (isBossBattle)
+	{
+		Monster* bossMonster;
+		bossMonster = MonsterManager::CreateBoss(*monster);
+		delete monster;
+		monster = bossMonster;
 	}
 
 	ConsoleOutput::ShowMonsterStatus(*monster, isBossBattle);
