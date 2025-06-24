@@ -1,6 +1,40 @@
 ﻿#include "ConsoleOutput.h"
 #include <iostream>
+#include <windows.h>
 
+
+void ConsoleOutput::ShowIntro()
+{
+	// usVng https://patorjk.com/software/taag/#p=dVsplay&h=0&v=0&f=BVg%20Money-ne&t=TextRPG
+	std::cout << " /$$$$$$$$                       /$$     /$$$$$$$  /$$$$$$$   /$$$$$$\n"; Sleep(100);
+	std::cout << "|__  $$__/                      | $$    | $$__  $$| $$__  $$ /$$__  $$\n"; Sleep(100);
+	std::cout << "   | $$     /$$$$$$  /$$   /$$ /$$$$$$  | $$  V $$| $$  V $$| $$  V__/\n"; Sleep(100);
+	std::cout << "   | $$    /$$__  $$|  $$ /$$/|_  $$_/  | $$$$$$$/| $$$$$$$/| $$ /$$$$\n"; Sleep(100);
+	std::cout << "   | $$   | $$$$$$$$ V  $$$$/   | $$    | $$__  $$| $$____/ | $$|_  $$\n"; Sleep(100);
+	std::cout << "   | $$   | $$_____/  >$$  $$   | $$ /$$| $$  V $$| $$      | $$  V $$\n"; Sleep(100);
+	std::cout << "   | $$   |  $$$$$$$ /$$/V  $$  |  $$$$/| $$  | $$| $$      |  $$$$$$/\n"; Sleep(100);
+	std::cout << "   |__/    V_______/|__/  V__/   V___/  |__/  |__/|__/       V______/\n\n"; Sleep(100);
+	
+	std::cout << "                                                   내일배움캠프 CH2 Team 9\n";
+}
+
+void ConsoleOutput::ShowCredit()
+{
+	std::cout << "_________                      .___.__   __\n"; Sleep(100);
+	std::cout << "V_   ___ V _______   ____    __| _/|__|_/  |_\n"; Sleep(100);
+	std::cout << "/    V  V/ V_  __ V_/ __ V  / __ | |  |V   __V\n"; Sleep(100);
+	std::cout << "V     V____ |  | V/V  ___/ / /_/ | |  | |  |\n"; Sleep(100);
+	std::cout << " V______  / |__|    V___  >V____ | |__| |__|\n"; Sleep(100);
+	std::cout << "		V/              V/      V/\n\n\n"; Sleep(100);
+
+	std::cout << "           - 만든 사람들 -           \n\n"; Sleep(500);
+	std::cout << "     팀장 및 캐릭터 개발: 오동률     \n"; Sleep(800);
+	std::cout << " 코드 리뷰 및 상점 로직 개발: 최대근 \n"; Sleep(800);
+	std::cout << "      몬스터 클래스 개발: 김효영     \n"; Sleep(800);
+	std::cout << "      아이템 클래스 개발: 서정원     \n"; Sleep(800);
+	std::cout << "        전투 로직 개발: 송우진       \n"; Sleep(800);
+	std::cout << "        출력 관련 개발: 이서영       \n"; Sleep(800);
+}
 
 void ConsoleOutput::ShowCreateCharacterIntro()
 {

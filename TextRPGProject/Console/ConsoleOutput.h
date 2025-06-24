@@ -11,6 +11,10 @@
 class ConsoleOutput
 {
 public:
+	// 인트로, 아웃트로
+	static void ShowIntro();
+	static void ShowCredit();
+
 	//캐릭터 생성
 	static void ShowCreateCharacterIntro();
 	static void ShowCreateCharacterName();

@@ -46,5 +46,7 @@ void testShop() {
 
 int main() {
 	//testMonster();
+	ConsoleOutput::ShowIntro();
 	testShop();
+	ConsoleOutput::ShowCredit();
 }
