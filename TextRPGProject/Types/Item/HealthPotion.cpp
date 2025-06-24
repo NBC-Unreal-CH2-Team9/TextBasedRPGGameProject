@@ -1,8 +1,14 @@
-#include "HealthPotion.h"
+ï»¿#include "HealthPotion.h"
 #include "../Character/Character.h"
 
 void HealthPotion::Use(Character& user) {
 	int newHealth = user.GetHealth() + healthRestore;
-	//hp È¸º¹À» À§ÇÑ Actor.hÀÇ  protected: health Á¢±ÙÀ» À§ÇØ SetHealth ÇÔ¼ö ÇÊ¿ä. 
-	user.SetHealth(newHealth);
+	//hp íšŒë³µ ë¡œì§. ìµœëŒ€ ì²´ë ¥ ì´ˆê³¼í•´ì„œ íšŒë³µ ëª»í•¨.
+	if (user.GetMaxHealth() < newHealth) {
+		user.SetHealth(user.GetMaxHealth());
+	}
+	else {
+		user.SetHealth(newHealth);
+	}
+	
 }

@@ -1,10 +1,13 @@
-#pragma once
+ï»¿#pragma once
 
 #include "../Actor.h"
 #include "Inventory.h"
+#include "../Equipment/Sword.h"
+#include "../Equipment/Armor.h"
 
 class Item;
 class Equipment;
+
 
 class Character : public Actor {
 public:
@@ -37,7 +40,6 @@ public:
 	int GetAttack() { return attack; }
 	void SetAttack(int newAttack) { attack = newAttack; }
 
-
 	int GetLevel() {
 		return level;
 	}
@@ -53,15 +55,20 @@ public:
 
 	virtual void OnLevelChangedAttack();
 
-	void AddExperience(int exp);	
+	void AddExperience(int exp);
+	void EquipSword(Sword* newSword);
+	void EquipArmor(Armor* newArmor);
+	void Equip(Equipment* newEquip);
 
-	void UseRandomItem(); // ÀüÅõÁß ·£´ýÇÏ°Ô »ç¿ë
+	void UseRandomItem(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½
 
-	void GetRandomItem(Item* item); // ÀüÅõ½Â¸®½Ã ¾ÆÀÌÅÛ È¹µæ
+	void GetRandomItem(Item* item); // ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¹ï¿½ï¿½
 
 protected:
 	Inventory<Item> itemInventory;
 	Inventory<Equipment> equipmentInventory;
+	Sword* equipSword;
+	Armor* equipArmor;
 	int gold;
 	int level;
 	

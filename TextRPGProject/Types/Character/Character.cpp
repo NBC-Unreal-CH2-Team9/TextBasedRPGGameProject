@@ -1,4 +1,4 @@
-#include "Character.h"
+﻿#include "Character.h"
 #include "Inventory.h"
 #include <iostream>
 
@@ -10,7 +10,7 @@ void Character::Attack(Actor& other)
 void Character::TakeDamage(int damage)
 {
 	health -= damage;	
-	// hp�� 10���Ϸ� �������� ��� �����ϰ� ������ ���
+	// hp가 10이하로 떨어지는 경우 랜덤하게 아이템 사용
 	if (health > 0 && health <= 10) {
 		UseRandomItem();
 	}
@@ -43,20 +43,86 @@ void Character::OnLevelChangedAttack() {}
 
 void Character::AddExperience(int exp)
 {
-	int newExp = experience + exp; // ���� ����ġ + �߰� ����ġ
+	int newExp = experience + exp; // 현재 경험치 + 추가 경험치
 	if(newExp >= 100) {		
 		LevelUp();
-		experience = 0; // ������ �� ����ġ�� �ʱ�ȭ
+		experience = 0; // 레벨업 후 경험치를 초기화
 	}
 }
 
 void Character::UseRandomItem()
 {
-	// TODO: �����ϰ� ������ ���
+	// TODO: 랜덤하게 아이템 사용
 	std::vector<Item*> items = itemInventory.GetItems();
 }
 
 void Character::GetRandomItem(Item* item)
 {
 	itemInventory.Insert(item);
+}
+
+void Character::EquipSword(Sword* newSword)
+{	//기존 검이 없거나 새로 얻은 검이 더 좋을 때
+	if (equipSword == nullptr || newSword->GetStat() > equipSword->GetStat()) {
+		//기존 검을 장비 인벤토리에 넣기.
+		if (equipSword != nullptr) {
+			int newAttack = attack - equipSword->GetStat();
+			SetAttack(newAttack);
+			equipmentInventory.Insert(new Sword(*equipSword));  // 복사본 삽입
+			delete equipSword;  // 기존 장비 메모리 해제
+		}
+
+		equipSword = newSword;
+		int newAttack = attack + equipSword->GetStat();
+		SetAttack(newAttack);
+	}
+	//새로 얻은 검을 장비 인벤토리에 넣기.
+	else {
+		equipmentInventory.Insert(new Sword(*newSword));  // 복사본 삽입
+		delete newSword;// 새로운 장비 메모리 해제
+	}
+
+}
+
+void Character::EquipArmor(Armor* newArmor)
+{
+	if (equipArmor == nullptr || newArmor->GetStat() > equipArmor->GetStat())
+	{
+		// 기존 갑옷이 있다면 인벤토리에 추가
+		if (equipArmor != nullptr) {
+			maxHealth = maxHealth - equipArmor->GetStat();
+			equipmentInventory.Insert(new Armor(*equipArmor));  // 복사본 삽입
+			delete equipArmor;  // 기존 장비 메모리 해제
+		}
+
+		equipArmor = newArmor;
+
+		// 최대 체력 재계산: 기본 maxHealth + 갑옷 스탯
+		maxHealth = maxHealth + equipArmor->GetStat();
+		health = health + equipArmor->GetStat();
+		// 현재 체력이 maxHealth를 초과하면 maxHealth로 조정
+		if (health > maxHealth) {
+			health = maxHealth;
+		}
+			
+	}
+	else
+	{
+		// 새 갑옷 인벤토리에 복사본 삽입
+		equipmentInventory.Insert(new Armor(*newArmor));
+		delete newArmor;// 새로운 장비 메모리 해제
+	}
+}
+
+
+//새로운 장비를 얻을 때 실행. 검인지 갑옷인지 판단 후 위 함수 실행
+void Character::Equip(Equipment* newEquip) {
+	Equipment::EquipmentType type = newEquip->GetType();
+
+	if (type == Equipment::EquipmentType::SWORD) {
+		EquipSword(dynamic_cast<Sword*>(newEquip));
+	}
+	else if (type == Equipment::EquipmentType::ARMOR) {
+		EquipArmor(dynamic_cast<Armor*>(newEquip));
+	}
 }
