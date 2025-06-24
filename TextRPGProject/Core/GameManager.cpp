@@ -91,7 +91,7 @@ Monster* GameManager::GenerateMonster(int characterLevel, bool isBossBattle = fa
 	{
 		monster = MonsterManager::CreateTroll(characterLevel);
 	}
-	else // if(randNum<100)
+	else
 	{
 		monster = MonsterManager::CreateDragon(characterLevel);
 	}
@@ -160,6 +160,8 @@ BattleResult GameManager::Battle()
 		character->SetGold(character->GetGold() + monster->GetGold());
 		character->AddExperience(monster->GetExperience());
 		std::cout << monster->GetExperience() << " EXP와 " << monster->GetGold() << "를 획득했습니다.\n";	
+
+		PickItem();
 	}
 
 	delete monster;
@@ -195,6 +197,30 @@ void GameManager::CheckHealthPotionAndUse()
 			break;
 		}
 	}
+}
+
+void GameManager::PickItem()
+{
+	int getItemProbability = rand() % 100;
+	int getEqupmentProbability = rand() % 100;
+
+	if (getItemProbability < 30)
+	{
+		//Item* item = ItemManager::GenerateRandomItem();
+		//character->GetItemInventory()->Insert(item);
+		//std::cout << item->GetName() << "을(를) 주웠습니다.";
+	}
+
+	if (getEqupmentProbability < 30)
+	{
+		Equipment* equip = EquipmentManager::GenerateRandomEquipment();
+
+		character->GetEquipmentInventory()->Insert(equip);
+
+		std::cout << equip->GetName() << "을(를) 주웠습니다.";
+	}
+
+	std::cout << std::endl;
 }
 
 void GameManager::Shop()
