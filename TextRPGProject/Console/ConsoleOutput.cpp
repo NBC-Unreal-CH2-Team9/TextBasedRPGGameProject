@@ -2,30 +2,18 @@
 #include <iostream>
 
 
-// 캐릭터 생성 시 안내메시지 출력
-void ShowCreateCharacterIntro()
+void ConsoleOutput::ShowCreateCharacterIntro()
 {
-	std::cout << "----------------\n";
+	std::cout << "--------------------\n";
 	std::cout << "캐릭터를 생성합니다.\n";
-	std::cout << "----------------\n";
+	std::cout << "--------------------\n";
 }
-// 캐릭터 이름을 생성할 때 출력하는 함수
-void ShowCreateCharacterName()
-{
-	std::cout << "캐릭터 이름을 입력하세요 : " << std::endl;
-}
-// 캐릭터 직업을 선택할 때 출력하는 함수
-void ShowSelectJob()
-{
-	std::cout << "캐릭터의 직업을 입력하세요.\n";
-	std::cout << "1 : 전사\n";
-	std::cout << "2 : 마법사" << std::endl;
-	//std::cout << "2 : 마법사" << std::endl;
-}
-// 캐릭터 생성 확인을 출력하는 함수 구현 예정 
 
+void ConsoleOutput::ShowCreateCharacterName()
+{
+	std::cout << "캐릭터 이름을 입력하세요 : ";
+}
 
-// 캐릭터 현재 상태를 출력하는 함수
 void ConsoleOutput::ShowCharacterStatus(Character& character) {
 	std::cout << "--캐릭터 현재 상태--\n";
 	std::cout << "이름: " << character.GetName() << "\n";
@@ -35,18 +23,14 @@ void ConsoleOutput::ShowCharacterStatus(Character& character) {
 	std::cout << "체력: " << character.GetHealth() << " /  " << character.GetHealth() << "\n";
 	std::cout << "공격력: " << character.GetAttack() << "\n";
 	std::cout << "----------------\n";
-
-	// 아이템 출력 구현 예정
 }
-// 캐릭터의 골드를 출력하는 함수
+
 void ConsoleOutput::ShowCharacterGold(Character& character) {
 	std::cout << "--캐릭터 지갑--\n";
 	std::cout << "현재 골드: " << character.GetGold() << "\n";
 	std::cout << "----------------\n";
 }
 
-
-// 몬스터의 상태를 출력하는 함수
 void ConsoleOutput::ShowMonsterStatus(Monster& monster) {
 	std::cout << "--몬스터 현재 상태--\n";
 	std::cout << "이름 : " << monster.GetName() << "\n";
@@ -56,52 +40,97 @@ void ConsoleOutput::ShowMonsterStatus(Monster& monster) {
 }
 
 
-// 공격을 출력하는 함수
-void ShowAttackMessage(Actor& attacker, Actor& target) {
+
+void ConsoleOutput::ShowAttackMessage(Actor& attacker, Actor& target) {
 	std::cout << attacker.GetName() << "이(가) " << target.GetName() << "을(를) 공격합니다!\n";
 }
-// 피해를 출력하는 함수
-void ShowDamageMessage(Actor* who, int damage) {
+
+void ConsoleOutput::ShowDamageMessage(Actor* who, int damage) {
 	std::cout << who->GetName() << "이(가) " << damage << "의 데미지를 입습니다.\n";
 }
-// 크리티컬을 출력하는 함수
-void ShowCriticalHit()
+
+void ConsoleOutput::ShowCriticalHit()
 {
 	std::cout << "크리티컬!!\n";
 }
 
-
-// 캐릭터가 몬스터를 처치해 전투에서 승리했을 때의 메시지를 출력하는 함수
 void ConsoleOutput::ShowDieMonster() {
-	std::cout << "몬스터가 처치되었습니다! 전투에서 승리하셨습니다.\n";
+	std::cout << "몬스터를 처치했습니다! 전투에서 승리하셨습니다.\n";
 }
 
 
-// 상점에 들어갈 것인지 물어보는 메시지를 출력하는 함수
-void ShowAskEnterShop()
-{
-	std::cout << "----------------\n";
-	std::cout << "상점에 입장하겠습까?\n";
-	std::cout << "1 : 예\n";
-	std::cout << "2 : 아니오\n";
-	std::cout << "----------------" << std::endl;
-}
-//상점에 입장했을 때 입장 메시지를 출력하는 함수
-void ShowEnterShop()
+const std::string ConsoleOutput::shopQuestion = "상점에 방문하시겠습니까?";
+const std::vector<std::string> ConsoleOutput::shopOptions = { "물건 사기", "물건 팔기", "상점 나가기" };
+
+void ConsoleOutput::ShowEnterShop()
 {
 	std::cout << "상점에 입장했습니다.\n";
 }
-// 상점에서 나갈 것인지 물어보는 메시지를 출력하는 함수
-void ShowAskExitShop()
+
+void ConsoleOutput::ShowSkipShop()
 {
-	std::cout << "----------------\n";
-	std::cout << "상점에서 나가겠습까?\n";
-	std::cout << "1 : 예\n";
-	std::cout << "2 : 아니오\n";
-	std::cout << "----------------" << std::endl;
+	std::cout << "상점을 방문하지 않습니다.\n";
 }
-//상점에 나갔을 때 메시지를 출력하는 함수
-void ShowExitShop()
+
+void ConsoleOutput::ShowExitShop()
 {
 	std::cout << "상점에서 나왔습니다\n";
+}
+
+void ConsoleOutput::ShowNoItemToSell()
+{
+	std::cout << "판매할 물건이 없습니다.\n";
+}
+
+void ConsoleOutput::ShowNotEnoughGold()
+{
+	std::cout << "골드가 모자랍니다\n";
+}
+
+void ConsoleOutput::ShowCharacterGoldChange(Character& character, int change)
+{
+	std::cout << "남은 골드: " << character.GetGold();
+	if (change > 0) {
+		std::cout << "(+" << change << ")\n";
+	}
+	else {
+		std::cout << "(" << change << ")\n";
+	}
+}
+
+std::vector<std::string> ConsoleOutput::MakeShopBuyList(std::vector<Item*> list)
+{
+	std::vector<std::string> options;
+	for (int i = 0; i < list.size(); i++) {
+		options.emplace_back(list[i]->GetName() + ", (" + std::to_string(list[i]->GetPrice()) + "골드)");
+	}
+	return options;
+}
+
+std::vector<std::string> ConsoleOutput::MakeShopSellList(std::vector<Item*> list, float ratio)
+{
+	std::vector<std::string> options;
+	for (int i = 0; i < list.size(); i++) {
+		int sellPrice = (int)(list[i]->GetPrice() * ratio);
+		options.emplace_back(list[i]->GetName() + ", (" + std::to_string(sellPrice) + "골드)");
+	}
+	return options;
+}
+
+void ConsoleOutput::ShowBuyItem(Item& item, Character& character)
+{
+	std::cout << item.GetName() << "을/를 구매 했습니다.\n";
+	ShowCharacterGoldChange(character, -1 * item.GetPrice());
+}
+
+void ConsoleOutput::ShowSellItem(Item& item, Character& character, float ratio)
+{
+	std::cout << item.GetName() << "을/를 판매 했습니다.\n";
+	ShowCharacterGoldChange(character, (int)(item.GetPrice() * ratio));
+}
+
+void ConsoleOutput::ShowSellEquipment(Equipment& equipment, Character& character, float ratio)
+{
+	std::cout << equipment.GetName() << "을/를 판매 했습니다.\n";
+	ShowCharacterGoldChange(character, (int)(equipment.GetPrice() * ratio));
 }

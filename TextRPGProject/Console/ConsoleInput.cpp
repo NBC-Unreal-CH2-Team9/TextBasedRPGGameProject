@@ -1,6 +1,6 @@
 ﻿#include "ConsoleInput.h"
 
-int SelectNumber(std::vector<std::string> options)
+int ConsoleInput::SelectNumber(std::vector<std::string> options)
 {
 	std::string select;
 	while (true) {
@@ -27,7 +27,7 @@ int SelectNumber(std::vector<std::string> options)
 	return -1;
 }
 
-bool SelectYesOrNo(std::string question)
+bool ConsoleInput::SelectYesOrNo(std::string question)
 {
 	char input;
 	while (true) {

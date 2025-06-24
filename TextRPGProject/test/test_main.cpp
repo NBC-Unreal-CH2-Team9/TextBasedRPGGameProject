@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 
 #include "../Core/GameManager.h"
@@ -45,6 +45,6 @@ void testShop() {
 }
 
 int main() {
-  testMonster();
+	//testMonster();
+	testShop();
 }
-

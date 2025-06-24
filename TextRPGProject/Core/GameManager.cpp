@@ -15,6 +15,7 @@
 #include "../Types/Item/AttackBoost.h"
 #include "../Types/Item/HealthPotion.h"
 #include "../Console/ConsoleInput.h"
+#include "../Console/ConsoleOutput.h"
 
 #include "../Types/Character/Warrior.h"
 #include "../Types/Character/Mage.h"
@@ -34,31 +35,28 @@ GameManager::~GameManager()
 
 Character* GameManager::CreateCharacter()
 {
-	std::cout << "캐릭터 이름을 입력하세요: ";
+	ConsoleOutput::ShowCreateCharacterIntro();
+	ConsoleOutput::ShowCreateCharacterName();
 	std::string name;
 	std::cin >> name;
 
-	std::cout << "캐릭터 직업을 선택하세요(1번, 2번, 3번) " << std::endl;
-	std::cout << "1. 검사" << std::endl;
-	std::cout << "2. 마법사" << std::endl;
-	std::cout << "3. 탱커" << std::endl;
-	int jobChoice;
-	std::cin >> jobChoice;
+	std::vector<std::string> jobOptions = { "검사", "마법사", "탱커" };
+	int jobChoice = ConsoleInput::SelectNumber(jobOptions);
 
 	switch (jobChoice)
 	{
-	case 1:
+	case 0:
 		character = new Warrior(1, name, 200, 30, 0);
 		break;
-	case 2:
+	case 1:
 		character = new Mage(1, name, 100, 45, 0);
 		break;
-	case 3:
+	case 2:
 		character = new Tanker(1, name, 350, 15, 0);
 		break;
 	default:
 		break;
-	}		
+	}
 
 	return character;
 }
@@ -145,34 +143,37 @@ BattleResult GameManager::Battle()
 	return result;
 }
 
-const std::string GameManager::shopMessage = "";
-const std::vector<std::string> GameManager::shopPrompt = {
-	"물건 사기", "물건 팔기", "상점 나가기"
-};
-
 void GameManager::Shop()
 {
-	// 상점에 방문했을 때, 사용하지 않는 모든 장비를 판매함
-	ShopSellEquipment();
+	if (ConsoleInput::SelectYesOrNo(ConsoleOutput::shopQuestion)) {
 
-	while (true) {
-		int select = SelectNumber(shopPrompt);
-		switch (select) {
-		case 0: 
-			ShopBuyItem();
-			break;
-		case 1: 
-			if (character->GetItemInventory()->Count() > 0) {
-				ShopSellItem();
+		ConsoleOutput::ShowEnterShop();
+
+		// 상점에 방문했을 때, 사용하지 않는 모든 장비를 판매함
+		ShopSellEquipment();
+
+		while (true) {
+			int select = ConsoleInput::SelectNumber(ConsoleOutput::shopOptions);
+			switch (select) {
+			case 0:
+				ShopBuyItem();
+				break;
+			case 1:
+				if (character->GetItemInventory()->Count() > 0) {
+					ShopSellItem();
+				}
+				else {
+					ConsoleOutput::ShowNoItemToSell();
+				}
+				break;
+			case 2:
+				ConsoleOutput::ShowExitShop();
+				return;
 			}
-			else {
-				// temp message
-				std::cout << "판매할 물건이 없습니다." << std::endl;
-			}
-			break;
-		case 2: 
-			return;
 		}
+	}
+	else {
+		ConsoleOutput::ShowSkipShop();
 	}
 }
 
@@ -202,15 +203,9 @@ void GameManager::ShopBuyItem()
 
 	int gold = character->GetGold();
 
-	// temp message
-	std::cout << "소유 골드: " << character->GetGold() << std::endl;
-
-	std::vector<std::string> options;
-	for (int i = 0; i < shopItems.size(); i++) {
-		options.emplace_back(shopItems[i]->GetName() + ", (" + std::to_string(shopItems[i]->GetPrice()) + "골드)");
-	}
-	
-	int buyIndex = SelectNumber(options);
+	ConsoleOutput::ShowCharacterGold(*character);
+	std::vector<std::string> options = ConsoleOutput::MakeShopBuyList(shopItems);
+	int buyIndex = ConsoleInput::SelectNumber(options);
 
 	if (gold >= shopItems[buyIndex]->GetPrice()) {
 		gold -= shopItems[buyIndex]->GetPrice();
@@ -227,14 +222,11 @@ void GameManager::ShopBuyItem()
 			character->GetItemInventory()->Insert(newItem);
 			character->SetGold(gold);
 
-			// temp message
-			std::cout << newItem->GetName() << "을/를 구매했습니다. "
-				<< "(남은 골드: " << gold << ")" << std::endl;
+			ConsoleOutput::ShowBuyItem(*newItem, *character);
 		}
 	}
 	else {
-		// temp message
-		std::cout << "골드가 모자랍니다" << std::endl;
+		ConsoleOutput::ShowNotEnoughGold();
 	}
 	
 }
@@ -243,43 +235,26 @@ void GameManager::ShopSellItem()
 {
 	std::vector<Item*> items = character->GetItemInventory()->GetItems();
 
-	std::vector<std::string> options;
-	for (int i = 0; i < items.size(); i++) {
-		options.emplace_back(items[i]->GetName());
-	}
-
-	int sellIndex = SelectNumber(options);
+	float ratio = 0.6f;
+	std::vector<std::string> options = ConsoleOutput::MakeShopSellList(items, ratio);
+	int sellIndex = ConsoleInput::SelectNumber(options);
 
 	Item* item = character->GetItemInventory()->Get(sellIndex);
 	if (item != nullptr) {
-		int price = item->GetPrice() * 60 / 100;
+		int price = (int)(item->GetPrice() * ratio);
 
-		// temp message
-		std::cout << item->GetName() << "을/를 " << price << "골드에 팔았습니다." << std::endl;
-
+		ConsoleOutput::ShowSellItem(*item, *character, ratio);
 		character->GetItemInventory()->Remove(sellIndex);
 		character->SetGold(character->GetGold() + price);
 	}
-
-	// temp message
-	std::cout << "현재 소유 골드는 " << character->GetGold() << " 입니다." << std::endl;
 }
 
 void GameManager::ShopSellEquipment()
 {
-	// 가지고 있는 모든 장비 판매하기
 	std::vector<Equipment*> eqiupments = character->GetEquipmentInventory()->GetItems();
-	int gain = 0;
-	int old_glod = character->GetGold();
-	for (auto& equipment : eqiupments) {
-		// temp message
-		std::cout << equipment->GetName() << "를 " << equipment->GetPrice() << " 에 팔았습니다.." << std::endl;
-		gain += equipment->GetPrice();
+	for (Equipment* equipment : eqiupments) {
+		character->SetGold(character->GetGold() + equipment->GetPrice());
+		ConsoleOutput::ShowSellEquipment(*equipment, *character, 1);
 	}
-	int new_gold = old_glod + gain;
-	character->SetGold(new_gold);
-
-	// temp message
-	std::cout << "현재 골드: " << character->GetGold() << " (+" << gain << ")" << std::endl;
 }
 

@@ -3,7 +3,7 @@
 #include "../Types/Actor.h"
 #include "../Types/Monster/Monster.h"
 
-//#include "../Types/Item/Item.h"
+#include "../Types/Item/Item.h"
 //#include "../Types/Item/AttackBoost.h"
 //#include "../Types/Item/HealthPotion.h"
 
@@ -40,10 +40,20 @@ public:
 
 	
 	// 상점
-	static void ShowAskEnterShop();
+	static const std::string shopQuestion;
+	static const std::vector<std::string> shopOptions;
+
 	static void ShowEnterShop();
-	// 상점 판매 아이템 출력
-	// 구매, 판매, 나가기 UI 출력
-	static void ShowAskExitShop();
+	static void ShowSkipShop();
 	static void ShowExitShop();
+	static void ShowNoItemToSell();
+	static void ShowNotEnoughGold();
+	static void ShowCharacterGoldChange(Character& character, int change);
+
+	static std::vector<std::string> MakeShopBuyList(std::vector<Item*> list);
+	static std::vector<std::string> MakeShopSellList(std::vector<Item*> list, float ratio = 0.6f);
+
+	static void ShowBuyItem(Item& item, Character& character);
+	static void ShowSellItem(Item& item, Character& character, float ratio);
+	static void ShowSellEquipment(Equipment& equipment, Character& character, float ratio);
 };
