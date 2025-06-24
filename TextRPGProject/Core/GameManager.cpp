@@ -208,12 +208,15 @@ void GameManager::UseItemRandom(std::string itemName, bool canUse)
 		if (Items[i] && Items[i]->GetName() == itemName)
 		{
 			Items[i]->Use(*character);
-			HealthPotion* potion = dynamic_cast<HealthPotion*>(Items[i]);
-			ConsoleOutput::ShowUseHealthPotion(*character, *potion);
+			if (Items[i]->GetName() == "Health Potion") {
+				HealthPotion* potion = dynamic_cast<HealthPotion*>(Items[i]);
+				ConsoleOutput::ShowUseHealthPotion(*character, *potion);
+			}
+			else if (Items[i]->GetName() == "Attack Boost") {
+			}
+			else {
+			}
 			character->GetItemInventory()->Remove(i);
-
-			// TODO: remove
-			std::cout << character->GetName() << "이(가)" << Items[i]->GetName() << "을 사용하였습니다.\n";
 			break;
 		}
 	}
