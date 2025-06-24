@@ -20,14 +20,22 @@ void testMonster()
 	srand(time(nullptr));
 	int playerLevel = 1;
 	Monster* mon = MonsterManager::CreateOrc(playerLevel);
+	Monster* bossMon = MonsterManager::CreateBoss(*mon);
 
-
-	//std::cout << mon->GetCriticalAttack() << std::endl;
+	std::cout << mon->GetName() << std::endl;
+	std::cout << mon->GetHealth() << std::endl;
 	std::cout << mon->GetAttack() << std::endl;
-	for (int i = 0; i < 100; i++)
-	{
-		//std::cout << mon->GetCriticalProbablily() << std::endl;
-	}
+	std::cout << mon->GetGold() << std::endl;
+	std::cout << mon->GetExperience() << std::endl;
+
+	std::cout << "보스" << std::endl;
+	std::cout << bossMon->GetName() << std::endl;
+	std::cout << bossMon->GetHealth() << std::endl;
+	std::cout << bossMon->GetAttack() << std::endl;
+	std::cout << bossMon->GetGold() << std::endl;
+	std::cout << bossMon->GetExperience() << std::endl;
+	
+	
 }
 
 void testShop() {

@@ -210,6 +210,7 @@
     <ClInclude Include="Types\Item\AttackBoost.h" />
     <ClInclude Include="Types\Item\HealthPotion.h" />
     <ClInclude Include="Types\Item\Item.h" />
+    <ClInclude Include="Types\Monster\BossMonster.h" />
     <ClInclude Include="Types\Monster\Dragon.h" />
     <ClInclude Include="Types\Monster\Goblin.h" />
     <ClInclude Include="Types\Monster\Monster.h" />

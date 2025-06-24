@@ -12,6 +12,8 @@ public:
 	int GetGold();
 	int GetExperience();
 
+	
+
 protected:
 	int gold;
 	int experience;
@@ -24,6 +26,8 @@ public:
 	static Monster* CreateSlime(int characterLevel);
 	static Monster* CreateGoblin(int characterLevel);
 	static Monster* CreateTroll(int characterLevel);
+
+	static Monster* CreateBoss(Monster monster);
 
 		
 

@@ -37,5 +37,6 @@
     <ClInclude Include="Types\Character\Warrior.h" />
     <ClInclude Include="Types\Character\Mage.h" />
     <ClInclude Include="Types\Character\Tanker.h" />
+    <ClInclude Include="Types\Monster\BossMonster.h" />
   </ItemGroup>
 </Project>
