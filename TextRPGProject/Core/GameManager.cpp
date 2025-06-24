@@ -205,6 +205,7 @@ void GameManager::UseItemRandom(std::string itemName, bool canUse)
 			else {
 				ConsoleOutput::ShowUseItem(*character, *Items[i]);
 			}
+			delete Items[i];
 			character->GetItemInventory()->Remove(i);
 			break;
 		}
@@ -307,6 +308,9 @@ void GameManager::ShopBuyItem()
 		ConsoleOutput::ShowNotEnoughGold();
 	}
 	
+	for (Item* item : shopItems) {
+		delete item;
+	}
 }
 
 void GameManager::ShopSellItem()
