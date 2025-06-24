@@ -68,7 +68,7 @@ void itemTest() {
 
     //테스트 1, 2, 3
     std::cout << "아이템 이름과 가격, 각 증가량 확인" << std::endl;
-    std::cout << "HealthPotion 이름: " << hpPotion30.GetName() << ", 가격: " << hpPotion30.GetPrice() << ", 증가량: " << hpPotion30.GetStat() << std::endl;
+    std::cout << "HealthPotion 이름: " << hpPotion30.GetName() << ", 가격: " << hpPotion30.GetPrice() << ", 증가량: " << hpPotion30.GetHealthRestore() << std::endl;
     std::cout << "AttackBoost 이름: " << atkBoost10.GetName() << ", 가격: " << atkBoost10.GetPrice() << ", 증가량: " << atkBoost10.GetStat() << std::endl;
 
     

@@ -21,7 +21,6 @@ public:
 		return name;
 	}
 
-	virtual int GetStat() = 0;
 
 protected:
 	std::string name;
