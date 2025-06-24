@@ -4,6 +4,7 @@
 #include "../Actor.h"
 
 class Monster : public Actor {
+	// ±¸Çö
 public:
 	Monster(std::string name, int health, int attack, int gold, int experience) : Actor(name, health, attack), gold(gold), experience(experience) {}
 	void Attack(Actor& other) override;

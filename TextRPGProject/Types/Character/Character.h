@@ -62,7 +62,6 @@ protected:
 	Inventory<Equipment> equipmentInventory;
 	int gold;
 	int level;
-	
 	int maxHealth;
 	int experience;
 };
