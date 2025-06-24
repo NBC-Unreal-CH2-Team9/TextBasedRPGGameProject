@@ -111,12 +111,12 @@ void Character::EquipArmor(Armor* newArmor)
 
 //새로운 장비를 얻을 때 실행. 검인지 갑옷인지 판단 후 위 함수 실행
 void Character::Equip(Equipment* newEquip) {
-	std::string type = newEquip->GetType();
+	Equipment::EquipmentType type = newEquip->GetType();
 
-	if (type == "Sword") {
+	if (type == Equipment::EquipmentType::SWORD) {
 		EquipSword(dynamic_cast<Sword*>(newEquip));
 	}
-	else if (type == "Armor") {
+	else if (type == Equipment::EquipmentType::ARMOR) {
 		EquipArmor(dynamic_cast<Armor*>(newEquip));
 	}
 }

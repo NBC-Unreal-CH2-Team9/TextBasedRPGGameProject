@@ -13,8 +13,8 @@ public:
 		return healthincrease;
 	}
 
-	std::string GetType() {
-		return "Armor";
+	EquipmentType GetType() {
+		return EquipmentType::ARMOR;
 	}
 
 

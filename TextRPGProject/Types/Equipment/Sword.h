@@ -13,8 +13,8 @@ public:
 		return attackincrease;
 	}
 
-	std::string GetType() {
-		return "Sword";
+	EquipmentType GetType() {
+		return EquipmentType::SWORD;
 	}
 
 
