@@ -1,5 +1,5 @@
 #include "BossMonster.h"
-/*
+
 void BossMonster::Attack(Actor& other)
 {
 	std::cout << name << "이(가) " << other.GetName() << "을(를)";
@@ -14,7 +14,7 @@ void BossMonster::Attack(Actor& other)
 		other.TakeDamage(attack);
 	}
 
-}*/
+}
 
 void BossMonster::UseSkill(Actor& other, std::string name)
 {
