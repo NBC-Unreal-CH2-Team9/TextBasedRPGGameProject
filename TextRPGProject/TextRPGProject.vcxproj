@@ -177,6 +177,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Types\Equipment\EquipmentManager.cpp" />
     <ClCompile Include="Types\Equipment\Armor.cpp" />
     <ClCompile Include="Console\ConsoleInput.cpp" />
     <ClCompile Include="Console\ConsoleOutput.cpp" />
@@ -203,6 +204,7 @@
     <ClCompile Include="Types\Monster\Monster.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Types\Equipment\EquipmentManager.h" />
     <ClInclude Include="Types\Equipment\Armor.h" />
     <ClInclude Include="Core\GameManager.h" />
     <ClInclude Include="Types\Equipment\Sword.h" />

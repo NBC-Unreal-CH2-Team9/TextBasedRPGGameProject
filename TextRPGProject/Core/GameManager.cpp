@@ -14,6 +14,7 @@
 #include "../Types/Item/Item.h"
 #include "../Types/Item/AttackBoost.h"
 #include "../Types/Item/HealthPotion.h"
+#include "../Types/Equipment/EquipmentManager.h"
 #include "../Console/ConsoleInput.h"
 
 #include "../Types/Character/Warrior.h"
@@ -89,6 +90,7 @@ void GameManager::GenerateMonster(int characterLevel)
 
 	std::cout << "체력:" << monsters[monsterNum]->GetHealth() << ",공격력:" << monsters[monsterNum]->GetAttack() << std::endl;
 }
+
 
 BattleResult GameManager::Battle()
 {
@@ -192,6 +194,12 @@ Item* GameManager::MakeShopItem(ShopItems index) {
 		break;
 	}
 	return shopItem;
+}
+
+void GameManager::DropEquip()
+{
+	Equipment* dropEquip = EquipmentManager::GenerateRandomEquipment();
+	character->Equip(dropEquip);
 }
 
 void GameManager::ShopBuyItem()

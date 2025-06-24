@@ -5,9 +5,26 @@
 class Sword : public Equipment
 {
 public:
-	Sword(std::string swordN, int attackincrease) 
-		: Equipment(swordN, 10), attackincrease(attackincrease) {
-	};
+    Sword(std::string swordN)
+        : Equipment(swordN, 10)
+    {
+        if (swordN == "나무 검") {
+            this->attackincrease = 1;
+            price = 10;
+        }
+        else if (swordN == "청동검") {
+            this->attackincrease = 3;
+            price = 20;
+        }
+        else if (swordN == "철검") {
+            this->attackincrease = 5;
+            price = 30;
+        }
+        else {
+            this->attackincrease = 0;
+            price = 5;
+        }
+    }
 
 	int GetStat() {
 		return attackincrease;

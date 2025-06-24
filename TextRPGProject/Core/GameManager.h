@@ -29,6 +29,7 @@ public:
 		return character;
 	}
 
+	void DropEquip();
 private:
 	Monster* monsters[5];
 	int monsterNum;

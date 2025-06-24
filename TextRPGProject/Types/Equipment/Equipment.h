@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include <string>
 
+
+
 class Equipment {
 public:
 	Equipment(std::string name, int pirce) : name(name), price(pirce) {};
@@ -28,4 +30,5 @@ protected:
 	std::string name;
 	int price;
 };
+
 
