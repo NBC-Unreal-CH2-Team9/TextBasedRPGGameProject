@@ -63,14 +63,15 @@ Character* GameManager::CreateCharacter()
 	return character;
 }
 
-void GameManager::GenerateMonster(int characterLevel)
+Monster* GameManager::GenerateMonster(int characterLevel, bool isBossBattle = false)
 {
 	//다른 확률 몬스터 생성
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> monsterRandNum(0, 99);
-
 	int randNum = monsterRandNum(gen);
+
+	Monster* monster = nullptr;
 
 	//30,25,20,15,10
 	if (randNum < 30)
@@ -89,13 +90,12 @@ void GameManager::GenerateMonster(int characterLevel)
 	{
 		monster = MonsterManager::CreateTroll(characterLevel);
 	}
-	else if(randNum<100)
+	else // if(randNum<100)
 	{
 		monster = MonsterManager::CreateDragon(characterLevel);
 	}
 
-
-	if (characterLevel >= 10)
+	if (isBossBattle)
 	{
 		std::cout << "보스 몬스터 " << monster->GetName() << " 등장!";
 	}
@@ -105,6 +105,8 @@ void GameManager::GenerateMonster(int characterLevel)
 	}
 
 	std::cout << "체력:" << monster->GetHealth() << ",공격력:" << monster->GetAttack() << std::endl;
+
+	return monster;
 }
 
 BattleResult GameManager::Battle()
@@ -116,12 +118,11 @@ BattleResult GameManager::Battle()
 	bool isMyTurn = true;
 	bool isFighting = true;
 
-	GenerateMonster(character->GetLevel());
-
 	if (character->GetLevel() >= 10)
 	{
 		result.isBoss = true;
 	}
+	Monster* monster = GenerateMonster(character->GetLevel(), result.isBoss);
 
 	//전투중
 	while(isFighting)
@@ -327,6 +328,8 @@ void GameManager::ShopSellEquipment()
 	}
 	int new_gold = old_glod + gain;
 	character->SetGold(new_gold);
+
+	// TODO: 장비 인벤토리 비우는 코드가 구현이 되어있지 않음
 
 	// temp message
 	std::cout << "현재 골드: " << character->GetGold() << " (+" << gain << ")" << std::endl;

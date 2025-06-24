@@ -31,11 +31,10 @@ protected:
 	void ShopSellEquipment();
 	
 	Character* character;
-	Monster* monster;
 	int monsterNum;
 
 private:
-	void GenerateMonster(int characterLevel);
+	Monster* GenerateMonster(int characterLevel, bool isBossBattle);
 	void CheckHealthPotionAndUse();
 
 	// 상점에서 사용하는 정적 변수 모음
