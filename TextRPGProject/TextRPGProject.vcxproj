@@ -200,6 +200,7 @@
     <ClCompile Include="Types\Item\AttackBoost.cpp" />
     <ClCompile Include="Types\Item\HealthPotion.cpp" />
     <ClCompile Include="Types\Item\Item.cpp" />
+    <ClCompile Include="Types\Monster\BossMonster.cpp" />
     <ClCompile Include="Types\Monster\Dragon.cpp" />
     <ClCompile Include="Types\Monster\Monster.cpp" />
   </ItemGroup>
@@ -218,6 +219,7 @@
     <ClInclude Include="Types\Item\AttackBoost.h" />
     <ClInclude Include="Types\Item\HealthPotion.h" />
     <ClInclude Include="Types\Item\Item.h" />
+    <ClInclude Include="Types\Monster\BossMonster.h" />
     <ClInclude Include="Types\Monster\Dragon.h" />
     <ClInclude Include="Types\Monster\Goblin.h" />
     <ClInclude Include="Types\Monster\Monster.h" />
