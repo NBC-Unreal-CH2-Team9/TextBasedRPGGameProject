@@ -1,1 +1,49 @@
 #pragma once
+#include "../Types/Character/Character.h"
+#include "../Types/Actor.h"
+#include "../Types/Monster/Monster.h"
+
+//#include "../Types/Item/Item.h"
+//#include "../Types/Item/AttackBoost.h"
+//#include "../Types/Item/HealthPotion.h"
+
+
+class ConsoleOutput
+{
+public:
+	//캐릭터 생성
+	static void ShowCreateCharacterIntro();
+	static void ShowCreateCharacterName();
+	static void ShowSelectJob();
+
+	
+	// 캐릭터 상태 
+	static void ShowCharacterStatus(Character& Character);
+	static void ShowCharacterGold(Character& character);
+
+	
+	// 몬스터 상태
+	static void ShowMonsterStatus(Monster& monster);
+
+	
+	// 공격과 피해, 크리티컬
+	static void ShowAttackMessage(Actor& attacker, Actor& target);
+	static void ShowDamageMessage(Actor* who, int damage);
+	static void ShowCriticalHit();
+
+	
+	// 몬스터 사망
+	static void ShowDieMonster();
+
+	
+	// 승리 시 아이템, 경험치 획득
+
+	
+	// 상점
+	static void ShowAskEnterShop();
+	static void ShowEnterShop();
+	// 상점 판매 아이템 출력
+	// 구매, 판매, 나가기 UI 출력
+	static void ShowAskExitShop();
+	static void ShowExitShop();
+};
