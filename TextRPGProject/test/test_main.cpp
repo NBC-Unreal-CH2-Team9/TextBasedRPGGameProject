@@ -24,7 +24,7 @@ void testMonster()
 {
 	srand(time(nullptr));
 	int playerLevel = 1;
-	Monster* mon = MonsterManager::CreateOrc(playerLevel);
+	Monster* mon = MonsterManager::CreateGoblin(playerLevel);
 	Monster* mon2 = MonsterManager::CreateSlime(playerLevel);
 	Monster* bossMon = MonsterManager::CreateBoss(*mon);
 	std::cout << "name: " << mon->GetName() << " health: " << mon->GetHealth() << 
@@ -33,7 +33,19 @@ void testMonster()
 	std::cout << "name: " << bossMon->GetName() << " health: " << bossMon->GetHealth() << 
 		" attack: " << bossMon->GetAttack() << " gold: " << bossMon->GetGold() << 
 		" experience: " << bossMon->GetExperience() << std::endl;
-	mon->Attack(*mon2);
+
+
+	std::cout << "\n\nhealth: " << mon->GetHealth() << std::endl;
+	std::cout << "health: " << bossMon->GetHealth() << std::endl;
+	for (int i = 0; i < 10; i++)
+	{
+		
+		mon->Attack(*bossMon);
+		std::cout << bossMon->GetName() << "health: " << bossMon->GetHealth() << std::endl;
+		bossMon->Attack(*mon);
+		std::cout << mon->GetName() << "health: " << mon->GetHealth() << std::endl;
+	}
+	
 	
 	
 }
@@ -53,6 +65,6 @@ void testShop() {
 
 int main() {
 	//testBattle();
-	//testMonster();
+	testMonster();
 }
 

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include "../Actor.h"
 
 class Monster : public Actor {

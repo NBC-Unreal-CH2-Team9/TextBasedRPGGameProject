@@ -21,15 +21,15 @@ public:
 	std::string GetName() {	return name; }
 	int GetHealth() { return health; }
 	int GetAttack() { return attack; }
-	int GetCriticalAttack() { return attack * criticalAttack; }
-	
+
 
 protected:
 	std::string name;
 	int health;
 	int attack;
-	float criticalAttack = 1.5;
+	float criticalPower = 1.5;
 	int criticalProbablily = 20;
 
 	bool isCriticalHit();
+	int ApplyCriticalAttack();
 };

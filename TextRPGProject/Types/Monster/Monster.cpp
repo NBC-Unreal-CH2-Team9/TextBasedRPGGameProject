@@ -8,18 +8,14 @@
 
 void Monster::Attack(Actor& other)
 {
-	other.TakeDamage(attack);
+	int damage = ApplyCriticalAttack();
+
+	other.TakeDamage(damage);
 }
 
 void Monster::TakeDamage(int damage)
 {
 	health -= damage;
-	if (health > 0)
-	{
-	}
-	else
-	{
-	}
 }
 
 int Monster::GetGold()
