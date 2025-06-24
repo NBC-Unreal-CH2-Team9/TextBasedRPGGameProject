@@ -213,14 +213,14 @@ void ConsoleOutput::ShowBattleProgress(Character& character, Monster& monster)
 
 void ConsoleOutput::ShowUseHealthPotion(Character& character, HealthPotion& potion)
 {
-	std::cout << character.GetName() << "은(는) 체력이 절반이 되어, 포션을 사용하였습니다!\n";
+	std::cout << character.GetName() << "은/는 체력이 절반이 되어, 포션을 사용하였습니다!\n";
 	std::cout << "현재 체력: " << character.GetHealth() << "(+" << potion.GetHealthRestore() << ")\n";
 }
 
 void ConsoleOutput::ShowUseAttackBoost(Character& character, AttackBoost& boost)
 {
-	std::cout << character.GetName() << "공격력 강화 아이템을 사용했습니다!\n";
-	std::cout << "현재 체력: " << character.GetAttack() << "(+" << boost.GetAttackincrease() << ")\n";
+	std::cout << character.GetName() << "은/는 공격력 강화 아이템을 사용했습니다!\n";
+	std::cout << "현재 공격력: " << character.GetAttack() << "(+" << boost.GetAttackincrease() << ")\n";
 }
 
 void ConsoleOutput::ShowUseItem(Character& character, Item& item)
