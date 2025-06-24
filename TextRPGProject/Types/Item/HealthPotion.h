@@ -9,7 +9,7 @@ public:
 	
 	void Use(Character& user);
 
-	int GetStat() {
+	int GetHealthRestore() {
 		return healthRestore;
 	}
 

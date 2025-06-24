@@ -25,7 +25,9 @@ public:
 		return character;
 	}
 
+
 	void DropEquip();
+
 protected:
 	void ShopBuyItem();
 	void ShopSellItem();
@@ -35,11 +37,7 @@ protected:
 
 private:
 	Monster* GenerateMonster(int characterLevel, bool isBossBattle);
-	void CheckHealthPotionAndUse();
-
-	// 상점에서 사용하는 정적 변수 모음
-	static const std::string shopMessage;
-	static const std::vector<std::string> shopPrompt;
+	void UseItemRandom(std::string itemName,bool canUse);
 
 	// 상점에서 사용하는 정적 함수 모음
 	// 상점에서 판매하는 아이템 생성
