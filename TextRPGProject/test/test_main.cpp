@@ -11,16 +11,20 @@
 void testBattle() {
 	GameManager gameManager;
 	gameManager.CreateCharacter();
-	gameManager.Battle();
-}
 
+	std::string s = "Continue Battle ? ";
+	while(SelectYesOrNo(s))
+	{
+		gameManager.Battle();
+	}
+	
+}
 
 void testMonster()
 {
 	srand(time(nullptr));
 	int playerLevel = 1;
 	Monster* mon = MonsterManager::CreateOrc(playerLevel);
-
 
 	//std::cout << mon->GetCriticalAttack() << std::endl;
 	std::cout << mon->GetAttack() << std::endl;
@@ -41,10 +45,9 @@ void testShop() {
 	character->GetEquipmentInventory()->Insert(new Equipment("임시장비2", 30));
 
 	gameManager.Shop();
-
 }
 
 int main() {
-  testMonster();
+	testBattle();
 }
 
