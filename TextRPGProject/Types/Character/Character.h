@@ -67,6 +67,13 @@ public:
 
 	void GetRandomItem(Item* item);
 
+	Sword* GetSword() {
+		return equipSword;
+	}
+	Armor* GetArmor() {
+		return equipArmor;
+	}
+
 protected:
 	Inventory<Item> itemInventory;
 	Inventory<Equipment> equipmentInventory;

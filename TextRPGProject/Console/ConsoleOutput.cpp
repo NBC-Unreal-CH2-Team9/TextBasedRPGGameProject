@@ -148,6 +148,12 @@ void ConsoleOutput::ShowCharacterGoldAndItem(Character& character) {
 		}
 	}
 	std::cout << "\n";
+	if (character.GetSword() != nullptr) {
+		std::cout << "무기: " << character.GetSword()->GetName() << "\n";
+	}
+	if (character.GetArmor() != nullptr) {
+		std::cout << "방어구: " << character.GetArmor()->GetName() << "\n";
+	}
 	std::cout << "----------------------\n";
 }
 
