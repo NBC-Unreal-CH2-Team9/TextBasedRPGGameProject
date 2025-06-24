@@ -26,6 +26,13 @@ void testMonster()
 	int playerLevel = 1;
 	Monster* mon = MonsterManager::CreateOrc(playerLevel);
 	Monster* bossMon = MonsterManager::CreateBoss(*mon);
+	std::cout << "name: " << mon->GetName() << " health: " << mon->GetHealth() << 
+		" attack: " << mon->GetAttack() << " gold: " << mon->GetGold() << 
+		" experience: " << mon->GetExperience() << std::endl;
+	std::cout << "name: " << bossMon->GetName() << " health: " << bossMon->GetHealth() << 
+		" attack: " << bossMon->GetAttack() << " gold: " << bossMon->GetGold() << 
+		" experience: " << bossMon->GetExperience() << std::endl;
+	
 
 	
 }
