@@ -11,9 +11,14 @@
 void testBattle() {
 	GameManager gameManager;
 	gameManager.CreateCharacter();
-	gameManager.Battle();
-}
 
+	std::string s = "Continue Battle ? ";
+	while(SelectYesOrNo(s))
+	{
+		gameManager.Battle();
+	}
+	
+}
 
 void testMonster()
 {
@@ -22,19 +27,6 @@ void testMonster()
 	Monster* mon = MonsterManager::CreateOrc(playerLevel);
 	Monster* bossMon = MonsterManager::CreateBoss(*mon);
 
-	std::cout << mon->GetName() << std::endl;
-	std::cout << mon->GetHealth() << std::endl;
-	std::cout << mon->GetAttack() << std::endl;
-	std::cout << mon->GetGold() << std::endl;
-	std::cout << mon->GetExperience() << std::endl;
-
-	std::cout << "보스" << std::endl;
-	std::cout << bossMon->GetName() << std::endl;
-	std::cout << bossMon->GetHealth() << std::endl;
-	std::cout << bossMon->GetAttack() << std::endl;
-	std::cout << bossMon->GetGold() << std::endl;
-	std::cout << bossMon->GetExperience() << std::endl;
-	
 	
 }
 
@@ -49,10 +41,10 @@ void testShop() {
 	character->GetEquipmentInventory()->Insert(new Equipment("임시장비2", 30));
 
 	gameManager.Shop();
-
 }
 
 int main() {
-  testMonster();
+	//testBattle();
+	testMonster();
 }
 
