@@ -72,7 +72,6 @@ void Character::EquipArmor(Armor* newArmor)
 		if (health > maxHealth) {
 			health = maxHealth;
 		}
-			
 	}
 	else
 	{
