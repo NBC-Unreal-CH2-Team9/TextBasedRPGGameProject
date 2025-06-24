@@ -1,21 +1,26 @@
 #pragma once
 
 #include "../Actor.h"
-#include "../Item/Item.h"
 #include "Inventory.h"
+
+class Item;
+class Equipment;
 
 class Character : public Actor {
 public:
-	Character(std::string name, int health, int attack) : Actor(name, health, attack) {		
-		level = 1;
+	Character(int level, std::string name, int health, int attack, int exp) : Actor(name, health, attack) {
+		this->level = level;
 		maxHealth = health;
-		experience = 0;
+		experience = exp;
 	}
 	virtual void Attack(Actor& other);
 	virtual void TakeDamage(int damage);
 
-	Inventory* GetInventory() {
-		return &inventory;
+	Inventory<Item>* GetItemInventory() {
+		return &itemInventory;
+	}
+	Inventory<Equipment>* GetEquipmentInventory() {
+		return &equipmentInventory;
 	}
 
 	int GetGold() {
@@ -42,14 +47,19 @@ public:
 
 	void LevelUp();
 
-	void OnLevelChangedHealth();
+	virtual void OnLevelChangedHealth();
 
-	void OnLevelChangedAttack();
+	virtual void OnLevelChangedAttack();
 
 	void AddExperience(int exp);	
 
+	void UseRandomItem(); // 전투중 랜덤하게 사용
+
+	void GetRandomItem(Item* item); // 전투승리시 아이템 획득
+
 protected:
-	Inventory inventory;
+	Inventory<Item> itemInventory;
+	Inventory<Equipment> equipmentInventory;
 	int gold;
 	int level;
 	int maxHealth;
