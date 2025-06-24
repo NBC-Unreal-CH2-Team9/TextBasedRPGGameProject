@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Item.h"
 
@@ -8,6 +8,10 @@ public:
 		: Item("Health Potion", 10), healthRestore(healthRestore) {};
 	
 	void Use(Character& user);
+
+	int GetStat() {
+		return healthRestore;
+	}
 
 protected:
 	int healthRestore;
