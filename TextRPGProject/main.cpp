@@ -16,7 +16,6 @@ int main() {
 	while (true) {
 
 		BattleResult result = gameMamager.Battle();
-
 		if (result.isWin) {
 			if (result.isBoss) {
 				// 보스전투 승리 처리
@@ -27,10 +26,7 @@ int main() {
 			// 패배 처리
 			break;
 		}
-
-		// 도전 기능 [2]
-		// 상점 시스템
-		// 전투 이후, 방문 여부를 선택
+		ConsoleOutput::ShowCharacterStatus(*(gameMamager.GetCharacter()));
 		gameMamager.Shop();
 	}
 

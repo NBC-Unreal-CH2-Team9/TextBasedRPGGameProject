@@ -6,9 +6,6 @@
 class Monster : public Actor {
 public:
 	Monster(std::string name, int health, int attack, int gold, int experience) : Actor(name, health, attack), gold(gold), experience(experience) {}
-	void Attack(Actor& other) override;
-	void TakeDamage(int damage) override;
-
 	int GetGold();
 	int GetExperience();
 

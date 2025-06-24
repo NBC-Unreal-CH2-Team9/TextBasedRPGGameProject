@@ -1,6 +1,8 @@
 ﻿#include <vector>
 #include <string>
 #include <iostream>
+#include <windows.h>
+#include <random>
 
 #include "GameManager.h"
 
@@ -9,11 +11,11 @@
 #include "../Types/Monster/Orc.h"
 #include "../Types/Monster/Slime.h"
 #include "../Types/Monster/Troll.h"
-#include <random>
 
 #include "../Types/Item/Item.h"
 #include "../Types/Item/AttackBoost.h"
 #include "../Types/Item/HealthPotion.h"
+
 #include "../Console/ConsoleInput.h"
 #include "../Console/ConsoleOutput.h"
 
@@ -40,6 +42,7 @@ Character* GameManager::CreateCharacter()
 	std::string name;
 	std::cin >> name;
 
+	ConsoleOutput::ShowSelectJob();
 	std::vector<std::string> jobOptions = { "검사", "마법사", "탱커" };
 	int jobChoice = ConsoleInput::SelectNumber(jobOptions);
 
@@ -117,10 +120,9 @@ BattleResult GameManager::Battle()
 	{
 		if (isMyTurn)
 		{
+			ConsoleOutput::ShowCharacterTurn();
 			CheckHealthPotionAndUse();
-
 			character->Attack(*monster);
-
 			if (monster->GetHealth() <= 0)
 			{
 				isFighting = false;
@@ -128,15 +130,17 @@ BattleResult GameManager::Battle()
 		}
 		else
 		{
+			ConsoleOutput::ShowMonsterTurn();
 			monster->Attack(*character);
-
 			if (character->GetHealth() <= 0)
 			{
 				isFighting = false;
 			}
 		}
-
 		isMyTurn = !isMyTurn;
+		
+		// 약간의 딜레이
+		Sleep(1000);
 	}
 
 	if (character->GetHealth() > 0)
@@ -145,9 +149,13 @@ BattleResult GameManager::Battle()
 		ConsoleOutput::ShowBattleWin();
 		character->SetGold(character->GetGold() + monster->GetGold());
 		character->AddExperience(monster->GetExperience());
-
 		ConsoleOutput::ShowGetGold(*character, *monster);
 		ConsoleOutput::ShowGetExp(*character, *monster);
+		
+	}
+	else
+	{
+		ConsoleOutput::ShowBattleDefeat();
 	}
 
 	delete monster;

@@ -13,8 +13,6 @@ public:
 		maxHealth = health;
 		experience = exp;
 	}
-	virtual void Attack(Actor& other);
-	virtual void TakeDamage(int damage);
 
 	Inventory<Item>* GetItemInventory() {
 		return &itemInventory;
@@ -45,7 +43,9 @@ public:
 		level = value;
 	}
 
-	void DisplayStatus();
+	int GetExperience() {
+		return experience;
+	}
 
 	void LevelUp();
 
@@ -53,9 +53,7 @@ public:
 
 	virtual void OnLevelChangedAttack();
 
-	void AddExperience(int exp);	
-
-	void UseRandomItem(); // 전투중 랜덤하게 사용
+	void AddExperience(int exp);
 
 	void GetRandomItem(Item* item); // 전투승리시 아이템 획득
 

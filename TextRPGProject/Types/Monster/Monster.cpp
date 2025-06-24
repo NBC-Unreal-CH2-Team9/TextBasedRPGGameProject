@@ -5,22 +5,6 @@
 #include "Slime.h"
 #include "Troll.h"
 
-void Monster::Attack(Actor& other)
-{
-	other.TakeDamage(attack);
-}
-
-void Monster::TakeDamage(int damage)
-{
-	health -= damage;
-	if (health > 0)
-	{
-	}
-	else
-	{
-	}
-}
-
 int Monster::GetGold()
 {
 	return gold;

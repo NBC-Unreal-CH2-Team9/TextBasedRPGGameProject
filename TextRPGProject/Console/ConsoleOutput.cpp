@@ -48,12 +48,17 @@ void ConsoleOutput::ShowCreateCharacterName()
 	std::cout << "캐릭터 이름을 입력하세요 : ";
 }
 
+void ConsoleOutput::ShowSelectJob()
+{
+	std::cout << "캐릭터 직업을 선택하세요.\n";
+}
+
 void ConsoleOutput::ShowCharacterStatus(Character& character) {
 	std::cout << "--캐릭터 현재 상태--\n";
 	std::cout << "이름: " << character.GetName() << "\n";
 	//std::cout << "직업: " << character.GetJob() << "\n";
 	std::cout << "레벨: " << character.GetLevel() << "\n";
-	//std::cout << "경험치: " << character.Getexperience << "/ 100 " << "\n";
+	std::cout << "경험치: " << character.GetExperience() << "/ 100 " << "\n";
 	std::cout << "체력: " << character.GetHealth() << " / " << character.GetMaxHealth() << "\n";
 	std::cout << "공격력: " << character.GetAttack() << "\n";
 	std::cout << "----------------\n";
@@ -84,13 +89,23 @@ void ConsoleOutput::ShowAttackMessage(Actor& attacker, Actor& target) {
 	std::cout << attacker.GetName() << "이(가) " << target.GetName() << "을(를) 공격합니다!\n";
 }
 
-void ConsoleOutput::ShowDamageMessage(Actor* who, int damage) {
-	std::cout << who->GetName() << "이(가) " << damage << "의 데미지를 입습니다.\n";
+void ConsoleOutput::ShowDamageMessage(Actor& who, int damage) {
+	std::cout << who.GetName() << "이(가) " << damage << "의 데미지를 입습니다.\n";
 }
 
 void ConsoleOutput::ShowCriticalHit()
 {
 	std::cout << "크리티컬!!\n";
+}
+
+void ConsoleOutput::ShowCharacterTurn()
+{
+	std::cout << "<캐릭터의 턴>\n";
+}
+
+void ConsoleOutput::ShowMonsterTurn()
+{
+	std::cout << "<몬스터의 턴>\n";
 }
 
 void ConsoleOutput::ShowUseHealthPotion(Character& character, HealthPotion& potion)
@@ -105,12 +120,12 @@ void ConsoleOutput::ShowDieMonster() {
 
 void ConsoleOutput::ShowBattleWin()
 {
-	std::cout << "전투에서 승리했습니다!\n";
+	std::cout << "<전투 결과>\n전투에서 승리했습니다!\n";
 }
 
 void ConsoleOutput::ShowBattleDefeat()
 {
-	std::cout << "전투에서 패배했습니다...\n";
+	std::cout << "<전투 결과>\n전투에서 패배했습니다...\n";
 }
 
 void ConsoleOutput::ShowGetGold(Character& character, Monster& monster)

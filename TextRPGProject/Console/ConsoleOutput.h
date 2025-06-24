@@ -30,10 +30,12 @@ public:
 	static void ShowMonsterStatus(Monster& monster, bool isBoos);
 
 	
-	// 공격과 피해, 크리티컬
+	// 공격과 피해, 크리티컬, 전투
 	static void ShowAttackMessage(Actor& attacker, Actor& target);
-	static void ShowDamageMessage(Actor* who, int damage);
+	static void ShowDamageMessage(Actor& who, int damage);
 	static void ShowCriticalHit();
+	static void ShowCharacterTurn();
+	static void ShowMonsterTurn();
 
 	// 아이템 사용
 	static void ShowUseHealthPotion(Character& character, HealthPotion& potion);
