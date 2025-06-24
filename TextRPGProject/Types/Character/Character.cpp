@@ -53,10 +53,10 @@ void Character::AddExperience(int exp)
 void Character::UseRandomItem()
 {
 	// TODO: 랜덤하게 아이템 사용
-	std::vector<Item*> items = inventory.GetItems();
+	std::vector<Item*> items = itemInventory.GetItems();
 }
 
 void Character::GetRandomItem(Item* item)
 {
-	inventory.Insert(item);	
+	itemInventory.Insert(item);
 }

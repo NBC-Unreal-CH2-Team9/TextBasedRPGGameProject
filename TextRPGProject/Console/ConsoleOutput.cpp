@@ -1,4 +1,4 @@
-#include "ConsoleOutput.h"
+﻿#include "ConsoleOutput.h"
 #include <iostream>
 
 
@@ -20,6 +20,7 @@ void ShowSelectJob()
 	std::cout << "캐릭터의 직업을 입력하세요.\n";
 	std::cout << "1 : 전사\n";
 	std::cout << "2 : 마법사" << std::endl;
+	//std::cout << "2 : 마법사" << std::endl;
 }
 // 캐릭터 생성 확인을 출력하는 함수 구현 예정 
 
