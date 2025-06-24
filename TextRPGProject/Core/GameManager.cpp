@@ -178,19 +178,16 @@ const std::vector<std::string> GameManager::shopPrompt = {
 
 void GameManager::UseItemRandom(std::string itemName, bool canUse)
 {
-	//체력 절반 이하 포션 사용
 	if (!canUse)	return;
 
 	if (!character->GetItemInventory()->Count())	return;
 
 	std::vector<Item*> Items = character->GetItemInventory()->GetItems();
 
-	//회복 포션 유무 확인
 	for (int i = 0; i < Items.size(); i++)
 	{
 		if (Items[i] && Items[i]->GetName() == itemName)
 		{
-			//std::cout << character->GetName() << "은(는) 체력이 절반 이하이며 포션을 사용하였습니다!\n";
 			Items[i]->Use(*character);
 			character->GetItemInventory()->Remove(i);
 

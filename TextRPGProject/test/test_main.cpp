@@ -13,7 +13,7 @@
 #include "../Types/Character/Character.h"
 
 
-void testBattle() {
+void BattleTest() {
 	GameManager gameManager;
 	gameManager.CreateCharacter();
 
@@ -21,6 +21,7 @@ void testBattle() {
 	while(SelectYesOrNo(s))
 	{
 		gameManager.Battle();
+        gameManager.Shop();
 	}
 	
 }
@@ -50,52 +51,6 @@ void testShop() {
 	//character->GetEquipmentInventory()->Insert(new Equipment("임시장비2", 30));
 
 	gameManager.Shop();
-}
-
-
-void itemTest() {
-    GameManager gameManager;
-    gameManager.CreateCharacter();
-    Character* character = gameManager.GetCharacter();
-    // 아이템 생성
-    HealthPotion hpPotion30(30);   // 체력 30 회복
-    AttackBoost atkBoost10(10);     // 공격력 10 증가
-    HealthPotion hpPotion50(50);   // 체력 50 회복
-    AttackBoost atkBoost15(15);     // 공격력 10 증가
-
-    //테스트 1, 2, 3
-    std::cout << "아이템 이름과 가격, 각 증가량 확인" << std::endl;
-    std::cout << "HealthPotion 이름: " << hpPotion30.GetName() << ", 가격: " << hpPotion30.GetPrice() << ", 증가량: " << hpPotion30.GetStat() << std::endl;
-    std::cout << "AttackBoost 이름: " << atkBoost10.GetName() << ", 가격: " << atkBoost10.GetPrice() << ", 증가량: " << atkBoost10.GetStat() << std::endl;
-
-    
-    std::cout << "\n[초기 상태]" << std::endl;
-    std::cout << character->GetName() << " 상태 | 체력: " << character->GetHealth() << ", 공격력: " << character->GetAttack() << std::endl;
-
-    // 테스트 4
-    std::cout << "\n체력 물약 사용" << std::endl;
-    hpPotion30.Use(*character);
-    std::cout << character->GetName() << " 상태 | 체력: " << character->GetHealth() << ", 공격력: " << character->GetAttack() << std::endl;
-
-    // 테스트 5
-    std::cout << "\n공격력 증가 아이템 사용" << std::endl;
-    atkBoost10.Use(*character);
-    std::cout << character->GetName() << " 상태 | 체력: " << character->GetHealth() << ", 공격력: " << character->GetAttack() << std::endl;
-
-    // 테스트 6
-    std::cout << "\n 회복량 다른 체력 물약 사용" << std::endl;
-    hpPotion50.Use(*character);
-    std::cout << character->GetName() << " 상태 | 체력: " << character->GetHealth() << ", 공격력: " << character->GetAttack() << std::endl;
-    hpPotion30.Use(*character);
-    std::cout << character->GetName() << " 상태 | 체력: " << character->GetHealth() << ", 공격력: " << character->GetAttack() << std::endl;
-
-
-    // 테스트 7
-    std::cout << "\n공격력 증가량 다른 아이템 사용" << std::endl;
-    atkBoost15.Use(*character);
-    std::cout << character->GetName() << " 상태 | 체력: " << character->GetHealth() << ", 공격력: " << character->GetAttack() << std::endl;
-    atkBoost10.Use(*character);
-    std::cout << character->GetName() << " 상태 | 체력: " << character->GetHealth() << ", 공격력: " << character->GetAttack() << std::endl;
 }
 
 void equipTest() {
@@ -187,6 +142,7 @@ static void dropTest() {
 
 
 int main() {
-    dropTest();
+    //dropTest();
+    BattleTest();
 }
 
