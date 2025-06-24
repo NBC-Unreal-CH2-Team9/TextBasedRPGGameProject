@@ -27,6 +27,8 @@ public:
 
 
 	void DropEquip();
+	void DropItem();
+	void RandomGetItem();
 
 protected:
 	void ShopBuyItem();
