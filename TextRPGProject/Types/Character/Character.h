@@ -60,10 +60,6 @@ public:
 	void EquipArmor(Armor* newArmor);
 	void Equip(Equipment* newEquip);
 
-	void UseRandomItem(); // ������ �����ϰ� ���
-
-	void GetRandomItem(Item* item); // �����¸��� ������ ȹ��
-
 protected:
 	Inventory<Item> itemInventory;
 	Inventory<Equipment> equipmentInventory;

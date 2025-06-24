@@ -65,8 +65,8 @@ void itemTest() {
 
     //테스트 1, 2, 3
     std::cout << "아이템 이름과 가격, 각 증가량 확인" << std::endl;
-    std::cout << "HealthPotion 이름: " << hpPotion30.GetName() << ", 가격: " << hpPotion30.GetPrice() << ", 증가량: " << hpPotion30.GetStat() << std::endl;
-    std::cout << "AttackBoost 이름: " << atkBoost10.GetName() << ", 가격: " << atkBoost10.GetPrice() << ", 증가량: " << atkBoost10.GetStat() << std::endl;
+    //std::cout << "HealthPotion 이름: " << hpPotion30.GetName() << ", 가격: " << hpPotion30.GetPrice() << ", 증가량: " << hpPotion30.GetStat() << std::endl;
+    //std::cout << "AttackBoost 이름: " << atkBoost10.GetName() << ", 가격: " << atkBoost10.GetPrice() << ", 증가량: " << atkBoost10.GetStat() << std::endl;
 
     
     std::cout << "\n[초기 상태]" << std::endl;
@@ -185,8 +185,32 @@ static void dropTest() {
     }
 }
 
+void characterItemUseTest() {
+    GameManager gameManager;
+    gameManager.CreateCharacter();
+    Character* character = gameManager.GetCharacter();
+
+    // 아이템 생성
+    HealthPotion hpPotion30(30);   // 체력 30 회복
+    AttackBoost atkBoost10(10);     // 공격력 10 증가
+    HealthPotion hpPotion50(50);   // 체력 50 회복
+    AttackBoost atkBoost15(15);     // 공격력 10 증가
+
+	character->GetItemInventory()->Insert(&hpPotion30);
+    character->GetItemInventory()->Insert(&atkBoost15);
+    character->GetItemInventory()->Insert(&hpPotion50);
+    character->GetItemInventory()->Insert(&atkBoost10);
+
+	std::cout << "\n[전투 초기 상태]" << std::endl;
+    character->DisplayStatus();
+
+    gameManager.Battle();
+
+    std::cout << "\n[전투 종료 상태]" << std::endl;
+    character->DisplayStatus();
+}
 
 int main() {
-    dropTest();
+    characterItemUseTest();
 }
 

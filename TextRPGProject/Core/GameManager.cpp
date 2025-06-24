@@ -16,6 +16,7 @@
 #include "../Types/Item/HealthPotion.h"
 #include "../Types/Equipment/EquipmentManager.h"
 #include "../Console/ConsoleInput.h"
+#include "../Console/ConsoleOutput.h"
 
 #include "../Types/Character/Warrior.h"
 #include "../Types/Character/Mage.h"
@@ -35,27 +36,34 @@ GameManager::~GameManager()
 
 Character* GameManager::CreateCharacter()
 {
-	std::cout << "캐릭터 이름을 입력하세요: ";
+	//ConsoleOutput::ShowCreateCharacterName();
 	std::string name;
 	std::cin >> name;
 
-	std::cout << "캐릭터 직업을 선택하세요(1번, 2번, 3번) " << std::endl;
-	std::cout << "1. 검사" << std::endl;
-	std::cout << "2. 마법사" << std::endl;
-	std::cout << "3. 탱커" << std::endl;
+	//ConsoleOutput::ShowSelectJob();	
 	int jobChoice;
 	std::cin >> jobChoice;
 
+	int level = 1;
+	int health = 0;
+	int attack = 0;
+	int exp = 0;
 	switch (jobChoice)
 	{
 	case 1:
-		character = new Warrior(1, name, 200, 30, 0);
+		health = 200;
+		attack = 30;
+		character = new Warrior(level, name, health, attack, exp);
 		break;
 	case 2:
-		character = new Mage(1, name, 100, 45, 0);
+		health = 100;
+		attack = 45;
+		character = new Mage(level, name, health, attack, exp);
 		break;
 	case 3:
-		character = new Tanker(1, name, 350, 15, 0);
+		health = 350;
+		attack = 15;
+		character = new Tanker(level, name, health, attack, exp);
 		break;
 	default:
 		break;
@@ -131,7 +139,7 @@ BattleResult GameManager::Battle()
 	{
 		if (isMyTurn)
 		{
-			CheckHealthPotionAndUse();
+			UseRandomItem();			
 
 			character->Attack(*monster);
 
@@ -172,17 +180,38 @@ const std::vector<std::string> GameManager::shopPrompt = {
 	"물건 사기", "물건 팔기", "상점 나가기"
 };
 
-void GameManager::CheckHealthPotionAndUse()
+void GameManager::UseRandomItem() 
 {
-	//체력 절반 이하 포션 사용
-	if (character->GetHealth() > character->GetMaxHealth()/2)	return;
+	// 체력 포션 or 공격력 증가 포션 사용
+	bool isHealPotionUse = CheckHealthPotionAndUse();
+	if(!isHealPotionUse) CheckAttackBoostAndUse();
+}
 
-	//회복 포션 유무 확인
-	if (!character->GetItemInventory()->Count())	return;
-	
+void GameManager::CheckAttackBoostAndUse() 
+{
 	std::vector<Item*> Items = character->GetItemInventory()->GetItems();
 
-	int healthPotionIndex = -1;
+	for (int i = 0; i < Items.size(); i++)
+	{
+		if (Items[i] && Items[i]->GetName() == "Attack Boost")
+		{
+			std::cout << character->GetName() << "은(는) 공격력 증가 포션 사용!\n";			
+			Items[i]->Use(*character);
+			character->GetItemInventory()->Remove(i);
+			break;
+		}
+	}
+}
+
+bool GameManager::CheckHealthPotionAndUse()
+{
+	//체력 절반 이하 포션 사용
+	if (character->GetHealth() > character->GetMaxHealth()/2) return false;
+
+	//회복 포션 유무 확인
+	if (!character->GetItemInventory()->Count()) return false;
+	
+	std::vector<Item*> Items = character->GetItemInventory()->GetItems();	
 
 	for (int i = 0; i < Items.size(); i++)
 	{
@@ -191,10 +220,10 @@ void GameManager::CheckHealthPotionAndUse()
 			std::cout << character->GetName() << "은(는) 체력이 50이하이며 포션을 사용하였습니다!\n";
 			Items[i]->Use(*character);
 			character->GetItemInventory()->Remove(i);
-
-			break;
+			return true;
 		}
 	}
+	return false;
 }
 
 void GameManager::Shop()

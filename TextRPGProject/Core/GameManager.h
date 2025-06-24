@@ -35,7 +35,9 @@ protected:
 
 private:
 	Monster* GenerateMonster(int characterLevel, bool isBossBattle);
-	void CheckHealthPotionAndUse();
+	bool CheckHealthPotionAndUse();
+	void CheckAttackBoostAndUse();
+	void UseRandomItem();
 
 	// 상점에서 사용하는 정적 변수 모음
 	static const std::string shopMessage;

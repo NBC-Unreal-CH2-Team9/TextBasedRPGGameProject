@@ -1,6 +1,8 @@
 ﻿#include "Character.h"
 #include "Inventory.h"
 #include <iostream>
+#include "../Item/HealthPotion.h"
+#include "../Item/AttackBoost.h"
 
 void Character::Attack(Actor& other)
 {	
@@ -9,11 +11,7 @@ void Character::Attack(Actor& other)
 
 void Character::TakeDamage(int damage)
 {
-	health -= damage;	
-	// hp가 10이하로 떨어지는 경우 랜덤하게 아이템 사용
-	if (health > 0 && health <= 10) {
-		UseRandomItem();
-	}
+	health -= damage;
 }
 
 void Character::DisplayStatus()
@@ -48,17 +46,9 @@ void Character::AddExperience(int exp)
 		LevelUp();
 		experience = 0; // 레벨업 후 경험치를 초기화
 	}
-}
-
-void Character::UseRandomItem()
-{
-	// TODO: 랜덤하게 아이템 사용
-	std::vector<Item*> items = itemInventory.GetItems();
-}
-
-void Character::GetRandomItem(Item* item)
-{
-	itemInventory.Insert(item);
+	else {
+		experience = newExp; // 경험치 업데이트
+	}
 }
 
 void Character::EquipSword(Sword* newSword)
