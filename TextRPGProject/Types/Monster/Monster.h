@@ -5,7 +5,7 @@
 
 class Monster : public Actor {
 public:
-	Monster(std::string name, int health, int attack, int gold, int experience) : Actor(name, health, attack), gold(gold), experience(experience) {}
+	Monster(std::string name, int health, int attack, int gold, int experience) : Actor(name, health, attack), gold(gold), experience(experience), maxHealth(health) {}
 	void Attack(Actor& other) override;
 	void TakeDamage(int damage) override;
 
@@ -17,6 +17,7 @@ public:
 protected:
 	int gold;
 	int experience;
+	int maxHealth;
 };
 
 class MonsterManager {
