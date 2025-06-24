@@ -172,8 +172,8 @@ const std::vector<std::string> GameManager::shopPrompt = {
 
 void GameManager::CheckHealthPotionAndUse()
 {
-	//체력 50 이하 포션 사용
-	if (character->GetHealth() > 50)	return;
+	//체력 절반 이하 포션 사용
+	if (character->GetHealth() > character->GetMaxHealth()/2)	return;
 
 	//회복 포션 유무 확인
 	if (!character->GetItemInventory()->Count())	return;

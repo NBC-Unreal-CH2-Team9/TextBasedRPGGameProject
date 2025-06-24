@@ -32,6 +32,8 @@ public:
 	int GetHealth() { return health; }
 	void SetHealth(int newHealth) { health = newHealth; }
 
+	int GetMaxHealth() { return maxHealth; }
+
 	int GetAttack() { return attack; }
 	void SetAttack(int newAttack) { attack = newAttack; }
 
