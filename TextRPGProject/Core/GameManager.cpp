@@ -151,12 +151,15 @@ void GameManager::CheckHealthPotionAndUse()
 	//회복 포션 유무 확인
 	if (character->GetInventory()->Count())
 	{
+		//const 참조로?
 		std::vector<Item*> Items = character->GetInventory()->GetItems();
 
 		int healthPotionIndex = -1;
 
 		for (int i = 0; i < Items.size(); i++)
 		{
+			//health potion으로 판별할까?
+			//if(Items[i] && Items[i]==new HealthPotion())
 			if (Items[i] && Items[i]->GetName() == "Health Potion")
 			{
 				std::string option = "포션 사용 여부";
