@@ -93,17 +93,7 @@ Monster* GameManager::GenerateMonster(int characterLevel, bool isBossBattle = fa
 		monster = MonsterManager::CreateDragon(characterLevel);
 	}
 
-	if (isBossBattle)
-	{
-		std::cout << "보스 몬스터 " << monster->GetName() << " 등장!";
-	}
-	else
-	{
-		std::cout << "몬스터 " << monster->GetName() << " 등장!";
-	}
-
-	std::cout << "체력:" << monster->GetHealth() << ",공격력:" << monster->GetAttack() << std::endl;
-
+	ConsoleOutput::ShowMonsterStatus(*monster, isBossBattle);
 	return monster;
 }
 
@@ -152,10 +142,12 @@ BattleResult GameManager::Battle()
 	if (character->GetHealth() > 0)
 	{
 		result.isWin = true;
-		std::cout << "전투에서 승리했습니다!";
+		ConsoleOutput::ShowBattleWin();
 		character->SetGold(character->GetGold() + monster->GetGold());
 		character->AddExperience(monster->GetExperience());
-		std::cout << monster->GetExperience() << " EXP와 " << monster->GetGold() << "를 획득했습니다.\n";	
+
+		ConsoleOutput::ShowGetGold(*character, *monster);
+		ConsoleOutput::ShowGetExp(*character, *monster);
 	}
 
 	delete monster;
@@ -166,10 +158,14 @@ BattleResult GameManager::Battle()
 void GameManager::CheckHealthPotionAndUse()
 {
 	//체력 절반 이하 포션 사용
-	if (character->GetHealth() > character->GetMaxHealth()/2)	return;
+	if (character->GetHealth() > character->GetMaxHealth() / 2) {
+		return;
+	}
 
 	//회복 포션 유무 확인
-	if (!character->GetItemInventory()->Count())	return;
+	if (!character->GetItemInventory()->Count()) {
+		return;
+	}
 	
 	std::vector<Item*> Items = character->GetItemInventory()->GetItems();
 

@@ -54,7 +54,7 @@ void ConsoleOutput::ShowCharacterStatus(Character& character) {
 	//std::cout << "직업: " << character.GetJob() << "\n";
 	std::cout << "레벨: " << character.GetLevel() << "\n";
 	//std::cout << "경험치: " << character.Getexperience << "/ 100 " << "\n";
-	std::cout << "체력: " << character.GetHealth() << " /  " << character.GetHealth() << "\n";
+	std::cout << "체력: " << character.GetHealth() << " / " << character.GetMaxHealth() << "\n";
 	std::cout << "공격력: " << character.GetAttack() << "\n";
 	std::cout << "----------------\n";
 }
@@ -65,11 +65,16 @@ void ConsoleOutput::ShowCharacterGold(Character& character) {
 	std::cout << "----------------\n";
 }
 
-void ConsoleOutput::ShowMonsterStatus(Monster& monster) {
-	std::cout << "--몬스터 현재 상태--\n";
-	std::cout << "이름 : " << monster.GetName() << "\n";
-	//std::cout << "레벨: " << monster.GetLevel() << "\n";
+void ConsoleOutput::ShowMonsterStatus(Monster& monster, bool isBoss) {
+	if (isBoss) {
+		std::cout << "--보스 몬스터 등장!!!--\n";
+	}
+	else {
+		std::cout << "--몬스터 등장--\n";
+	}
+	std::cout << "이름: " << monster.GetName() << "\n";
 	std::cout << "체력: " << monster.GetHealth() << "\n";
+	std::cout << "공격력: " << monster.GetAttack() << "\n";
 	std::cout << "----------------\n";
 }
 
@@ -90,6 +95,27 @@ void ConsoleOutput::ShowCriticalHit()
 
 void ConsoleOutput::ShowDieMonster() {
 	std::cout << "몬스터를 처치했습니다! 전투에서 승리하셨습니다.\n";
+}
+
+void ConsoleOutput::ShowBattleWin()
+{
+	std::cout << "전투에서 승리했습니다!\n";
+}
+
+void ConsoleOutput::ShowBattleDefeat()
+{
+	std::cout << "전투에서 패배했습니다...\n";
+}
+
+void ConsoleOutput::ShowGetGold(Character& character, Monster& monster)
+{
+	std::cout << monster.GetName() << "으로부터 골드를 획득했습니다.\n";
+	ShowCharacterGoldChange(character, monster.GetGold());
+}
+
+void ConsoleOutput::ShowGetExp(Character& character, Monster& monster)
+{
+	std::cout << monster.GetName() << "으로부터 경험치 " << monster.GetExperience() <<"를 획득했습니다.\n";
 }
 
 
@@ -123,7 +149,7 @@ void ConsoleOutput::ShowNotEnoughGold()
 
 void ConsoleOutput::ShowCharacterGoldChange(Character& character, int change)
 {
-	std::cout << "남은 골드: " << character.GetGold();
+	std::cout << "소지 골드: " << character.GetGold();
 	if (change > 0) {
 		std::cout << "(+" << change << ")\n";
 	}

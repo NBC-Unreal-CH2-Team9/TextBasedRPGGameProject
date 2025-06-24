@@ -27,7 +27,7 @@ public:
 
 	
 	// 몬스터 상태
-	static void ShowMonsterStatus(Monster& monster);
+	static void ShowMonsterStatus(Monster& monster, bool isBoos);
 
 	
 	// 공격과 피해, 크리티컬
@@ -41,6 +41,10 @@ public:
 
 	
 	// 승리 시 아이템, 경험치 획득
+	static void ShowBattleWin();
+	static void ShowBattleDefeat();
+	static void ShowGetGold(Character& character, Monster& monster);
+	static void ShowGetExp(Character& character, Monster& monster);
 
 	
 	// 상점
