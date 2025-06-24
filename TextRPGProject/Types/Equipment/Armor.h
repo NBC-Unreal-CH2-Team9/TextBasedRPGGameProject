@@ -25,6 +25,10 @@ public:
         }
 	};
 
+    Armor(const Armor& other)
+        : Equipment(other.name, other.price), healthincrease(other.healthincrease) {
+    }
+
 	int GetStat() {
 		return healthincrease;
 	}
