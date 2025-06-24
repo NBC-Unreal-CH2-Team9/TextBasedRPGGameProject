@@ -16,8 +16,6 @@ public:
 		maxHealth = health;
 		experience = exp;
 	}
-	virtual void Attack(Actor& other);
-	virtual void TakeDamage(int damage);
 
 	Inventory<Item>* GetItemInventory() {
 		return &itemInventory;
@@ -47,7 +45,9 @@ public:
 		level = value;
 	}
 
-	void DisplayStatus();
+	int GetExperience() {
+		return experience;
+	}
 
 	void LevelUp();
 
@@ -55,14 +55,13 @@ public:
 
 	virtual void OnLevelChangedAttack();
 
-	void AddExperience(int exp);
+	bool AddExperienceAndCheckLevelUp(int exp);
+
 	void EquipSword(Sword* newSword);
 	void EquipArmor(Armor* newArmor);
 	void Equip(Equipment* newEquip);
 
-	void UseRandomItem(); // ������ �����ϰ� ���
-
-	void GetRandomItem(Item* item); // �����¸��� ������ ȹ��
+	void GetRandomItem(Item* item);
 
 protected:
 	Inventory<Item> itemInventory;

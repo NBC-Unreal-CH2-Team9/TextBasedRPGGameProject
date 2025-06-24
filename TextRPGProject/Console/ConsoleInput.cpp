@@ -1,6 +1,6 @@
 ﻿#include "ConsoleInput.h"
 
-int SelectNumber(std::vector<std::string> options)
+int ConsoleInput::SelectNumber(std::vector<std::string> options, bool isVertical)
 {
 	std::string select;
 	while (true) {
@@ -8,7 +8,12 @@ int SelectNumber(std::vector<std::string> options)
 		for (int n = 0; n < options.size(); n++) {
 			std::cout << (n + 1) << ": " << options[n];
 			if (n != options.size() - 1) {
-				std::cout << ", ";
+				if (isVertical) {
+					std::cout << "\n";
+				}
+				else {
+					std::cout << ", ";
+				}
 			}
 		}
 		std::cout << std::endl;
@@ -27,7 +32,12 @@ int SelectNumber(std::vector<std::string> options)
 	return -1;
 }
 
-bool SelectYesOrNo(std::string question)
+int ConsoleInput::SelectNumberVertical(std::vector<std::string> options)
+{
+	return SelectNumber(options, true);
+}
+
+bool ConsoleInput::SelectYesOrNo(std::string question)
 {
 	char input;
 	while (true) {

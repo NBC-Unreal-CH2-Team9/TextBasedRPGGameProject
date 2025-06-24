@@ -17,10 +17,14 @@
     <ClCompile Include="Types\Character\Warrior.cpp" />
     <ClCompile Include="Types\Character\Mage.cpp" />
     <ClCompile Include="Types\Character\Tanker.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Types\Equipment\Equipment.cpp" />
     <ClCompile Include="Types\Equipment\Sword.cpp" />
     <ClCompile Include="Types\Equipment\Armor.cpp" />
     <ClCompile Include="Types\Equipment\EquipmentManager.cpp" />
+=======
+    <ClCompile Include="Types\Monster\BossMonster.cpp" />
+>>>>>>> bossMon
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\GameManager.h" />
@@ -41,9 +45,13 @@
     <ClInclude Include="Types\Character\Warrior.h" />
     <ClInclude Include="Types\Character\Mage.h" />
     <ClInclude Include="Types\Character\Tanker.h" />
+<<<<<<< HEAD
     <ClInclude Include="Types\Equipment\Equipment.h" />
     <ClInclude Include="Types\Equipment\Sword.h" />
     <ClInclude Include="Types\Equipment\Armor.h" />
     <ClInclude Include="Types\Equipment\EquipmentManager.h" />
+=======
+    <ClInclude Include="Types\Monster\BossMonster.h" />
+>>>>>>> bossMon
   </ItemGroup>
 </Project>
