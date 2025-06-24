@@ -46,6 +46,9 @@ public:
 	static void ShowUseAttackBoost(Character& character, AttackBoost& boost);
 	static void ShowUseItem(Character& character, Item& item);
 
+	// 아이템 드롭
+	static void ShowDropEquip(Equipment& equip);
+	static void ShowDropItem(Item& item);
 	
 	// 몬스터 사망
 	static void ShowDieMonster();

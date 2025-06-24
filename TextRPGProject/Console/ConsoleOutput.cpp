@@ -234,6 +234,16 @@ void ConsoleOutput::ShowUseItem(Character& character, Item& item)
 	std::cout << character.GetName() << "이/가" << item.GetName() << "을 사용하였습니다.\n";
 }
 
+void ConsoleOutput::ShowDropEquip(Equipment& equip)
+{
+	std::cout << "장비 " << equip.GetName() << "을/를 얻었습니다!\n";
+}
+
+void ConsoleOutput::ShowDropItem(Item& item)
+{
+	std::cout << "아이템 " << item.GetName() << "을/를 얻었습니다!\n";
+}
+
 void ConsoleOutput::ShowDieMonster() {
 	std::cout << "몬스터를 처치했습니다! 전투에서 승리하셨습니다.\n";
 }
