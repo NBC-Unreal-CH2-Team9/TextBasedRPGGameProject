@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <vector>
 
 #include "Core/GameManager.h"
 #include "Console/ConsoleInput.h"
@@ -7,6 +9,23 @@
 int main() {
 	
 	ConsoleOutput::ShowIntro();
+
+	// 게임 메뉴
+	while (true) {
+		std::vector<std::string> menu = { "GAME START", "CREDITS", "EXIT" };
+		int menuSelect = ConsoleInput::SelectNumberVertical(menu);
+		
+		if (menuSelect == 0) {
+			break;
+		}
+		else if (menuSelect == 1) {
+			ConsoleOutput::ShowCredit();
+			continue;
+		}
+		else if (menuSelect == 2) {
+			return 0;
+		}
+	}
 
 	GameManager gameMamager;
 	gameMamager.CreateCharacter();

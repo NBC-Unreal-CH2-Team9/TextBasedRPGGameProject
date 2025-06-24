@@ -3,17 +3,62 @@
 #include <windows.h>
 
 
+void ConsoleOutput::SetColor(Color backgroundColor, Color textColor)
+{
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	if (handle != nullptr) {
+		SetConsoleTextAttribute(handle, (backgroundColor << 4) + textColor);
+	}
+}
+
+void ConsoleOutput::SetTextColor(Color textColor)
+{
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	if (handle != nullptr) {
+		SetConsoleTextAttribute(handle, (Color::BLACK << 4) + textColor);
+	}
+}
+
+
+void ConsoleOutput::ResetColor()
+{
+	SetColor(Color::BLACK, Color::DRAK_WHITE);
+}
+
+void ConsoleOutput::PrintBox(std::string text, int length, Color boxColor)
+{
+	std::string border(length, '=');
+	SetTextColor(boxColor);
+	std::cout << border << "\n";
+	std::cout << "| ";
+	ResetColor();
+	std::cout << text;
+	SetTextColor(boxColor);
+	std::cout << " |" << "\n";
+	std::cout << border << "\n";
+	ResetColor();
+}
+
+void ConsoleOutput::PrintProgressBar(int value, int max)
+{
+}
+
 void ConsoleOutput::ShowIntro()
 {
 	// usVng https://patorjk.com/software/taag/#p=dVsplay&h=0&v=0&f=BVg%20Money-ne&t=TextRPG
+	SetColor(Color::BLACK, Color::SKY);
 	std::cout << " /$$$$$$$$                       /$$     /$$$$$$$  /$$$$$$$   /$$$$$$\n"; Sleep(100);
 	std::cout << "|__  $$__/                      | $$    | $$__  $$| $$__  $$ /$$__  $$\n"; Sleep(100);
+	SetColor(Color::BLACK, Color::WHITE);
 	std::cout << "   | $$     /$$$$$$  /$$   /$$ /$$$$$$  | $$  V $$| $$  V $$| $$  V__/\n"; Sleep(100);
 	std::cout << "   | $$    /$$__  $$|  $$ /$$/|_  $$_/  | $$$$$$$/| $$$$$$$/| $$ /$$$$\n"; Sleep(100);
 	std::cout << "   | $$   | $$$$$$$$ V  $$$$/   | $$    | $$__  $$| $$____/ | $$|_  $$\n"; Sleep(100);
+	SetColor(Color::BLACK, Color::GRAY);
 	std::cout << "   | $$   | $$_____/  >$$  $$   | $$ /$$| $$  V $$| $$      | $$  V $$\n"; Sleep(100);
 	std::cout << "   | $$   |  $$$$$$$ /$$/V  $$  |  $$$$/| $$  | $$| $$      |  $$$$$$/\n"; Sleep(100);
 	std::cout << "   |__/    V_______/|__/  V__/   V___/  |__/  |__/|__/       V______/\n\n"; Sleep(100);
+
+	ResetColor();
 	
 	std::cout << "                                                   내일배움캠프 CH2 Team 9\n";
 }
@@ -27,20 +72,29 @@ void ConsoleOutput::ShowCredit()
 	std::cout << " V______  / |__|    V___  >V____ | |__| |__|\n"; Sleep(100);
 	std::cout << "		V/              V/      V/\n\n\n"; Sleep(100);
 
-	std::cout << "           - 만든 사람들 -           \n\n"; Sleep(500);
-	std::cout << "     팀장 및 캐릭터 개발: 오동률     \n"; Sleep(800);
-	std::cout << " 코드 리뷰 및 상점 로직 개발: 최대근 \n"; Sleep(800);
-	std::cout << "      몬스터 클래스 개발: 김효영     \n"; Sleep(800);
-	std::cout << "      아이템 클래스 개발: 서정원     \n"; Sleep(800);
-	std::cout << "        전투 로직 개발: 송우진       \n"; Sleep(800);
-	std::cout << "        출력 관련 개발: 이서영       \n"; Sleep(800);
+	std::cout << "               - 만든 사람들 -               \n\n"; Sleep(500);
+	std::cout << "         팀장 및 캐릭터 개발: 오동률         \n"; Sleep(800);
+	std::cout << "   코드 리뷰, 출력, 상점 로직 개발: 최대근   \n"; Sleep(800);
+	std::cout << "          몬스터 클래스 개발: 김효영         \n"; Sleep(800);
+	std::cout << "          아이템 클래스 개발: 서정원         \n"; Sleep(800);
+	std::cout << "            전투 로직 개발: 송우진           \n"; Sleep(800);
+	std::cout << "            출력 관련 개발: 이서영           \n"; Sleep(800);
+	std::cout << "\n";
 }
 
 void ConsoleOutput::ShowCreateCharacterIntro()
 {
-	std::cout << "--------------------\n";
-	std::cout << "캐릭터를 생성합니다.\n";
-	std::cout << "--------------------\n";
+	PrintBox("캐릭터 생성 단계", 20, Color::SKY);
+}
+
+void ConsoleOutput::ShowBattleStart()
+{
+	PrintBox("      전투      ", 20, Color::DRAK_RED);
+}
+
+void ConsoleOutput::ShowShopStart()
+{
+	PrintBox("      상점      ", 20, Color::DRAK_ORANGE);
 }
 
 void ConsoleOutput::ShowCreateCharacterName()
@@ -89,8 +143,6 @@ void ConsoleOutput::ShowMonsterStatus(Monster& monster, bool isBoss) {
 	std::cout << "----------------\n";
 }
 
-
-
 void ConsoleOutput::ShowAttackMessage(Actor& attacker, Actor& target) {
 	std::cout << attacker.GetName() << "이(가) " << target.GetName() << "을(를) 공격합니다!\n";
 }
@@ -101,17 +153,35 @@ void ConsoleOutput::ShowDamageMessage(Actor& who, int damage) {
 
 void ConsoleOutput::ShowCriticalHit()
 {
+	SetTextColor(Color::BLUE);
 	std::cout << "크리티컬!!\n";
+	ResetColor();
 }
 
 void ConsoleOutput::ShowCharacterTurn()
 {
+	SetTextColor(Color::GREEN);
 	std::cout << "<캐릭터의 턴>\n";
+	ResetColor();
 }
 
 void ConsoleOutput::ShowMonsterTurn()
 {
+	SetTextColor(Color::RED);
 	std::cout << "<몬스터의 턴>\n";
+	ResetColor();
+}
+
+void ConsoleOutput::ShowBattleProgress(Character& character, Monster& monster)
+{
+
+	SetTextColor(Color::GREEN);
+	std::cout << character.GetName() << "\n";
+	ResetColor();
+
+	SetTextColor(Color::RED);
+	std::cout << monster.GetName() << "\n";
+	ResetColor();
 }
 
 void ConsoleOutput::ShowUseHealthPotion(Character& character, HealthPotion& potion)
@@ -126,7 +196,10 @@ void ConsoleOutput::ShowDieMonster() {
 
 void ConsoleOutput::ShowBattleWin()
 {
-	std::cout << "<전투 결과>\n전투에서 승리했습니다!\n";
+	SetTextColor(Color::SKY);
+	std::cout << "<전투 결과>\n";
+	ResetColor();
+	std::cout << "전투에서 승리했습니다!\n";
 }
 
 void ConsoleOutput::ShowBattleDefeat()
@@ -176,7 +249,11 @@ void ConsoleOutput::ShowNotEnoughGold()
 
 void ConsoleOutput::ShowCharacterGoldChange(Character& character, int change)
 {
-	std::cout << "소지 골드: " << character.GetGold();
+	std::cout << "소지 골드: ";
+	SetTextColor(Color::YELLOW);
+	std::cout << character.GetGold();
+	ResetColor();
+	
 	if (change > 0) {
 		std::cout << "(+" << change << ")\n";
 	}

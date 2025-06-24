@@ -32,11 +32,14 @@ public:
 
 	
 	// 공격과 피해, 크리티컬, 전투
+	static void ShowBattleStart();
 	static void ShowAttackMessage(Actor& attacker, Actor& target);
 	static void ShowDamageMessage(Actor& who, int damage);
 	static void ShowCriticalHit();
 	static void ShowCharacterTurn();
 	static void ShowMonsterTurn();
+
+	static void ShowBattleProgress(Character& character, Monster& monster);
 
 	// 아이템 사용
 	static void ShowUseHealthPotion(Character& character, HealthPotion& potion);
@@ -57,6 +60,7 @@ public:
 	static const std::string shopQuestion;
 	static const std::vector<std::string> shopOptions;
 
+	static void ShowShopStart();
 	static void ShowEnterShop();
 	static void ShowSkipShop();
 	static void ShowExitShop();
@@ -70,4 +74,32 @@ public:
 	static void ShowBuyItem(Item& item, Character& character);
 	static void ShowSellItem(Item& item, Character& character, float ratio);
 	static void ShowSellEquipment(Equipment& equipment, Character& character, float ratio);
+
+private:
+	enum Color {
+		BLACK,
+		DRAK_BLUE,
+		DRAK_GREEN,
+		DRAK_SKY,
+		DRAK_RED,
+		DRAK_PINK,
+		DRAK_ORANGE,
+		DRAK_WHITE,
+		GRAY,
+		BLUE,
+		GREEN,
+		SKY,
+		RED,
+		PINK,
+		YELLOW,
+		WHITE
+	};
+
+	static void SetColor(Color backgroundColor, Color textColor); 
+	static void SetTextColor(Color textColor);
+	static void ResetColor();
+
+
+	static void PrintBox(std::string text, int length, Color boxColor);
+	static void PrintProgressBar(int value, int max);
 };

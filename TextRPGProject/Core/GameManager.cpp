@@ -104,6 +104,8 @@ Monster* GameManager::GenerateMonster(int characterLevel, bool isBossBattle = fa
 
 BattleResult GameManager::Battle()
 {
+	ConsoleOutput::ShowBattleStart();
+
 	BattleResult result;
 	result.isWin = false;
 	result.isBoss = false;
@@ -141,6 +143,7 @@ BattleResult GameManager::Battle()
 		}
 		isMyTurn = !isMyTurn;
 		
+		ConsoleOutput::ShowBattleProgress(*character, *monster);
 		// 약간의 딜레이
 		Sleep(1000);
 	}
@@ -200,6 +203,7 @@ void GameManager::CheckHealthPotionAndUse()
 
 void GameManager::Shop()
 {
+	ConsoleOutput::ShowShopStart();
 	if (ConsoleInput::SelectYesOrNo(ConsoleOutput::shopQuestion)) {
 
 		ConsoleOutput::ShowEnterShop();
