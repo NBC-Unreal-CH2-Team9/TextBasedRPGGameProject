@@ -4,8 +4,8 @@
 #include "../Types/Monster/Monster.h"
 
 #include "../Types/Item/Item.h"
-//#include "../Types/Item/AttackBoost.h"
-//#include "../Types/Item/HealthPotion.h"
+#include "../Types/Item/AttackBoost.h"
+#include "../Types/Item/HealthPotion.h"
 
 
 class ConsoleOutput
@@ -34,6 +34,9 @@ public:
 	static void ShowAttackMessage(Actor& attacker, Actor& target);
 	static void ShowDamageMessage(Actor* who, int damage);
 	static void ShowCriticalHit();
+
+	// 아이템 사용
+	static void ShowUseHealthPotion(Character& character, HealthPotion& potion);
 
 	
 	// 몬스터 사망

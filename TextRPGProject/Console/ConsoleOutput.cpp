@@ -93,6 +93,12 @@ void ConsoleOutput::ShowCriticalHit()
 	std::cout << "크리티컬!!\n";
 }
 
+void ConsoleOutput::ShowUseHealthPotion(Character& character, HealthPotion& potion)
+{
+	std::cout << character.GetName() << "은(는) 체력이 절반이 되어, 포션을 사용하였습니다!\n";
+	std::cout << "현재 체력: " << character.GetHealth() << "(+" << potion.GetHealthRestore() << ")\n";
+}
+
 void ConsoleOutput::ShowDieMonster() {
 	std::cout << "몬스터를 처치했습니다! 전투에서 승리하셨습니다.\n";
 }

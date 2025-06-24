@@ -175,10 +175,10 @@ void GameManager::CheckHealthPotionAndUse()
 	{
 		if (Items[i] && Items[i]->GetName() == "Health Potion")
 		{
-			std::cout << character->GetName() << "은(는) 체력이 50이하이며 포션을 사용하였습니다!\n";
 			Items[i]->Use(*character);
+			HealthPotion* potion = dynamic_cast<HealthPotion*>(Items[i]);
+			ConsoleOutput::ShowUseHealthPotion(*character, *potion);
 			character->GetItemInventory()->Remove(i);
-
 			break;
 		}
 	}
