@@ -149,13 +149,8 @@ void ConsoleOutput::ShowLevelUp(Character& character)
 	std::cout << "체력과 공격력이 상승했으며, 체력이 전부 회복되었다!\n";
 }
 
-void ConsoleOutput::ShowMonsterStatus(Monster& monster, bool isBoss) {
-	if (isBoss) {
-		std::cout << "--보스 몬스터 등장!!!--\n";
-	}
-	else {
-		std::cout << "--몬스터 등장--\n";
-	}
+void ConsoleOutput::ShowMonsterStatus(Monster& monster) {
+	std::cout << "--몬스터 등장--\n";
 	std::cout << "이름: " << monster.GetName() << "\n";
 	std::cout << "체력: " << monster.GetHealth() << "\n";
 	std::cout << "공격력: " << monster.GetAttack() << "\n";

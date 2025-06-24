@@ -66,7 +66,7 @@ Character* GameManager::CreateCharacter()
 	return character;
 }
 
-Monster* GameManager::GenerateMonster(int characterLevel, bool isBossBattle = false)
+Monster* GameManager::GenerateMonster(int characterLevel, BattleResult::BattleType battleType)
 {
 	//다른 확률 몬스터 생성
 	std::random_device rd;
@@ -76,33 +76,38 @@ Monster* GameManager::GenerateMonster(int characterLevel, bool isBossBattle = fa
 
 	Monster* monster = nullptr;
 
-	//40,30,20,10
-	if (randNum < 40)
-	{
-		monster = MonsterManager::CreateGoblin(characterLevel);
+	if (battleType == BattleResult::FINAL_BOSS) {
+		monster = MonsterManager::CreateDragon(characterLevel);
 	}
-	else if (randNum < 70)
-	{
-		monster = MonsterManager::CreateOrc(characterLevel);
-	}
-	else if (randNum < 90)
-	{
-		monster = MonsterManager::CreateSlime(characterLevel);
-	}
-	else
-	{
-		monster = MonsterManager::CreateTroll(characterLevel);
+	else {
+		//40,30,20,10
+		if (randNum < 40)
+		{
+			monster = MonsterManager::CreateGoblin(characterLevel);
+		}
+		else if (randNum < 70)
+		{
+			monster = MonsterManager::CreateOrc(characterLevel);
+		}
+		else if (randNum < 90)
+		{
+			monster = MonsterManager::CreateSlime(characterLevel);
+		}
+		else
+		{
+			monster = MonsterManager::CreateTroll(characterLevel);
+		}
+
+		if (battleType == BattleResult::MID_BOSS)
+		{
+			Monster* bossMonster;
+			bossMonster = MonsterManager::CreateBoss(*monster);
+			delete monster;
+			monster = bossMonster;
+		}
 	}
 
-	if (isBossBattle)
-	{
-		Monster* bossMonster;
-		bossMonster = MonsterManager::CreateBoss(*monster);
-		delete monster;
-		monster = bossMonster;
-	}
-
-	ConsoleOutput::ShowMonsterStatus(*monster, isBossBattle);
+	ConsoleOutput::ShowMonsterStatus(*monster);
 	return monster;
 }
 
@@ -113,16 +118,21 @@ BattleResult GameManager::Battle()
 
 	BattleResult result;
 	result.isWin = false;
-	result.isBoss = false;
 
 	bool isMyTurn = true;
 	bool isFighting = true;
 
-	if (character->GetLevel() >= 10)
+	if (character->GetLevel() >= 15)
 	{
-		result.isBoss = true;
+		result.battleType = BattleResult::FINAL_BOSS;
 	}
-	Monster* monster = GenerateMonster(character->GetLevel(), result.isBoss);
+	else if (character->GetLevel() >= 10) {
+		result.battleType = BattleResult::MID_BOSS;
+	}
+	else {
+		result.battleType = BattleResult::NORMAL;
+	}
+	Monster* monster = GenerateMonster(character->GetLevel(), result.battleType);
 
 	//전투중
 	while(isFighting)

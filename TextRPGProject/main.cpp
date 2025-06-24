@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include <vector>
 
@@ -10,7 +10,7 @@ int main() {
 	
 	ConsoleOutput::ShowIntro();
 
-	// °ÔÀÓ ¸Ş´º
+	// ê²Œì„ ë©”ë‰´
 	while (true) {
 		std::vector<std::string> menu = { "GAME START", "CREDITS", "EXIT" };
 		int menuSelect = ConsoleInput::SelectNumberVertical(menu);
@@ -31,24 +31,24 @@ int main() {
 	gameMamager.CreateCharacter();
 	ConsoleOutput::ShowCharacterStatus(*(gameMamager.GetCharacter()));
 
-	// Ä³¸¯ÅÍ°¡ Á×À» ¶§ ±îÁö °ÔÀÓ ÇÃ·Î¿ì ¹İº¹
+	// ìºë¦­í„°ê°€ ì£½ì„ ë•Œ ê¹Œì§€ ê²Œì„ í”Œë¡œìš° ë°˜ë³µ
 	while (true) {
 
 		BattleResult result = gameMamager.Battle();
 		if (result.isWin) {
-			if (result.isBoss) {
-				// º¸½ºÀüÅõ ½Â¸® Ã³¸®
+			if (result.battleType == BattleResult::FINAL_BOSS) {
+				// ë³´ìŠ¤ì „íˆ¬ ìŠ¹ë¦¬ ì²˜ë¦¬
 				break;
 			}
 		}
 		else {
-			// ÆĞ¹è Ã³¸®
+			// íŒ¨ë°° ì²˜ë¦¬
 			break;
 		}
 		ConsoleOutput::ShowCharacterStatus(*(gameMamager.GetCharacter()));
 		gameMamager.Shop();
 	}
 
-	// °ÔÀÓ Á¾·á Ã³¸®
+	// ê²Œì„ ì¢…ë£Œ ì²˜ë¦¬
 	return 0;
 }
