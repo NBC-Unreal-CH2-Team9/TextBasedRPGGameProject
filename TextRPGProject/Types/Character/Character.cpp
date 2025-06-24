@@ -69,6 +69,7 @@ void Character::EquipSword(Sword* newSword)
 			int newAttack = attack - equipSword->GetStat();
 			SetAttack(newAttack);
 			equipmentInventory.Insert(new Sword(*equipSword));  // 복사본 삽입
+			delete equipSword;  // 기존 장비 메모리 해제
 		}
 
 		equipSword = newSword;
@@ -78,6 +79,7 @@ void Character::EquipSword(Sword* newSword)
 	//새로 얻은 검을 장비 인벤토리에 넣기.
 	else {
 		equipmentInventory.Insert(new Sword(*newSword));  // 복사본 삽입
+		delete newSword;// 새로운 장비 메모리 해제
 	}
 
 }
@@ -88,7 +90,10 @@ void Character::EquipArmor(Armor* newArmor)
 	{
 		// 기존 갑옷이 있다면 인벤토리에 추가
 		if (equipArmor != nullptr) {
+			int newMaxHealth = maxHealth - equipArmor->GetStat();
+			SetHealth(newMaxHealth);
 			equipmentInventory.Insert(new Armor(*equipArmor));  // 복사본 삽입
+			delete equipArmor;  // 기존 장비 메모리 해제
 		}
 
 		equipArmor = newArmor;
@@ -105,6 +110,7 @@ void Character::EquipArmor(Armor* newArmor)
 	{
 		// 새 갑옷 인벤토리에 복사본 삽입
 		equipmentInventory.Insert(new Armor(*newArmor));
+		delete newArmor;// 새로운 장비 메모리 해제
 	}
 }
 
