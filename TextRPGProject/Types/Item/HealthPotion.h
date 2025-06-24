@@ -9,6 +9,10 @@ public:
 	
 	void Use(Character& user);
 
+	int GetHealthRestore() {
+		return healthRestore;
+	}
+
 protected:
 	int healthRestore;
 };

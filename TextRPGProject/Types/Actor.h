@@ -16,13 +16,13 @@
 class Actor {
 public:
 	Actor(std::string name, int health, int attack) : name(name), health(health), attack(attack) {}
-	virtual void Attack(Actor& other) = 0;
-	virtual void TakeDamage(int damage) = 0;
+	virtual void Attack(Actor& other);
+	virtual void TakeDamage(int damage);
 	std::string GetName() {	return name; }
 	int GetHealth() { return health; }
 	int GetAttack() { return attack; }
 	int GetCriticalAttack() { return attack * criticalAttack; }
-	
+	bool isCriticalHit();
 
 protected:
 	std::string name;
@@ -30,6 +30,4 @@ protected:
 	int attack;
 	float criticalAttack = 1.5;
 	int criticalProbablily = 20;
-
-	bool isCriticalHit();
 };
