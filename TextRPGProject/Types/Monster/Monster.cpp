@@ -1,4 +1,4 @@
-#include "Monster.h"
+ï»¿#include "Monster.h"
 #include "Dragon.h"
 #include "Orc.h"
 #include "Goblin.h"
@@ -7,7 +7,6 @@
 
 void Monster::Attack(Actor& other)
 {
-	std::cout << name << "ÀÌ(°¡) " << other.GetName() << "À»(¸¦) °ø°ÝÇÕ´Ï´Ù! ";
 	other.TakeDamage(attack);
 }
 
@@ -16,11 +15,9 @@ void Monster::TakeDamage(int damage)
 	health -= damage;
 	if (health > 0)
 	{
-		std::cout << name << "Ã¼·Â: " << health << std::endl;
 	}
 	else
 	{
-		std::cout << name << "Ã³Ä¡!" << std::endl;
 	}
 }
 
@@ -40,7 +37,7 @@ Monster* MonsterManager::CreateDragon(int characterLevel)
 	int attack = CalculateAttack(characterLevel, 15, 20) * 1.5;
 	int gold = CalculateGold(100, 150);
 	int experience = 100;
-	Monster* dragon = new Dragon("µå·¡°ï", health, attack, gold, experience);
+	Monster* dragon = new Dragon("ë“œëž˜ê³¤", health, attack, gold, experience);
 	return dragon;
 }
 
@@ -50,7 +47,7 @@ Monster* MonsterManager::CreateOrc(int characterLevel)
 	int attack = CalculateAttack(characterLevel, 2, 7);
 	int gold = CalculateGold(20, 30);
 	int experience = 75;
-	Monster* orc = new Orc("¿ÀÅ©", health, attack, gold, experience);
+	Monster* orc = new Orc("ì˜¤í¬", health, attack, gold, experience);
 	return orc;
 }
 
@@ -60,7 +57,7 @@ Monster* MonsterManager::CreateSlime(int characterLevel)
 	int attack = CalculateAttack(characterLevel, 1, 5);
 	int gold = CalculateGold(5, 15);
 	int experience = 25;
-	Monster* slime = new Slime("½½¶óÀÓ", health, attack, gold, experience);
+	Monster* slime = new Slime("ìŠ¬ë¼ìž„", health, attack, gold, experience);
 	return slime;
 }
 
@@ -70,7 +67,7 @@ Monster* MonsterManager::CreateGoblin(int characterLevel)
 	int attack = CalculateAttack(characterLevel, 5, 10);
 	int gold = CalculateGold(10, 20);
 	int experience = 50;
-	Monster* goblin = new Goblin("°íºí¸°", health, attack, gold, experience);
+	Monster* goblin = new Goblin("ê³ ë¸”ë¦°", health, attack, gold, experience);
 	return goblin;
 }
 
@@ -80,7 +77,7 @@ Monster* MonsterManager::CreateTroll(int characterLevel)
 	int attack = CalculateAttack(characterLevel, 6, 12);
 	int gold = CalculateGold(15, 25);
 	int experience = 60;
-	Monster* troll = new Troll("Æ®·Ñ", health, attack, gold, experience);
+	Monster* troll = new Troll("íŠ¸ë¡¤", health, attack, gold, experience);
 	return troll;
 }
 
