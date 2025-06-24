@@ -44,11 +44,15 @@ void ConsoleOutput::PrintProgressBar(int value, int max)
 {
 	int length = 10;
 	int fill = value * length / max;
+	if (value > 0 && fill == 0) {
+		fill = 1;
+	}
 	int empty = length - fill;
 	if (value < 0) {
 		fill = 0;
 		empty = 10;
 	}
+	
 	
 	ResetColor();
 	std::cout << "[";
