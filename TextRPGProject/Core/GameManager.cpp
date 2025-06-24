@@ -75,24 +75,27 @@ Monster* GameManager::GenerateMonster(int characterLevel, bool isBossBattle = fa
 
 	Monster* monster = nullptr;
 
-	//30,25,20,15,10
-	if (randNum < 30)
+	if (!isBossBattle)
 	{
-		monster = MonsterManager::CreateGoblin(characterLevel);
+		//40,30,20,10
+		if (randNum < 40)
+		{
+			monster = MonsterManager::CreateGoblin(characterLevel);
+		}
+		else if (randNum < 70)
+		{
+			monster = MonsterManager::CreateOrc(characterLevel);
+		}
+		else if (randNum < 90)
+		{
+			monster = MonsterManager::CreateSlime(characterLevel);
+		}
+		else
+		{
+			monster = MonsterManager::CreateTroll(characterLevel);
+		}
 	}
-	else if (randNum < 55)
-	{
-		monster = MonsterManager::CreateOrc(characterLevel);
-	}
-	else if (randNum < 75)
-	{
-		monster = MonsterManager::CreateSlime(characterLevel);
-	}
-	else if(randNum<90)
-	{
-		monster = MonsterManager::CreateTroll(characterLevel);
-	}
-	else // if(randNum<100)
+	else
 	{
 		monster = MonsterManager::CreateDragon(characterLevel);
 	}
@@ -124,8 +127,8 @@ BattleResult GameManager::Battle()
 	{
 		if (isMyTurn)
 		{
-			ConsoleOutput::ShowCharacterTurn();
-			CheckHealthPotionAndUse();
+			UseItemRandom("Health Potion", character->GetHealth() < character->GetMaxHealth() / 2);
+			UseItemRandom("Attack Boost", rand()%100<50);
 			character->Attack(*monster);
 			if (monster->GetHealth() <= 0)
 			{
@@ -172,34 +175,35 @@ BattleResult GameManager::Battle()
 	return result;
 }
 
-void GameManager::CheckHealthPotionAndUse()
+
+void GameManager::UseItemRandom(std::string itemName, bool canUse)
 {
-	//체력 절반 이하 포션 사용
-	if (character->GetHealth() > character->GetMaxHealth() / 2) {
+	if (!canUse) {
 		return;
 	}
 
-	//회복 포션 유무 확인
 	if (!character->GetItemInventory()->Count()) {
 		return;
 	}
-	
-	std::vector<Item*> Items = character->GetItemInventory()->GetItems();
 
-	int healthPotionIndex = -1;
+	std::vector<Item*> Items = character->GetItemInventory()->GetItems();
 
 	for (int i = 0; i < Items.size(); i++)
 	{
-		if (Items[i] && Items[i]->GetName() == "Health Potion")
+		if (Items[i] && Items[i]->GetName() == itemName)
 		{
 			Items[i]->Use(*character);
 			HealthPotion* potion = dynamic_cast<HealthPotion*>(Items[i]);
 			ConsoleOutput::ShowUseHealthPotion(*character, *potion);
 			character->GetItemInventory()->Remove(i);
+
+			// TODO: remove
+			std::cout << character->GetName() << "이(가)" << Items[i]->GetName() << "을 사용하였습니다.\n";
 			break;
 		}
 	}
 }
+
 
 void GameManager::Shop()
 {

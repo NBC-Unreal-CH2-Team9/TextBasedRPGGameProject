@@ -37,7 +37,7 @@ protected:
 
 private:
 	Monster* GenerateMonster(int characterLevel, bool isBossBattle);
-	void CheckHealthPotionAndUse();
+	void UseItemRandom(std::string itemName,bool canUse);
 
 	// 상점에서 사용하는 정적 함수 모음
 	// 상점에서 판매하는 아이템 생성

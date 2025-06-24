@@ -13,7 +13,7 @@
 #include "../Types/Character/Character.h"
 
 
-void testBattle() {
+void BattleTest() {
 	GameManager gameManager;
 	gameManager.CreateCharacter();
 
@@ -21,6 +21,7 @@ void testBattle() {
 	while(ConsoleInput::SelectYesOrNo(s))
 	{
 		gameManager.Battle();
+        gameManager.Shop();
 	}
 	
 }
@@ -53,6 +54,7 @@ void testShop() {
 
 	gameManager.Shop();
 }
+
 
 void itemTest() {
     GameManager gameManager;
@@ -190,4 +192,6 @@ static void dropTest() {
 int main() {
 	//testBattle();
 	//testMonster();
+    //dropTest();
+    BattleTest();
 }
