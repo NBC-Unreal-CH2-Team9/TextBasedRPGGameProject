@@ -49,6 +49,10 @@ public:
 		return experience;
 	}
 
+	virtual std::string GetJobName() {
+		return "초보자";
+	}
+
 	void LevelUp();
 
 	virtual void OnLevelChangedHealth();

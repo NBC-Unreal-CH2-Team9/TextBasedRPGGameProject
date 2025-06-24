@@ -129,12 +129,10 @@ void ConsoleOutput::ShowSelectJob()
 
 void ConsoleOutput::ShowCharacterStatus(Character& character) {
 	std::cout << "--캐릭터 현재 상태--\n";
-	std::cout << "이름: " << character.GetName() << "\n";
-	//std::cout << "직업: " << character.GetJob() << "\n";
-	std::cout << "레벨: " << character.GetLevel() << "\n";
-	std::cout << "경험치: " << character.GetExperience() << "/ 100 " << "\n";
-	std::cout << "체력: " << character.GetHealth() << " / " << character.GetMaxHealth() << "\n";
+	std::cout << "정보: " << character.GetName() << ", 레벨 " << character.GetLevel() << " " << character.GetJobName() << "\n";
+	std::cout << "체력: " << character.GetHealth() << "/" << character.GetMaxHealth() << "\n";
 	std::cout << "공격력: " << character.GetAttack() << "\n";
+	std::cout << "경험치: " << character.GetExperience() << "/100 " << "\n";
 	std::cout << "----------------\n";
 }
 
