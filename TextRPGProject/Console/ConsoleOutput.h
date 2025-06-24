@@ -24,6 +24,7 @@ public:
 	// 캐릭터 상태 
 	static void ShowCharacterStatus(Character& Character);
 	static void ShowCharacterGold(Character& character);
+	static void ShowLevelUp(Character& character);
 
 	
 	// 몬스터 상태

@@ -53,7 +53,7 @@ public:
 
 	virtual void OnLevelChangedAttack();
 
-	void AddExperience(int exp);
+	bool AddExperienceAndCheckLevelUp(int exp);
 
 	void GetRandomItem(Item* item); // ÀüÅõ½Â¸®½Ã ¾ÆÀÌÅÛ È¹µæ
 

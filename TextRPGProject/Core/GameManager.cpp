@@ -148,9 +148,13 @@ BattleResult GameManager::Battle()
 		result.isWin = true;
 		ConsoleOutput::ShowBattleWin();
 		character->SetGold(character->GetGold() + monster->GetGold());
-		character->AddExperience(monster->GetExperience());
+		bool isLevelUp = character->AddExperienceAndCheckLevelUp(monster->GetExperience());
 		ConsoleOutput::ShowGetGold(*character, *monster);
 		ConsoleOutput::ShowGetExp(*character, *monster);
+
+		if (isLevelUp) {
+			ConsoleOutput::ShowLevelUp(*character);
+		}
 		
 	}
 	else

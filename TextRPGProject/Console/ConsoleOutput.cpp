@@ -70,6 +70,12 @@ void ConsoleOutput::ShowCharacterGold(Character& character) {
 	std::cout << "----------------\n";
 }
 
+void ConsoleOutput::ShowLevelUp(Character& character)
+{
+	std::cout << character.GetName() << "는/은 레벨업했다!\n";
+	std::cout << "체력과 공격력이 상승했으며, 체력이 전부 회복되었다!\n";
+}
+
 void ConsoleOutput::ShowMonsterStatus(Monster& monster, bool isBoss) {
 	if (isBoss) {
 		std::cout << "--보스 몬스터 등장!!!--\n";
