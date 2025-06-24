@@ -5,13 +5,11 @@
 class Monster : public Actor {
 public:
 	Monster(std::string name, int health, int attack, int gold, int experience) : Actor(name, health, attack), gold(gold), experience(experience), maxHealth(health) {}
-	void Attack(Actor& other) override;
-	void TakeDamage(int damage) override;
-
 	int GetGold();
 	int GetExperience();
-
-	
+	int GetMaxHealth() {
+		return maxHealth;
+	}
 
 protected:
 	int gold;
@@ -28,8 +26,6 @@ public:
 	static Monster* CreateTroll(int characterLevel);
 
 	static Monster* CreateBoss(Monster monster);
-
-		
 
 private:
 	static int CalculateHealth(int characterLevel, int minHealth, int maxHealth);

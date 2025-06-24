@@ -6,17 +6,6 @@
 #include "Troll.h"
 #include "BossMonster.h"
 
-void Monster::Attack(Actor& other)
-{
-	int damage = ApplyCriticalAttack();
-
-	other.TakeDamage(damage);
-}
-
-void Monster::TakeDamage(int damage)
-{
-	health -= damage;
-}
 
 int Monster::GetGold()
 {

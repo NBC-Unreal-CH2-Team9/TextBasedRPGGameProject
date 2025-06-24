@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <string>
 
@@ -11,7 +11,7 @@ public:
 
 	virtual void Use(Character& user) = 0;
 
-	// ¾Æ·¡ ÇÔ¼ö¸¦ ¾²¸é, ¸ó½ºÅÍµµ ¾ÆÀÌÅÛÀ» »ç¿ëÇÒ ¼ö ÀÖ´Ù.
+	// ì•„ë˜ í•¨ìˆ˜ë¥¼ ì“°ë©´, ëª¬ìŠ¤í„°ë„ ì•„ì´í…œì„ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.
 	// virtual void Use(Actor& user) = 0;
 
 	int GetPrice() {
@@ -26,19 +26,3 @@ protected:
 	int price;
 };
 
-// Temporal class, Equipment
-// Àåºñ ±¸ÇöÀÌ ³¡³ª¸é, Á¦°ÅÇØ¾ß ÇÔ
-class Equipment {
-public:
-	Equipment(std::string name, int pirce) : name(name), price(pirce) {};
-	int GetPrice() {
-		return price;
-	}
-	std::string GetName() {
-		return name;
-	}
-
-protected:
-	std::string name;
-	int price;
-};
