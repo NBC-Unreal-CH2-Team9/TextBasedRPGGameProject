@@ -21,6 +21,7 @@ public:
 	std::string GetName() {	return name; }
 	int GetHealth() { return health; }
 	int GetAttack() { return attack; }
+	int GetCriticalAttack() { return attack * criticalAttack; }
 	
 
 protected:
