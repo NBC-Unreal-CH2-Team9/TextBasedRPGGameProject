@@ -1,4 +1,4 @@
-#include <iostream>
+癤�#include <iostream>
 #include "Character.h"
 #include "Inventory.h"
 
@@ -17,10 +17,10 @@ void Character::OnLevelChangedAttack() {}
 
 bool Character::AddExperienceAndCheckLevelUp(int exp)
 {
-	int newExp = experience + exp; // 현재 경험치 + 추가 경험치
+	int newExp = experience + exp;
 	if(newExp >= 100) {		
 		LevelUp();
-		experience = 0; // 레벨업 후 경험치를 초기화
+		experience = 0; 
 		return true;
 	}
 	else {
@@ -32,4 +32,62 @@ bool Character::AddExperienceAndCheckLevelUp(int exp)
 void Character::GetRandomItem(Item* item)
 {
 	itemInventory.Insert(item);
+}
+
+void Character::EquipSword(Sword* newSword)
+{
+	if (equipSword == nullptr || newSword->GetStat() > equipSword->GetStat()) {
+		if (equipSword != nullptr) {
+			int newAttack = attack - equipSword->GetStat();
+			SetAttack(newAttack);
+			equipmentInventory.Insert(new Sword(*equipSword));
+			delete equipSword;
+		}
+
+		equipSword = newSword;
+		int newAttack = attack + equipSword->GetStat();
+		SetAttack(newAttack);
+	}
+	else {
+		equipmentInventory.Insert(new Sword(*newSword));
+		delete newSword;
+	}
+
+}
+
+void Character::EquipArmor(Armor* newArmor)
+{
+	if (equipArmor == nullptr || newArmor->GetStat() > equipArmor->GetStat())
+	{
+		if (equipArmor != nullptr) {
+			maxHealth = maxHealth - equipArmor->GetStat();
+			equipmentInventory.Insert(new Armor(*equipArmor));
+			delete equipArmor;
+		}
+
+		equipArmor = newArmor;
+
+		maxHealth = maxHealth + equipArmor->GetStat();
+		health = health + equipArmor->GetStat();
+		if (health > maxHealth) {
+			health = maxHealth;
+		}
+			
+	}
+	else
+	{
+		equipmentInventory.Insert(new Armor(*newArmor));
+		delete newArmor;
+	}
+}
+
+void Character::Equip(Equipment* newEquip) {
+	Equipment::EquipmentType type = newEquip->GetType();
+
+	if (type == Equipment::EquipmentType::SWORD) {
+		EquipSword(dynamic_cast<Sword*>(newEquip));
+	}
+	else if (type == Equipment::EquipmentType::ARMOR) {
+		EquipArmor(dynamic_cast<Armor*>(newEquip));
+	}
 }

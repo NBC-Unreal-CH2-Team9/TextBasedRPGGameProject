@@ -15,6 +15,7 @@
 #include "../Types/Item/Item.h"
 #include "../Types/Item/AttackBoost.h"
 #include "../Types/Item/HealthPotion.h"
+#include "../Types/Equipment/EquipmentManager.h"
 
 #include "../Console/ConsoleInput.h"
 #include "../Console/ConsoleOutput.h"
@@ -99,6 +100,7 @@ Monster* GameManager::GenerateMonster(int characterLevel, bool isBossBattle = fa
 	ConsoleOutput::ShowMonsterStatus(*monster, isBossBattle);
 	return monster;
 }
+
 
 BattleResult GameManager::Battle()
 {
@@ -248,6 +250,12 @@ Item* GameManager::MakeShopItem(ShopItems index) {
 	return shopItem;
 }
 
+void GameManager::DropEquip()
+{
+	Equipment* dropEquip = EquipmentManager::GenerateRandomEquipment();
+	character->Equip(dropEquip);
+}
+
 void GameManager::ShopBuyItem()
 {
 	std::vector<Item*> shopItems;
@@ -309,6 +317,5 @@ void GameManager::ShopSellEquipment()
 		character->SetGold(character->GetGold() + equipment->GetPrice());
 		ConsoleOutput::ShowSellEquipment(*equipment, *character, 1);
 	}
-	// TODO: 장비 인벤토리 비우는 코드가 구현이 되어있지 않음
+	character->GetEquipmentInventory()->Clear(); // 인벤토리 비우기
 }
-
