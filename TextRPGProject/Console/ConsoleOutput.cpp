@@ -1,5 +1,6 @@
 ﻿#include "ConsoleOutput.h"
 #include <iostream>
+#include <vector>
 #include <windows.h>
 
 
@@ -137,10 +138,19 @@ void ConsoleOutput::ShowCharacterStatus(Character& character) {
 	std::cout << "----------------\n";
 }
 
-void ConsoleOutput::ShowCharacterGold(Character& character) {
-	std::cout << "--캐릭터 지갑--\n";
+void ConsoleOutput::ShowCharacterGoldAndItem(Character& character) {
+	std::cout << "--캐릭터 소지품 정보--\n";
 	std::cout << "현재 골드: " << character.GetGold() << "\n";
-	std::cout << "----------------\n";
+	std::cout << "아이템: ";
+	std::vector<Item*> items = character.GetItemInventory()->GetItems();
+	for (int n = 0; n < items.size(); n++) {
+		std::cout << items[n]->GetName() ;
+		if (n < items.size() - 1) {
+			std::cout << ", ";
+		}
+	}
+	std::cout << "\n";
+	std::cout << "----------------------\n";
 }
 
 void ConsoleOutput::ShowLevelUp(Character& character)

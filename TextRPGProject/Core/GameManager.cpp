@@ -217,6 +217,9 @@ void GameManager::Shop()
 		ShopSellEquipment();
 
 		while (true) {
+
+			ConsoleOutput::ShowCharacterGoldAndItem(*character);
+
 			int select = ConsoleInput::SelectNumber(ConsoleOutput::shopOptions);
 			switch (select) {
 			case 0:
@@ -273,7 +276,6 @@ void GameManager::ShopBuyItem()
 
 	int gold = character->GetGold();
 
-	ConsoleOutput::ShowCharacterGold(*character);
 	std::vector<std::string> options = ConsoleOutput::MakeShopBuyList(shopItems);
 	int buyIndex = ConsoleInput::SelectNumber(options);
 
@@ -313,9 +315,9 @@ void GameManager::ShopSellItem()
 	if (item != nullptr) {
 		int price = (int)(item->GetPrice() * ratio);
 
-		ConsoleOutput::ShowSellItem(*item, *character, ratio);
 		character->GetItemInventory()->Remove(sellIndex);
 		character->SetGold(character->GetGold() + price);
+		ConsoleOutput::ShowSellItem(*item, *character, ratio);
 	}
 }
 
