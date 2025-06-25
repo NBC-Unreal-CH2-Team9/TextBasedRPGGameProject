@@ -17,9 +17,9 @@ void BattleTest() {
 	GameManager gameManager;
 	gameManager.CreateCharacter();
 
-	std::string s = "Continue Battle ? ";
-	while(ConsoleInput::SelectYesOrNo(s))
+	while(gameManager.GetCharacter()->GetHealth()>0)
 	{
+        std::cout <<"캐릭터 레벨:" << gameManager.GetCharacter()->GetLevel()<<std::endl;
 		gameManager.Battle();
         gameManager.Shop();
 	}

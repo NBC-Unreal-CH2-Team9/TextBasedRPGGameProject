@@ -27,7 +27,7 @@
 
 GameManager::GameManager()
 {
-	character == nullptr;
+	character = nullptr;
 }
 
 GameManager::~GameManager()
