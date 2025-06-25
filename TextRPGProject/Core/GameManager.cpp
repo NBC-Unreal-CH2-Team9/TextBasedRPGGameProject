@@ -268,7 +268,7 @@ void GameManager::Shop()
 Item* GameManager::MakeShopItem(ShopItems index) {
 	Item* shopItem = nullptr;
 	int shop_healthRestore = 50;
-	int shop_attackincrease = 4;
+	int shop_attackincrease = 10;
 	switch (index) {
 	case ShopHealthPotion:
 		shopItem = new HealthPotion(shop_healthRestore);
