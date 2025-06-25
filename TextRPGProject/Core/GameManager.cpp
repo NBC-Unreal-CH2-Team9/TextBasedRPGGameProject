@@ -367,10 +367,10 @@ void GameManager::ShopSellItem()
 	Item* item = character->GetItemInventory()->Get(sellIndex);
 	if (item != nullptr) {
 		int price = (int)(item->GetPrice() * ratio);
-
 		character->GetItemInventory()->Remove(sellIndex);
 		character->SetGold(character->GetGold() + price);
 		ConsoleOutput::ShowSellItem(*item, *character, ratio);
+		delete item;
 	}
 }
 
