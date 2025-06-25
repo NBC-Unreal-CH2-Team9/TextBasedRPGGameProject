@@ -13,7 +13,7 @@ Item* ItemManager::GenerateRandomItem()
     Item* dropItem = nullptr;
 
     if (roll <= 50) {
-        dropItem = new HealthPotion(30);
+        dropItem = new HealthPotion(50);
     }
     else{
         dropItem = new AttackBoost(10);
