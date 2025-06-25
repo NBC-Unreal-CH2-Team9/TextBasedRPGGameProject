@@ -29,7 +29,7 @@ int main() {
 
 	GameManager gameMamager;
 	gameMamager.CreateCharacter();
-
+	
 	// 캐릭터가 죽을 때 까지 게임 플로우 반복
 	while (true) {
 
