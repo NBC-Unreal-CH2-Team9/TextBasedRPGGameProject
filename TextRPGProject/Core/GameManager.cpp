@@ -15,6 +15,7 @@
 #include "../Types/Item/Item.h"
 #include "../Types/Item/AttackBoost.h"
 #include "../Types/Item/HealthPotion.h"
+#include "../Types/Item/ItemManager.h"
 #include "../Types/Equipment/EquipmentManager.h"
 
 #include "../Console/ConsoleInput.h"
@@ -127,6 +128,7 @@ BattleResult GameManager::Battle()
 	{
 		if (isMyTurn)
 		{
+			ConsoleOutput::ShowCharacterTurn();
 			UseItemRandom("Health Potion", character->GetHealth() < character->GetMaxHealth() / 2);
 			UseItemRandom("Attack Boost", rand()%100<50);
 			character->Attack(*monster);
@@ -159,6 +161,8 @@ BattleResult GameManager::Battle()
 		bool isLevelUp = character->AddExperienceAndCheckLevelUp(monster->GetExperience());
 		ConsoleOutput::ShowGetGold(*character, *monster);
 		ConsoleOutput::ShowGetExp(*character, *monster);
+
+		RandomGetItem();
 
 		if (isLevelUp) {
 			ConsoleOutput::ShowLevelUp(*character);
@@ -193,12 +197,18 @@ void GameManager::UseItemRandom(std::string itemName, bool canUse)
 		if (Items[i] && Items[i]->GetName() == itemName)
 		{
 			Items[i]->Use(*character);
-			HealthPotion* potion = dynamic_cast<HealthPotion*>(Items[i]);
-			ConsoleOutput::ShowUseHealthPotion(*character, *potion);
+			if (Items[i]->GetName() == "Health Potion") {
+				HealthPotion* potion = dynamic_cast<HealthPotion*>(Items[i]);
+				ConsoleOutput::ShowUseHealthPotion(*character, *potion);
+			}
+			else if (Items[i]->GetName() == "Attack Boost") {
+				AttackBoost* boost = dynamic_cast<AttackBoost*>(Items[i]);
+				ConsoleOutput::ShowUseAttackBoost(*character, *boost);
+			}
+			else {
+				ConsoleOutput::ShowUseItem(*character, *Items[i]);
+			}
 			character->GetItemInventory()->Remove(i);
-
-			// TODO: remove
-			std::cout << character->GetName() << "이(가)" << Items[i]->GetName() << "을 사용하였습니다.\n";
 			break;
 		}
 	}
@@ -216,6 +226,9 @@ void GameManager::Shop()
 		ShopSellEquipment();
 
 		while (true) {
+
+			ConsoleOutput::ShowCharacterGoldAndItem(*character);
+
 			int select = ConsoleInput::SelectNumber(ConsoleOutput::shopOptions);
 			switch (select) {
 			case 0:
@@ -262,6 +275,35 @@ void GameManager::DropEquip()
 {
 	Equipment* dropEquip = EquipmentManager::GenerateRandomEquipment();
 	character->Equip(dropEquip);
+	ConsoleOutput::ShowDropEquip(*dropEquip);
+}
+
+void GameManager::DropItem()
+{
+	Item* dropItem = ItemManager::GenerateRandomItem();
+	character->GetRandomItem(dropItem);
+	ConsoleOutput::ShowDropItem(*dropItem);
+}
+
+void GameManager::RandomGetItem()
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dist(1, 100);
+
+	int itemRoll = dist(gen);
+	int equipRoll = dist(gen);
+	
+
+	if (itemRoll <= 30)
+	{
+		DropItem();
+	}
+
+	if (equipRoll <= 10)
+	{
+		DropEquip();
+	}
 }
 
 void GameManager::ShopBuyItem()
@@ -272,7 +314,6 @@ void GameManager::ShopBuyItem()
 
 	int gold = character->GetGold();
 
-	ConsoleOutput::ShowCharacterGold(*character);
 	std::vector<std::string> options = ConsoleOutput::MakeShopBuyList(shopItems);
 	int buyIndex = ConsoleInput::SelectNumber(options);
 
@@ -312,9 +353,9 @@ void GameManager::ShopSellItem()
 	if (item != nullptr) {
 		int price = (int)(item->GetPrice() * ratio);
 
-		ConsoleOutput::ShowSellItem(*item, *character, ratio);
 		character->GetItemInventory()->Remove(sellIndex);
 		character->SetGold(character->GetGold() + price);
+		ConsoleOutput::ShowSellItem(*item, *character, ratio);
 	}
 }
 

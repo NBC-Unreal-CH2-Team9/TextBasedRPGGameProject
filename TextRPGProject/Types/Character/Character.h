@@ -49,6 +49,10 @@ public:
 		return experience;
 	}
 
+	virtual std::string GetJobName() {
+		return "초보자";
+	}
+
 	void LevelUp();
 
 	virtual void OnLevelChangedHealth();
@@ -62,6 +66,13 @@ public:
 	void Equip(Equipment* newEquip);
 
 	void GetRandomItem(Item* item);
+
+	Sword* GetSword() {
+		return equipSword;
+	}
+	Armor* GetArmor() {
+		return equipArmor;
+	}
 
 protected:
 	Inventory<Item> itemInventory;

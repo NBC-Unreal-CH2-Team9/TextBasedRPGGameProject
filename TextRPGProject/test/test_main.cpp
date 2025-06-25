@@ -103,7 +103,7 @@ void itemTest() {
     HealthPotion hpPotion30(30);   // 체력 30 회복
     AttackBoost atkBoost10(10);     // 공격력 10 증가
     HealthPotion hpPotion50(50);   // 체력 50 회복
-    AttackBoost atkBoost15(15);     // 공격력 10 증가
+    AttackBoost atkBoost15(15);     // 공격력 15 증가
 
     //테스트 1, 2, 3
     std::cout << "아이템 이름과 가격, 각 증가량 확인" << std::endl;
@@ -143,55 +143,78 @@ void itemTest() {
 void equipTest() {
     GameManager gameManager;
     gameManager.CreateCharacter();
-    // 캐릭터 생성
     Character* character = gameManager.GetCharacter();
 
     // 장비 생성
-    Sword* oldSword = new Sword("나무 검");
-    Sword* newSword1 = new Sword("철검");
-    Sword* newSword2 = new Sword("청동검");
-    Armor* oldarmor = new Armor("청동갑옷");
-    Armor* newarmor = new Armor("가죽갑옷");
+    Sword* sword1 = new Sword("나무검");
+    Sword* sword2 = new Sword("청동검");
+    Sword* sword3 = new Sword("철검");
 
-    std::cout << "\n[초기 장비 장착]" << std::endl;
-    character->EquipSword(oldSword);  // 낡은 검 장착
-    character->EquipArmor(oldarmor);  // 갑옷 장착
-    std::cout << "현재 공격력: " << character->GetAttack() << " 체력 : " << character->GetHealth() << std::endl;
+    Armor* armor1 = new Armor("가죽갑옷");
+    Armor* armor2 = new Armor("청동갑옷");
+    Armor* armor3 = new Armor("철갑옷");
 
-    std::cout << "\n[더 좋은 무기 장착]" << std::endl;
-    character->EquipSword(newSword1);  // 더 좋은 검으로 교체
-    std::cout << "현재 공격력: " << character->GetAttack() << " 체력 : " << character->GetHealth() << std::endl;
+    // 테스트 1, 2: 장비 기본 스탯 및 가격 출력
+    std::cout << "\n[장비 가격 및 스탯]" << std::endl;
+    std::cout << sword1->GetName() << " - 공격력: " << sword1->GetStat() << ", 가격: " << sword1->GetPrice() << std::endl;
+    std::cout << sword2->GetName() << " - 공격력: " << sword2->GetStat() << ", 가격: " << sword2->GetPrice() << std::endl;
+    std::cout << sword3->GetName() << " - 공격력: " << sword3->GetStat() << ", 가격: " << sword3->GetPrice() << std::endl;
+    std::cout << armor1->GetName() << " - 체력: " << armor1->GetStat() << ", 가격: " << armor1->GetPrice() << std::endl;
+    std::cout << armor2->GetName() << " - 체력: " << armor2->GetStat() << ", 가격: " << armor2->GetPrice() << std::endl;
+    std::cout << armor3->GetName() << " - 체력: " << armor3->GetStat() << ", 가격: " << armor3->GetPrice() << std::endl;
 
-    std::cout << "\n[살짝 안 좋은 장비 획득]" << std::endl;
-    character->EquipSword(newSword2);
-    character->EquipArmor(newarmor);   // 갑옷 장착
-    std::cout << "현재 공격력: " << character->GetAttack() << " 체력 : " << character->GetHealth() << std::endl;
+    // 테스트 3: 초기 장비 장착 전 상태
+    std::cout << "\n[초기 장비 장착 전]" << std::endl;
+    std::cout << "공격력: " << character->GetAttack()
+        << ", 체력: " << character->GetHealth()
+        << ", 최대 체력: " << character->GetMaxHealth() << std::endl;
 
-    std::cout << "\n[인벤토리 목록 출력]" << std::endl;
+    // 나무검, 가죽갑옷 장착
+    character->Equip(sword1);
+    character->Equip(armor1);
+
+    std::cout << "\n[초기 장비 장착 후]" << std::endl;
+    std::cout << "공격력: " << character->GetAttack()
+        << ", 체력: " << character->GetHealth()
+        << ", 최대 체력: " << character->GetMaxHealth() << std::endl;
+
+    // 테스트 4, 7: 더 좋은 무기와 갑옷으로 교체
+    std::cout << "\n[더 좋은 장비 장착]" << std::endl;
+    character->Equip(sword2);
+    character->Equip(armor2);
+
+    std::cout << "공격력: " << character->GetAttack()
+        << ", 체력: " << character->GetHealth()
+        << ", 최대 체력: " << character->GetMaxHealth() << std::endl;
+
+    // 테스트 5: 인벤토리 아이템 출력
+    std::cout << "\n[인벤토리 목록]" << std::endl;
     auto items = character->GetEquipmentInventory()->GetItems();
     for (auto item : items) {
         std::cout << "- " << item->GetName() << " (가격: " << item->GetPrice() << ")" << std::endl;
     }
+    std::cout << "인벤토리 총 개수: " << character->GetEquipmentInventory()->Count() << std::endl;
 
-    // 장비 모두 판매 테스트
-    std::cout << "\n[장비 모두 판매]" << std::endl;
-    gameManager.Shop();
+    // 테스트 6: 성능이 낮은 장비 다시 획득 및 장착 시도
+    std::cout << "\n[낮은 성능 장비 획득 및 장착 시도]" << std::endl;
+    character->Equip(sword1);
+    character->Equip(new Armor("가죽갑옷"));
 
-    std::cout << "\n[판매 후 인벤토리 목록]" << std::endl;
+    std::cout << "공격력: " << character->GetAttack()
+        << ", 체력: " << character->GetHealth()
+        << ", 최대 체력: " << character->GetMaxHealth() << std::endl;
+
+    // 최종 인벤토리 출력
+    std::cout << "\n[최종 인벤토리 목록]" << std::endl;
     items = character->GetEquipmentInventory()->GetItems();
-    if (items.empty()) {
-        std::cout << "장비 인벤토리가 비어 있습니다." << std::endl;
+    for (auto item : items) {
+        std::cout << "- " << item->GetName() << " (가격: " << item->GetPrice() << ")" << std::endl;
     }
-    else {
-        for (auto item : items) {
-            std::cout << "- " << item->GetName() << " (가격: " << item->GetPrice() << ")" << std::endl;
-        }
-    }
-
-    std::cout << "\n[현재 골드] " << character->GetGold() << std::endl;
+    std::cout << "인벤토리 총 개수: " << character->GetEquipmentInventory()->Count() << std::endl;
 }
 
-static void dropTest() {
+
+void dropTest() {
     GameManager gameManager;
     gameManager.CreateCharacter();
     // 캐릭터 생성
@@ -203,8 +226,12 @@ static void dropTest() {
     std::cout << "\n[인벤토리 목록 출력]" << std::endl;
     auto items = character->GetEquipmentInventory()->GetItems();
     for (auto item : items) {
-        std::cout << "- " << item->GetName() << " (가격: " << item->GetPrice() << ")" << std::endl;
+        if (item->GetType() == Equipment::SWORD)
+            std::cout << "- [무기] " << item->GetName() << " (공격력: " << item->GetStat() << ", 가격: " << item->GetPrice() << ")" << std::endl;
+        else if (item->GetType() == Equipment::ARMOR)
+            std::cout << "- [방어구] " << item->GetName() << " (체력: " << item->GetStat() << ", 가격: " << item->GetPrice() << ")" << std::endl;
     }
+
 
     gameManager.DropEquip();
     std::cout << "\n[장비 1회 드랍 후 스텟]" << std::endl;
@@ -223,8 +250,12 @@ static void dropTest() {
     std::cout << "\n[인벤토리 목록 출력]" << std::endl;
     items = character->GetEquipmentInventory()->GetItems();
     for (auto item : items) {
-        std::cout << "- " << item->GetName() << " (가격: " << item->GetPrice() << ")" << std::endl;
+        if (item->GetType() == Equipment::SWORD)
+            std::cout << "- [무기] " << item->GetName() << " (공격력: " << item->GetStat() << ", 가격: " << item->GetPrice() << ")" << std::endl;
+        else if (item->GetType() == Equipment::ARMOR)
+            std::cout << "- [방어구] " << item->GetName() << " (체력: " << item->GetStat() << ", 가격: " << item->GetPrice() << ")" << std::endl;
     }
+
 }
 
 

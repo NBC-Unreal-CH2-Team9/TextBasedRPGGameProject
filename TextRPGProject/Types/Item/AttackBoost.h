@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Item.h"
 
@@ -9,6 +9,14 @@ public:
 	};
 
 	void Use(Character& user);
+
+	int GetAttackincrease() {
+		return attackincrease;
+	}
+
+	int GetStat() {
+		return attackincrease;
+	}
 
 protected:
 	int attackincrease;
