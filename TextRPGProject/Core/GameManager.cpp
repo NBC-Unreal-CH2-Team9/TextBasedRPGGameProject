@@ -66,7 +66,7 @@ Character* GameManager::CreateCharacter()
 	return character;
 }
 
-Monster* GameManager::GenerateMonster(int characterLevel, bool isBossBattle = false)
+Monster* GameManager::GenerateMonster(int characterLevel, BattleResult::BattleType battleType)
 {
 	//다른 확률 몬스터 생성
 	std::random_device rd;
@@ -76,8 +76,10 @@ Monster* GameManager::GenerateMonster(int characterLevel, bool isBossBattle = fa
 
 	Monster* monster = nullptr;
 
-	if (!isBossBattle)
-	{
+	if (battleType == BattleResult::FINAL_BOSS) {
+		monster = MonsterManager::CreateDragon(characterLevel);
+	}
+	else {
 		//40,30,20,10
 		if (randNum < 40)
 		{
@@ -95,13 +97,17 @@ Monster* GameManager::GenerateMonster(int characterLevel, bool isBossBattle = fa
 		{
 			monster = MonsterManager::CreateTroll(characterLevel);
 		}
-	}
-	else
-	{
-		monster = MonsterManager::CreateDragon(characterLevel);
+
+		if (battleType == BattleResult::MID_BOSS)
+		{
+			Monster* bossMonster;
+			bossMonster = MonsterManager::CreateBoss(*monster);
+			delete monster;
+			monster = bossMonster;
+		}
 	}
 
-	ConsoleOutput::ShowMonsterStatus(*monster, isBossBattle);
+	ConsoleOutput::ShowMonsterStatus(*monster);
 	return monster;
 }
 
@@ -112,16 +118,21 @@ BattleResult GameManager::Battle()
 
 	BattleResult result;
 	result.isWin = false;
-	result.isBoss = false;
 
 	bool isMyTurn = true;
 	bool isFighting = true;
 
-	if (character->GetLevel() >= 10)
+	if (character->GetLevel() >= 15)
 	{
-		result.isBoss = true;
+		result.battleType = BattleResult::FINAL_BOSS;
 	}
-	Monster* monster = GenerateMonster(character->GetLevel(), result.isBoss);
+	else if (character->GetLevel() >= 10) {
+		result.battleType = BattleResult::MID_BOSS;
+	}
+	else {
+		result.battleType = BattleResult::NORMAL;
+	}
+	Monster* monster = GenerateMonster(character->GetLevel(), result.battleType);
 
 	//전투중
 	while(isFighting)
@@ -208,6 +219,7 @@ void GameManager::UseItemRandom(std::string itemName, bool canUse)
 			else {
 				ConsoleOutput::ShowUseItem(*character, *Items[i]);
 			}
+			delete Items[i];
 			character->GetItemInventory()->Remove(i);
 			break;
 		}
@@ -339,6 +351,9 @@ void GameManager::ShopBuyItem()
 		ConsoleOutput::ShowNotEnoughGold();
 	}
 	
+	for (Item* item : shopItems) {
+		delete item;
+	}
 }
 
 void GameManager::ShopSellItem()

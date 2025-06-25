@@ -56,7 +56,7 @@ Monster* MonsterManager::CreateTroll(int characterLevel)
 	return troll;
 }
 
-Monster* MonsterManager::CreateBoss(Monster monster)
+Monster* MonsterManager::CreateBoss(Monster& monster)
 {
 	std::string name = "보스 " + monster.GetName();
 	int health = monster.GetHealth() * 1.5;

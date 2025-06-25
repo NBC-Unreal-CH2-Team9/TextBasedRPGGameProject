@@ -28,7 +28,7 @@ public:
 
 	
 	// 몬스터 상태
-	static void ShowMonsterStatus(Monster& monster, bool isBoos);
+	static void ShowMonsterStatus(Monster& monster);
 
 	
 	// 공격과 피해, 크리티컬, 전투

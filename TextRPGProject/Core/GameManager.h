@@ -7,8 +7,13 @@
 
 struct BattleResult {
 public:
+	enum BattleType {
+		NORMAL = 100,
+		MID_BOSS = 200,
+		FINAL_BOSS = 300,
+	};
 	bool isWin;
-	bool isBoss;
+	BattleType battleType;
 };
 
 class GameManager {
@@ -38,7 +43,7 @@ protected:
 	Character* character;
 
 private:
-	Monster* GenerateMonster(int characterLevel, bool isBossBattle);
+	Monster* GenerateMonster(int characterLevel, BattleResult::BattleType battleType);
 	void UseItemRandom(std::string itemName,bool canUse);
 
 	// 상점에서 사용하는 정적 함수 모음

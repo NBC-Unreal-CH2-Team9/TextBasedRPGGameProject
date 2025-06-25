@@ -23,7 +23,7 @@ public:
 	static Monster* CreateGoblin(int characterLevel);
 	static Monster* CreateTroll(int characterLevel);
 
-	static Monster* CreateBoss(Monster monster);
+	static Monster* CreateBoss(Monster& monster);
 
 private:
 	static int CalculateHealth(int characterLevel, int minHealth, int maxHealth);

@@ -16,6 +16,16 @@ public:
 		maxHealth = health;
 		experience = exp;
 	}
+	~Character() {
+		if (equipSword != nullptr) {
+			delete equipSword;
+		}
+		if (equipArmor != nullptr) {
+			delete equipArmor;
+		}
+		itemInventory.Clear();
+		equipmentInventory.Clear();
+	}
 
 	Inventory<Item>* GetItemInventory() {
 		return &itemInventory;
@@ -84,4 +94,6 @@ protected:
 	
 	int maxHealth;
 	int experience;
+
+	const int MAX_LEVEL = 15;
 };
