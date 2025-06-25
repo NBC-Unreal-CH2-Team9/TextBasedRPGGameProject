@@ -6,17 +6,6 @@
 #include "Troll.h"
 #include "BossMonster.h"
 
-
-int Monster::GetGold()
-{
-	return gold;
-}
-
-int Monster::GetExperience()
-{
-	return experience;
-}
-
 Monster* MonsterManager::CreateDragon(int characterLevel)
 {
 	int health = CalculateHealth(characterLevel, 100, 150);
