@@ -286,15 +286,15 @@ Item* GameManager::MakeShopItem(ShopItems index) {
 void GameManager::DropEquip()
 {
 	Equipment* dropEquip = EquipmentManager::GenerateRandomEquipment();
-	character->Equip(dropEquip);
 	ConsoleOutput::ShowDropEquip(*dropEquip);
+	character->Equip(dropEquip);
 }
 
 void GameManager::DropItem()
 {
 	Item* dropItem = ItemManager::GenerateRandomItem();
-	character->GetRandomItem(dropItem);
 	ConsoleOutput::ShowDropItem(*dropItem);
+	character->GetRandomItem(dropItem);
 }
 
 void GameManager::RandomGetItem()
