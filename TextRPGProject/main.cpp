@@ -1,4 +1,4 @@
-﻿#include <iostream>
+癤#include <iostream>
 #include <string>
 #include <vector>
 
@@ -10,7 +10,7 @@ int main() {
 	
 	ConsoleOutput::ShowIntro();
 
-	// 게임 메뉴
+	// 寃 硫
 	while (true) {
 		std::vector<std::string> menu = { "GAME START", "CREDITS", "EXIT" };
 		int menuSelect = ConsoleInput::SelectNumberVertical(menu);
@@ -29,26 +29,28 @@ int main() {
 
 	GameManager gameMamager;
 	gameMamager.CreateCharacter();
-	ConsoleOutput::ShowCharacterStatus(*(gameMamager.GetCharacter()));
 
 	// 캐릭터가 죽을 때 까지 게임 플로우 반복
 	while (true) {
 
+		ConsoleOutput::ShowCharacterStatus(*(gameMamager.GetCharacter()));
+		ConsoleOutput::ShowCharacterGoldAndItem(*(gameMamager.GetCharacter()));
 		BattleResult result = gameMamager.Battle();
 		if (result.isWin) {
 			if (result.battleType == BattleResult::FINAL_BOSS) {
-				// 보스전투 승리 처리
+				// 蹂댁ㅼ 밸━ 泥由
 				break;
 			}
 		}
 		else {
-			// 패배 처리
+			// ⑤같 泥由
 			break;
 		}
 		ConsoleOutput::ShowCharacterStatus(*(gameMamager.GetCharacter()));
+		ConsoleOutput::ShowCharacterGoldAndItem(*(gameMamager.GetCharacter()));
 		gameMamager.Shop();
 	}
 
-	// 게임 종료 처리
+	// 寃 醫猷 泥由
 	return 0;
 }
