@@ -12,8 +12,8 @@ Monster* MonsterManager::CreateDragon(int characterLevel)
 	int attack = CalculateAttack(characterLevel, 15, 20);
 	int gold = CalculateGold(100, 150);
 	int experience = 100;
-	Monster* dragon = new Dragon("드래곤", health, attack, gold, experience);
-	return CreateBoss(*dragon);
+	Monster dragon("드래곤", health, attack, gold, experience);
+	return CreateBoss(dragon);
 }
 
 Monster* MonsterManager::CreateOrc(int characterLevel)
