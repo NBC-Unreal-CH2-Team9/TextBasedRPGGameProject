@@ -13,7 +13,7 @@ Equipment* EquipmentManager::GenerateRandomEquipment()
     Equipment* dropEquip = nullptr;
 
     if (roll <= 25) {
-        dropEquip = new Sword("나무 검");
+        dropEquip = new Sword("나무검");
     }
     else if (roll <= 50) {
         dropEquip = new Sword("청동검");
