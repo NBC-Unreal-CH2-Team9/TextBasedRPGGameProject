@@ -29,11 +29,12 @@ int main() {
 
 	GameManager gameMamager;
 	gameMamager.CreateCharacter();
-	ConsoleOutput::ShowCharacterStatus(*(gameMamager.GetCharacter()));
-
+	
 	// 캐릭터가 죽을 때 까지 게임 플로우 반복
 	while (true) {
 
+		ConsoleOutput::ShowCharacterStatus(*(gameMamager.GetCharacter()));
+		ConsoleOutput::ShowCharacterGoldAndItem(*(gameMamager.GetCharacter()));
 		BattleResult result = gameMamager.Battle();
 		if (result.isWin) {
 			if (result.isBoss) {
@@ -46,6 +47,7 @@ int main() {
 			break;
 		}
 		ConsoleOutput::ShowCharacterStatus(*(gameMamager.GetCharacter()));
+		ConsoleOutput::ShowCharacterGoldAndItem(*(gameMamager.GetCharacter()));
 		gameMamager.Shop();
 	}
 

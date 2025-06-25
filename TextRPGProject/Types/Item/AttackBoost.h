@@ -10,6 +10,10 @@ public:
 
 	void Use(Character& user);
 
+	int GetAttackincrease() {
+		return attackincrease;
+	}
+
 	int GetStat() {
 		return attackincrease;
 	}

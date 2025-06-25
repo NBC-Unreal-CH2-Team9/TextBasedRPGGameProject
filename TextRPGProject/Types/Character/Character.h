@@ -16,6 +16,16 @@ public:
 		maxHealth = health;
 		experience = exp;
 	}
+	~Character() {
+		if (equipSword != nullptr) {
+			delete equipSword;
+		}
+		if (equipArmor != nullptr) {
+			delete equipArmor;
+		}
+		itemInventory.Clear();
+		equipmentInventory.Clear();
+	}
 
 	Inventory<Item>* GetItemInventory() {
 		return &itemInventory;
@@ -49,6 +59,10 @@ public:
 		return experience;
 	}
 
+	virtual std::string GetJobName() {
+		return "초보자";
+	}
+
 	void LevelUp();
 
 	virtual void OnLevelChangedHealth();
@@ -62,6 +76,13 @@ public:
 	void Equip(Equipment* newEquip);
 
 	void GetRandomItem(Item* item);
+
+	Sword* GetSword() {
+		return equipSword;
+	}
+	Armor* GetArmor() {
+		return equipArmor;
+	}
 
 protected:
 	Inventory<Item> itemInventory;

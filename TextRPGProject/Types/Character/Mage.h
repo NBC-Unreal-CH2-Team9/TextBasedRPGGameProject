@@ -10,4 +10,8 @@ public:
 	void OnLevelChangedHealth() override;
 
 	void OnLevelChangedAttack() override;
+
+	virtual std::string GetJobName() {
+		return "¸¶¹ý»ç";
+	}
 };

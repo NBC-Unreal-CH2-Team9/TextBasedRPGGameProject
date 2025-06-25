@@ -23,7 +23,7 @@ public:
 	
 	// 캐릭터 상태 
 	static void ShowCharacterStatus(Character& Character);
-	static void ShowCharacterGold(Character& character);
+	static void ShowCharacterGoldAndItem(Character& character);
 	static void ShowLevelUp(Character& character);
 
 	
@@ -43,6 +43,8 @@ public:
 
 	// 아이템 사용
 	static void ShowUseHealthPotion(Character& character, HealthPotion& potion);
+	static void ShowUseAttackBoost(Character& character, AttackBoost& boost);
+	static void ShowUseItem(Character& character, Item& item);
 
 	
 	// 몬스터 사망

@@ -26,6 +26,11 @@ public:
 	}
 
 	void Clear() {
+		for (int n = 0; n < items.size(); n++) {
+			if (items[n] != nullptr) {
+				delete items[n];
+			}
+		}
 		items.clear();
 	}
 
