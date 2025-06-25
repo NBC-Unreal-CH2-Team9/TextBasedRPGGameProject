@@ -1,4 +1,5 @@
 #include "BossMonster.h"
+#include "../../Console/ConsoleOutput.h"
 
 void BossMonster::Attack(Actor& other)
 {
@@ -14,6 +15,7 @@ void BossMonster::Attack(Actor& other)
 	}
 	else
 	{
+		ConsoleOutput::ShowAttackMessage(*this, other);
 		int damage = ApplyCriticalAttack();
 		other.TakeDamage(damage);
 	}
@@ -47,6 +49,7 @@ void BossMonster::UseSkill(Actor& other, std::string name)
 void BossMonster::HealSkill()
 {
 	int heal = maxHealth / 10;
+	int oldHealth = health;
 	if (health + heal < maxHealth)
 	{
 		health += heal;
@@ -55,17 +58,20 @@ void BossMonster::HealSkill()
 	{
 		health = maxHealth;
 	}
-	
+	ConsoleOutput::ShowMonsterHealSkill(*this, (health - oldHealth));
 }
 
 void BossMonster::AttackSkill(Actor& other)
 {
 	int damage = ApplyCriticalAttack() * 2;
+	ConsoleOutput::ShowMonsterAttackSkill(*this);
 	other.TakeDamage(damage);
+	
 }
 
 void BossMonster::PassiveSkill()
 {
 	attack += 20;
 	passiveSkill = false;
+	ConsoleOutput::ShowMonsterPassiveSkill(*this);
 }

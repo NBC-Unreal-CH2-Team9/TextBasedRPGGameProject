@@ -175,6 +175,22 @@ void ConsoleOutput::ShowMonsterStatus(Monster& monster) {
 	std::cout << "----------------\n";
 }
 
+void ConsoleOutput::ShowMonsterHealSkill(Monster& monster, int heal)
+{
+	std::cout << monster.GetName() << "은/는 " << heal << " 만큼 회복했다!\n";
+}
+
+void ConsoleOutput::ShowMonsterAttackSkill(Monster& monster)
+{
+	std::string skillName = "공격 스킬";
+	std::cout << monster.GetName() << "은/는 " << skillName << "을/를 사용했다!\n";
+}
+
+void ConsoleOutput::ShowMonsterPassiveSkill(Monster& monster)
+{
+	std::cout << monster.GetName() << "은/는 분노했다!\n";
+}
+
 void ConsoleOutput::ShowAttackMessage(Actor& attacker, Actor& target) {
 	std::cout << attacker.GetName() << "이(가) " << target.GetName() << "을(를) 공격합니다!\n";
 }
