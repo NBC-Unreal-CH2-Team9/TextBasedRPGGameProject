@@ -44,7 +44,8 @@ protected:
 
 private:
 	Monster* GenerateMonster(int characterLevel, BattleResult::BattleType battleType);
-	void UseItemRandom(std::string itemName,bool canUse);
+	void UseHealthPotion();
+	void UseAttackBooster();
 
 	// 상점에서 사용하는 정적 함수 모음
 	// 상점에서 판매하는 아이템 생성
