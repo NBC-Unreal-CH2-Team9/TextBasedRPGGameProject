@@ -30,7 +30,7 @@ Monster* MonsterManager::CreateDragon(int characterLevel)
 Monster* MonsterManager::CreateOrc(int characterLevel)
 {
 	int health = CalculateHealth(characterLevel, 40, 60);
-	int attack = CalculateAttack(characterLevel, 20, 70);
+	int attack = CalculateAttack(characterLevel, 2, 7);
 	int gold = CalculateGold(20, 30);
 	int experience = 75;
 	Monster* orc = new Orc("오크", health, attack, gold, experience);
