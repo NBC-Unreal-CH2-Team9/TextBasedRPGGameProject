@@ -44,11 +44,15 @@ void ConsoleOutput::PrintProgressBar(int value, int max)
 {
 	int length = 10;
 	int fill = value * length / max;
+	if (value > 0 && fill == 0) {
+		fill = 1;
+	}
 	int empty = length - fill;
 	if (value < 0) {
 		fill = 0;
 		empty = 10;
 	}
+	
 	
 	ResetColor();
 	std::cout << "[";
@@ -171,6 +175,22 @@ void ConsoleOutput::ShowMonsterStatus(Monster& monster) {
 	std::cout << "----------------\n";
 }
 
+void ConsoleOutput::ShowMonsterHealSkill(Monster& monster, int heal)
+{
+	std::cout << monster.GetName() << "은/는 " << heal << " 만큼 회복했다!\n";
+}
+
+void ConsoleOutput::ShowMonsterAttackSkill(Monster& monster)
+{
+	std::string skillName = "공격 스킬";
+	std::cout << monster.GetName() << "은/는 " << skillName << "을/를 사용했다!\n";
+}
+
+void ConsoleOutput::ShowMonsterPassiveSkill(Monster& monster)
+{
+	std::cout << monster.GetName() << "은/는 분노했다!\n";
+}
+
 void ConsoleOutput::ShowAttackMessage(Actor& attacker, Actor& target) {
 	std::cout << attacker.GetName() << "이(가) " << target.GetName() << "을(를) 공격합니다!\n";
 }
@@ -227,6 +247,16 @@ void ConsoleOutput::ShowUseAttackBoost(Character& character, AttackBoost& boost)
 void ConsoleOutput::ShowUseItem(Character& character, Item& item)
 {
 	std::cout << character.GetName() << "이/가" << item.GetName() << "을 사용하였습니다.\n";
+}
+
+void ConsoleOutput::ShowDropEquip(Equipment& equip)
+{
+	std::cout << "장비 " << equip.GetName() << "을/를 얻었습니다!\n";
+}
+
+void ConsoleOutput::ShowDropItem(Item& item)
+{
+	std::cout << "아이템 " << item.GetName() << "을/를 얻었습니다!\n";
 }
 
 void ConsoleOutput::ShowDieMonster() {

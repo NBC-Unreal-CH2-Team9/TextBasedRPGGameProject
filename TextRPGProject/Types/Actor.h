@@ -20,13 +20,18 @@ public:
 	virtual void TakeDamage(int damage);
 	std::string GetName() {	return name; }
 	int GetHealth() { return health; }
-	int GetAttack();
-	bool isCriticalHit();
+	int GetAttack() { return attack; }
+
 
 protected:
 	std::string name;
 	int health;
 	int attack;
-	float criticalAttack = 1.5;
+	float criticalPower = 1.5;
 	int criticalProbablily = 20;
+
+
+	bool isCriticalHit();
+	int ApplyCriticalAttack();
+
 };

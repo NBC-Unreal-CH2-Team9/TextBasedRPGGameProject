@@ -4,7 +4,8 @@
 void Actor::Attack(Actor& other)
 {
     ConsoleOutput::ShowAttackMessage(*this, other);
-    other.TakeDamage(GetAttack());
+    int damage = ApplyCriticalAttack();
+    other.TakeDamage(damage);
 }
 
 void Actor::TakeDamage(int damage)
@@ -13,18 +14,12 @@ void Actor::TakeDamage(int damage)
     health -= damage;
 }
 
-int Actor::GetAttack()
-{
-    if (isCriticalHit())
-    {
-        return attack * criticalAttack;
-    }
-    return attack;
-}
 
 bool Actor::isCriticalHit()
 {
-    if (rand() % 100 < criticalProbablily)
+	int num = rand() % 100;
+
+    if (num < criticalProbablily)
     {
         ConsoleOutput::ShowCriticalHit();
         return true;
@@ -33,4 +28,16 @@ bool Actor::isCriticalHit()
     {
         return false;
     }
+}
+
+int Actor::ApplyCriticalAttack()
+{
+	if (isCriticalHit())
+	{
+		return attack * criticalPower;
+	}
+	else
+	{
+		return attack;
+	}
 }

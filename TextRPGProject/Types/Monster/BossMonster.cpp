@@ -1,30 +1,46 @@
 #include "BossMonster.h"
-/*
+#include "../../Console/ConsoleOutput.h"
+
 void BossMonster::Attack(Actor& other)
 {
-	std::cout << name << "이(가) " << other.GetName() << "을(를)";
+	if (name == "보스 드래곤" && GetHealth() < GetMaxHealth() / 3 && passiveSkill)
+	{
+		PassiveSkill();
+	}
 
+	
 	if (rand() % 10 < 2)
 	{
 		UseSkill(other, name);
 	}
 	else
 	{
-		std::cout << " 공격합니다! ";
-		other.TakeDamage(attack);
+		ConsoleOutput::ShowAttackMessage(*this, other);
+		int damage = ApplyCriticalAttack();
+		other.TakeDamage(damage);
 	}
 
-}*/
+}
 
 void BossMonster::UseSkill(Actor& other, std::string name)
 {
-	std::cout << name << "이(가) 스킬을 사용했다." << std::endl;
-
-	if (name == "고블린" || name == "트롤")
+	if (name == "보스 드래곤")
+	{
+		if (GetHealth() > GetMaxHealth() / 2)
+		{
+			AttackSkill(other);
+		}
+		else
+		{
+			HealSkill();
+		}
+		
+	}
+	else if (name == "보스 고블린" || name == "보스 트롤")
 	{
 		AttackSkill(other);
 	}
-	else if (name == "슬라임" || name == "오크")
+	else if (name == "보스 슬라임" || name == "보스 오크")
 	{
 		HealSkill();
 	}
@@ -33,6 +49,7 @@ void BossMonster::UseSkill(Actor& other, std::string name)
 void BossMonster::HealSkill()
 {
 	int heal = maxHealth / 10;
+	int oldHealth = health;
 	if (health + heal < maxHealth)
 	{
 		health += heal;
@@ -41,10 +58,20 @@ void BossMonster::HealSkill()
 	{
 		health = maxHealth;
 	}
-	
+	ConsoleOutput::ShowMonsterHealSkill(*this, (health - oldHealth));
 }
 
 void BossMonster::AttackSkill(Actor& other)
 {
-	other.TakeDamage(attack * 2);
+	int damage = ApplyCriticalAttack() * 2;
+	ConsoleOutput::ShowMonsterAttackSkill(*this);
+	other.TakeDamage(damage);
+	
+}
+
+void BossMonster::PassiveSkill()
+{
+	attack += 20;
+	passiveSkill = false;
+	ConsoleOutput::ShowMonsterPassiveSkill(*this);
 }

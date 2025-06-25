@@ -1,16 +1,13 @@
 #pragma once
 
-#include <iostream>
 #include "../Actor.h"
 
 class Monster : public Actor {
 public:
 	Monster(std::string name, int health, int attack, int gold, int experience) : Actor(name, health, attack), gold(gold), experience(experience), maxHealth(health) {}
-	int GetGold();
-	int GetExperience();
-	int GetMaxHealth() {
-		return maxHealth;
-	}
+	int GetGold() { return gold; }
+	int GetExperience() { return experience; }
+	int GetMaxHealth() { return maxHealth;	}
 
 protected:
 	int gold;

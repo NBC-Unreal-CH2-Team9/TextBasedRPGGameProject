@@ -27,9 +27,11 @@ public:
 	static void ShowLevelUp(Character& character);
 
 	
-	// 몬스터 상태
+	// 몬스터 상태, 전투
 	static void ShowMonsterStatus(Monster& monster);
-
+	static void ShowMonsterHealSkill(Monster& monster, int heal);
+	static void ShowMonsterAttackSkill(Monster& monster);
+	static void ShowMonsterPassiveSkill(Monster& monster);
 	
 	// 공격과 피해, 크리티컬, 전투
 	static void ShowBattleStart();
@@ -46,6 +48,9 @@ public:
 	static void ShowUseAttackBoost(Character& character, AttackBoost& boost);
 	static void ShowUseItem(Character& character, Item& item);
 
+	// 아이템 드롭
+	static void ShowDropEquip(Equipment& equip);
+	static void ShowDropItem(Item& item);
 	
 	// 몬스터 사망
 	static void ShowDieMonster();

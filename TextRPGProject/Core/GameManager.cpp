@@ -287,12 +287,14 @@ void GameManager::DropEquip()
 {
 	Equipment* dropEquip = EquipmentManager::GenerateRandomEquipment();
 	character->Equip(dropEquip);
+	ConsoleOutput::ShowDropEquip(*dropEquip);
 }
 
 void GameManager::DropItem()
 {
 	Item* dropItem = ItemManager::GenerateRandomItem();
 	character->GetRandomItem(dropItem);
+	ConsoleOutput::ShowDropItem(*dropItem);
 }
 
 void GameManager::RandomGetItem()
@@ -308,15 +310,11 @@ void GameManager::RandomGetItem()
 	if (itemRoll <= 30)
 	{
 		DropItem();
-		//테스트 확인용
-		//std::cout << "\n 아이템 얻음" << std::endl;
 	}
 
 	if (equipRoll <= 10)
 	{
 		DropEquip();
-		//테스트 확인용
-		//std::cout << "\n 장비 얻음" << std::endl;
 	}
 }
 

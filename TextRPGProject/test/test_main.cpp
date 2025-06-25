@@ -30,7 +30,7 @@ void testMonster()
 {
 	srand(time(nullptr));
 	int playerLevel = 1;
-	Monster* mon = MonsterManager::CreateOrc(playerLevel);
+	/*Monster* mon = MonsterManager::CreateGoblin(playerLevel);
 	Monster* mon2 = MonsterManager::CreateSlime(playerLevel);
 	Monster* bossMon = MonsterManager::CreateBoss(*mon);
 	std::cout << "name: " << mon->GetName() << " health: " << mon->GetHealth() << 
@@ -39,7 +39,46 @@ void testMonster()
 	std::cout << "name: " << bossMon->GetName() << " health: " << bossMon->GetHealth() << 
 		" attack: " << bossMon->GetAttack() << " gold: " << bossMon->GetGold() << 
 		" experience: " << bossMon->GetExperience() << std::endl;
-	mon->Attack(*mon2);
+
+
+
+	std::cout << "\n\nhealth: " << mon->GetHealth() << std::endl;
+	std::cout << "health: " << bossMon->GetHealth() << std::endl;
+	for (int i = 0; i < 10; i++)
+	{
+		
+		mon->Attack(*bossMon);
+		std::cout << bossMon->GetName() << "health: " << bossMon->GetHealth() << std::endl;
+		bossMon->Attack(*mon);
+		std::cout << mon->GetName() << "health: " << mon->GetHealth() << std::endl;
+	}*/
+
+    Monster* mon = MonsterManager::CreateOrc(playerLevel);
+    Monster* dragon = MonsterManager::CreateDragon(playerLevel);
+    std::cout << "name: " << mon->GetName() << " health: " << mon->GetHealth() <<
+        " attack: " << mon->GetAttack() << " gold: " << mon->GetGold() <<
+        " experience: " << mon->GetExperience() << std::endl;
+    std::cout << "name: " << dragon->GetName() << " health: " << dragon->GetHealth() <<
+        " attack: " << dragon->GetAttack() << " gold: " << dragon->GetGold() <<
+        " experience: " << dragon->GetExperience() << std::endl;
+	
+    std::cout << "\n\nhealth: " << mon->GetHealth() << std::endl;
+    std::cout << "health: " << dragon->GetHealth() << std::endl;
+    for (int i = 0; i < 10; i++)
+    {
+
+        mon->Attack(*dragon);
+        std::cout << dragon->GetName() << "health: " << dragon->GetHealth() << std::endl;
+        dragon->Attack(*mon);
+        std::cout << mon->GetName() << "health: " << mon->GetHealth() << std::endl;
+    
+        if (dragon->GetMaxHealth() / 3 > dragon->GetHealth())
+        {
+            std::cout << "체력 절반!!!!!" << std::endl;
+            std::cout << dragon->GetAttack() << std::endl;
+            std::cout << mon->GetAttack() << std::endl;
+        }
+    }
 }
 
 void testShop() {
@@ -68,8 +107,8 @@ void itemTest() {
 
     //테스트 1, 2, 3
     std::cout << "아이템 이름과 가격, 각 증가량 확인" << std::endl;
-    std::cout << "HealthPotion 이름: " << hpPotion30.GetName() << ", 가격: " << hpPotion30.GetPrice() << ", 증가량: " << hpPotion30.GetHealthRestore() << std::endl;
-    std::cout << "AttackBoost 이름: " << atkBoost10.GetName() << ", 가격: " << atkBoost10.GetPrice() << ", 증가량: " << atkBoost10.GetStat() << std::endl;
+    //std::cout << "HealthPotion 이름: " << hpPotion30.GetName() << ", 가격: " << hpPotion30.GetPrice() << ", 증가량: " << hpPotion30.GetStat() << std::endl;
+    //std::cout << "AttackBoost 이름: " << atkBoost10.GetName() << ", 가격: " << atkBoost10.GetPrice() << ", 증가량: " << atkBoost10.GetStat() << std::endl;
 
     
     std::cout << "\n[초기 상태]" << std::endl;
@@ -221,8 +260,5 @@ void dropTest() {
 
 
 int main() {
-	//testBattle();
-	//testMonster();
-    //dropTest();
-    BattleTest();
+    testMonster();
 }
