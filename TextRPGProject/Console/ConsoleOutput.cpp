@@ -133,17 +133,17 @@ void ConsoleOutput::ShowSelectJob()
 
 void ConsoleOutput::ShowCharacterStatus(Character& character) {
 	std::cout << "--캐릭터 현재 상태--\n";
-	std::cout << "정보: " << character.GetName() << ", 레벨 " << character.GetLevel() << " " << character.GetJobName() << "\n";
-	std::cout << "체력: " << character.GetHealth() << "/" << character.GetMaxHealth() << "\n";
-	std::cout << "공격력: " << character.GetAttack() << "\n";
-	std::cout << "경험치: " << character.GetExperience() << "/100 " << "\n";
+	std::cout << "이름 : " << character.GetName() << ", 레벨 : " << character.GetLevel() << " " << character.GetJobName() << "\n";
+	std::cout << "체력 : " << character.GetHealth() << " / " << character.GetMaxHealth() << "\n";
+	std::cout << "공격력 : " << character.GetAttack() << "\n";
+	std::cout << "경험치 : " << character.GetExperience() << " / 100 " << "\n";
 	std::cout << "----------------\n";
 }
 
 void ConsoleOutput::ShowCharacterGoldAndItem(Character& character) {
-	std::cout << "--캐릭터 소지품 정보--\n";
-	std::cout << "현재 골드: " << character.GetGold() << "\n";
-	std::cout << "아이템: ";
+	std::cout << "-- 캐릭터 소지품 정보 --\n";
+	std::cout << "현재 골드 : " << character.GetGold() << "\n";
+	std::cout << "아이템 : ";
 	std::vector<Item*> items = character.GetItemInventory()->GetItems();
 	for (int n = 0; n < items.size(); n++) {
 		std::cout << items[n]->GetName() ;
@@ -153,46 +153,46 @@ void ConsoleOutput::ShowCharacterGoldAndItem(Character& character) {
 	}
 	std::cout << "\n";
 	if (character.GetSword() != nullptr) {
-		std::cout << "무기: " << character.GetSword()->GetName() << "\n";
+		std::cout << "무기 : " << character.GetSword()->GetName() << "\n";
 	}
 	if (character.GetArmor() != nullptr) {
-		std::cout << "방어구: " << character.GetArmor()->GetName() << "\n";
+		std::cout << "방어구 : " << character.GetArmor()->GetName() << "\n";
 	}
-	std::cout << "----------------------\n";
+	std::cout << "----------------\n";
 }
 
 void ConsoleOutput::ShowLevelUp(Character& character)
 {
-	std::cout << character.GetName() << "는/은 레벨업했다!\n";
-	std::cout << "체력과 공격력이 상승했으며, 체력이 전부 회복되었다!\n";
+	std::cout << character.GetName() << "이(가) 레벨업했습니다.\n";
+	std::cout << "체력과 공격력이 상승했으며, 체력이 전부 회복되었습니다.\n";
 }
 
 void ConsoleOutput::ShowMonsterStatus(Monster& monster) {
-	std::cout << "--몬스터 등장--\n";
-	std::cout << "이름: " << monster.GetName() << "\n";
-	std::cout << "체력: " << monster.GetHealth() << "\n";
-	std::cout << "공격력: " << monster.GetAttack() << "\n";
+	std::cout << "-- 몬스터 등장 --\n";
+	std::cout << "이름 : " << monster.GetName() << "\n";
+	std::cout << "체력 : " << monster.GetHealth() << "\n";
+	std::cout << "공격력 : " << monster.GetAttack() << "\n";
 	std::cout << "----------------\n";
 }
 
 void ConsoleOutput::ShowMonsterHealSkill(Monster& monster, int heal)
 {
-	std::cout << monster.GetName() << "은/는 " << heal << " 만큼 회복했다!\n";
+	std::cout << monster.GetName() << "이(가) " << heal << " 만큼 회복했습니다.\n";
 }
 
 void ConsoleOutput::ShowMonsterAttackSkill(Monster& monster)
 {
-	std::string skillName = "공격 스킬";
-	std::cout << monster.GetName() << "은/는 " << skillName << "을/를 사용했다!\n";
+	std::string skillName = "스킬 공격";
+	std::cout << monster.GetName() << "이(가) " << skillName << "을(를) 사용했습니다.\n";
 }
 
 void ConsoleOutput::ShowMonsterPassiveSkill(Monster& monster)
 {
-	std::cout << monster.GetName() << "은/는 분노했다!\n";
+	std::cout << monster.GetName() << "이(가) 분노했습니다.\n";
 }
 
 void ConsoleOutput::ShowAttackMessage(Actor& attacker, Actor& target) {
-	std::cout << attacker.GetName() << "이(가) " << target.GetName() << "을(를) 공격합니다!\n";
+	std::cout << attacker.GetName() << "이(가) " << target.GetName() << "을(를) 공격합니다.\n";
 }
 
 void ConsoleOutput::ShowDamageMessage(Actor& who, int damage) {
@@ -209,24 +209,24 @@ void ConsoleOutput::ShowCriticalHit()
 void ConsoleOutput::ShowCharacterTurn()
 {
 	SetTextColor(Color::GREEN);
-	std::cout << "<캐릭터의 턴>\n";
+	std::cout << "-- 캐릭터의 턴 --\n";
 	ResetColor();
 }
 
 void ConsoleOutput::ShowMonsterTurn()
 {
 	SetTextColor(Color::RED);
-	std::cout << "<몬스터의 턴>\n";
+	std::cout << "-- 몬스터의 턴 --\n";
 	ResetColor();
 }
 
 void ConsoleOutput::ShowBattleProgress(Character& character, Monster& monster)
 {
-	std::cout << "HP:";
+	std::cout << "HP : ";
 	PrintProgressBar(character.GetHealth(), character.GetMaxHealth());
 	std::cout << character.GetName() << "\n";
 
-	std::cout << "HP:";
+	std::cout << "HP : ";
 	PrintProgressBar(monster.GetHealth(), monster.GetMaxHealth());
 	std::cout << monster.GetName() << "\n";
 	std::cout << "\n";
@@ -234,46 +234,46 @@ void ConsoleOutput::ShowBattleProgress(Character& character, Monster& monster)
 
 void ConsoleOutput::ShowUseHealthPotion(Character& character, HealthPotion& potion)
 {
-	std::cout << character.GetName() << "은/는 체력이 절반이 되어, 포션을 사용하였습니다!\n";
-	std::cout << "현재 체력: " << character.GetHealth() << "(+" << potion.GetHealthRestore() << ")\n";
+	std::cout << character.GetName() << "이(가) 체력이 절반이 되어, 포션을 사용하였습니다.\n";
+	std::cout << "현재 체력 : " << character.GetHealth() << " (+" << potion.GetHealthRestore() << ")\n";
 }
 
 void ConsoleOutput::ShowUseAttackBoost(Character& character, AttackBoost& boost)
 {
-	std::cout << character.GetName() << "은/는 공격력 강화 아이템을 사용했습니다!\n";
-	std::cout << "현재 공격력: " << character.GetAttack() << "(+" << boost.GetAttackincrease() << ")\n";
+	std::cout << character.GetName() << "이(가) 공격력 강화 아이템을 사용했습니다.\n";
+	std::cout << "현재 공격력 : " << character.GetAttack() << " (+" << boost.GetAttackincrease() << ")\n";
 }
 
 void ConsoleOutput::ShowUseItem(Character& character, Item& item)
 {
-	std::cout << character.GetName() << "이/가" << item.GetName() << "을 사용하였습니다.\n";
+	std::cout << character.GetName() << "이(가)" << item.GetName() << "을(를) 사용했습니다.\n";
 }
 
 void ConsoleOutput::ShowDropEquip(Equipment& equip)
 {
-	std::cout << "장비 " << equip.GetName() << "을/를 얻었습니다!\n";
+	std::cout << "장비 " << equip.GetName() << "을(를) 얻었습니다.\n";
 }
 
 void ConsoleOutput::ShowDropItem(Item& item)
 {
-	std::cout << "아이템 " << item.GetName() << "을/를 얻었습니다!\n";
+	std::cout << "아이템 " << item.GetName() << "을(를) 얻었습니다.\n";
 }
 
 void ConsoleOutput::ShowDieMonster() {
-	std::cout << "몬스터를 처치했습니다! 전투에서 승리하셨습니다.\n";
+	std::cout << "몬스터를 처치했습니다.\n전투에서 승리하셨습니다.\n";
 }
 
 void ConsoleOutput::ShowBattleWin()
 {
 	SetTextColor(Color::SKY);
-	std::cout << "<전투 결과>\n";
+	std::cout << "-- 전투 결과 --\n";
 	ResetColor();
-	std::cout << "전투에서 승리했습니다!\n";
+	std::cout << "전투에서 승리했습니다.\n";
 }
 
 void ConsoleOutput::ShowBattleDefeat()
 {
-	std::cout << "<전투 결과>\n전투에서 패배했습니다...\n";
+	std::cout << "-- 전투 결과 --\n전투에서 패배했습니다...\n";
 }
 
 void ConsoleOutput::ShowGetGold(Character& character, Monster& monster)
@@ -284,16 +284,16 @@ void ConsoleOutput::ShowGetGold(Character& character, Monster& monster)
 
 void ConsoleOutput::ShowGetExp(Character& character, Monster& monster)
 {
-	std::cout << monster.GetName() << "으로부터 경험치 " << monster.GetExperience() <<"를 획득했습니다.\n";
+	std::cout << monster.GetName() << "으로부터 경험치 " << monster.GetExperience() <<"을(를) 획득했습니다.\n";
 }
 
 
-const std::string ConsoleOutput::shopQuestion = "상점에 방문하시겠습니까?";
+const std::string ConsoleOutput::shopQuestion = "상점에 방문합니까?";
 const std::vector<std::string> ConsoleOutput::shopOptions = { "물건 사기", "물건 팔기", "상점 나가기" };
 
 void ConsoleOutput::ShowEnterShop()
 {
-	std::cout << "상점에 입장했습니다.\n";
+	std::cout << "상점에 방문했습니다.\n";
 }
 
 void ConsoleOutput::ShowSkipShop()
@@ -303,7 +303,7 @@ void ConsoleOutput::ShowSkipShop()
 
 void ConsoleOutput::ShowExitShop()
 {
-	std::cout << "상점에서 나왔습니다\n";
+	std::cout << "상점에서 나왔습니다.\n";
 }
 
 void ConsoleOutput::ShowNoItemToSell()
@@ -313,12 +313,12 @@ void ConsoleOutput::ShowNoItemToSell()
 
 void ConsoleOutput::ShowNotEnoughGold()
 {
-	std::cout << "골드가 모자랍니다\n";
+	std::cout << "골드가 모자랍니다.\n";
 }
 
 void ConsoleOutput::ShowCharacterGoldChange(Character& character, int change)
 {
-	std::cout << "소지 골드: ";
+	std::cout << "소지 골드 : ";
 	SetTextColor(Color::YELLOW);
 	std::cout << character.GetGold();
 	ResetColor();
@@ -352,18 +352,18 @@ std::vector<std::string> ConsoleOutput::MakeShopSellList(std::vector<Item*> list
 
 void ConsoleOutput::ShowBuyItem(Item& item, Character& character)
 {
-	std::cout << item.GetName() << "을/를 구매 했습니다.\n";
+	std::cout << item.GetName() << "을(를) 구매했습니다.\n";
 	ShowCharacterGoldChange(character, -1 * item.GetPrice());
 }
 
 void ConsoleOutput::ShowSellItem(Item& item, Character& character, float ratio)
 {
-	std::cout << item.GetName() << "을/를 판매 했습니다.\n";
+	std::cout << item.GetName() << "을(를) 판매했습니다.\n";
 	ShowCharacterGoldChange(character, (int)(item.GetPrice() * ratio));
 }
 
 void ConsoleOutput::ShowSellEquipment(Equipment& equipment, Character& character, float ratio)
 {
-	std::cout << equipment.GetName() << "을/를 판매 했습니다.\n";
+	std::cout << equipment.GetName() << "을(를) 판매했습니다.\n";
 	ShowCharacterGoldChange(character, (int)(equipment.GetPrice() * ratio));
 }
