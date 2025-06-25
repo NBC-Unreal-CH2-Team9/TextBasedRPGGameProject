@@ -4,7 +4,7 @@
 
 void Character::LevelUp()
 {	
-	if (level < 10) {
+	if (level < MAX_LEVEL) {
 		level++;
 		OnLevelChangedHealth();
 		OnLevelChangedAttack();

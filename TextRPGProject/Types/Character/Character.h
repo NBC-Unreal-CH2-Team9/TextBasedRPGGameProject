@@ -94,4 +94,6 @@ protected:
 	
 	int maxHealth;
 	int experience;
+
+	const int MAX_LEVEL = 15;
 };
