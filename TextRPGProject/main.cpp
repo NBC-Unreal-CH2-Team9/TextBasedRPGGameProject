@@ -9,7 +9,7 @@
 
 int main() {
 	
-	srand(time(nullptr));
+	srand((unsigned int)time(nullptr));
 
 	ConsoleOutput::ShowIntro();
 
