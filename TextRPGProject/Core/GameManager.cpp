@@ -57,7 +57,7 @@ Character* GameManager::CreateCharacter()
 		character = new Mage(1, name, 200, 50, 0);
 		break;
 	case 2:
-		character = new Tanker(1, name, 500, 20, 0);
+		character = new Tanker(1, name, 500, 25, 0);
 		break;
 	default:
 		break;

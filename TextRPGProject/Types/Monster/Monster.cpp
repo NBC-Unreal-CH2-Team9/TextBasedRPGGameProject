@@ -19,7 +19,7 @@ Monster* MonsterManager::CreateDragon(int characterLevel)
 Monster* MonsterManager::CreateOrc(int characterLevel)
 {
 	int health = CalculateHealth(characterLevel, 40, 60);
-	int attack = CalculateAttack(characterLevel, 2, 7);
+	int attack = CalculateAttack(characterLevel, 5, 10);
 	int gold = CalculateGold(20, 30);
 	int experience = 75;
 	Monster* orc = new Orc("오크", health, attack, gold, experience);
@@ -28,8 +28,8 @@ Monster* MonsterManager::CreateOrc(int characterLevel)
 
 Monster* MonsterManager::CreateSlime(int characterLevel)
 {
-	int health = CalculateHealth(characterLevel, 10, 20);
-	int attack = CalculateAttack(characterLevel, 1, 5);
+	int health = CalculateHealth(characterLevel, 15, 20);
+	int attack = CalculateAttack(characterLevel, 3, 5);
 	int gold = CalculateGold(5, 15);
 	int experience = 25;
 	Monster* slime = new Slime("슬라임", health, attack, gold, experience);
@@ -49,7 +49,7 @@ Monster* MonsterManager::CreateGoblin(int characterLevel)
 Monster* MonsterManager::CreateTroll(int characterLevel)
 {
 	int health = CalculateHealth(characterLevel, 25, 40);
-	int attack = CalculateAttack(characterLevel, 6, 12);
+	int attack = CalculateAttack(characterLevel, 10, 15);
 	int gold = CalculateGold(15, 25);
 	int experience = 60;
 	Monster* troll = new Troll("트롤", health, attack, gold, experience);
