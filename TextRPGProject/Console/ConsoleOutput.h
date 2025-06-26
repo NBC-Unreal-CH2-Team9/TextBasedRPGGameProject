@@ -11,9 +11,11 @@
 class ConsoleOutput
 {
 public:
-	// 인트로, 아웃트로
+	// 인트로, 아웃트로, 게임 클리어, 게임 오버
 	static void ShowIntro();
 	static void ShowCredit();
+	static void ShowGameClear();
+	static void ShowGameOver();
 
 	//캐릭터 생성
 	static void ShowCreateCharacterIntro();

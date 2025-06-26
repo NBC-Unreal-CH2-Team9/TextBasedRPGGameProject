@@ -106,6 +106,32 @@ void ConsoleOutput::ShowCredit()
 	std::cout << "\n";
 }
 
+void ConsoleOutput::ShowGameClear()
+{
+	SetTextColor(Color::GREEN);
+	std::cout << "  /$$$$$$  /$$                               /$$ /$$\n"; Sleep(100);
+	std::cout << " /$$__  $$| $$                              | $$| $$\n"; Sleep(100);
+	std::cout << "| $$  V__/| $$  /$$$$$$   /$$$$$$   /$$$$$$ | $$| $$\n"; Sleep(100);
+	std::cout << "| $$      | $$ /$$__  $$ |____  $$ /$$__  $$| $$| $$\n"; Sleep(100);
+	std::cout << "| $$      | $$| $$$$$$$$  /$$$$$$$| $$  V__/|__/|__/\n"; Sleep(100);
+	std::cout << "| $$    $$| $$| $$_____/ /$$__  $$| $$\n"; Sleep(100);
+	std::cout << "|  $$$$$$/| $$|  $$$$$$$|  $$$$$$$| $$       /$$ /$$\n"; Sleep(100);
+	std::cout << " V______/ |__/ V_______/ V_______/|__/      |__/|__/\n"; Sleep(100);
+	ResetColor();
+}
+
+void ConsoleOutput::ShowGameOver()
+{
+	SetTextColor(Color::RED);
+	std::cout << " _____                          _____ \n"; Sleep(100);
+	std::cout << "|  __ V                        |  _  | \n"; Sleep(100);
+	std::cout << "| |  V/  __ _  _ __ ___    ___ | | | |__   __  ___  _ __ \n"; Sleep(100);
+	std::cout << "| | __  / _` || '_ ` _ V  / _ V| | | |V V / / / _ V| '__| \n"; Sleep(200);
+	std::cout << "| |_V V| (_| || | | | | ||  __/V V_/ / V V / |  __/| | \n"; Sleep(400);
+	std::cout << " V____/ V__,_||_| |_| |_| V___| V___/   V_/   V___||_| \n"; Sleep(800);
+	ResetColor();
+}
+
 void ConsoleOutput::ShowCreateCharacterIntro()
 {
 	PrintBox("캐릭터 생성 단계", 20, Color::SKY);
