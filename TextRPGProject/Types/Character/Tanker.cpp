@@ -3,11 +3,11 @@
 #include <iostream>  
 
 void Tanker::OnLevelChangedHealth() {
-	int newHealth = (maxHealth + level * 30);
+	int newHealth = (maxHealth + level * 35);
 	health = newHealth;
 	maxHealth = newHealth;
 }
 
 void Tanker::OnLevelChangedAttack() {
-	attack += (level * 2);
+	attack += (level * 3);
 }

@@ -8,5 +8,5 @@ void Mage::OnLevelChangedHealth() {
 }  
 
 void Mage::OnLevelChangedAttack() { 
-	attack += (level * 8);  
+	attack += (level * 6);  
 }

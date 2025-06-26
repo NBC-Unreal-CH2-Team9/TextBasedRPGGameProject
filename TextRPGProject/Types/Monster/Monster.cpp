@@ -9,7 +9,7 @@
 Monster* MonsterManager::CreateDragon(int characterLevel)
 {
 	int health = CalculateHealth(characterLevel, 100, 150);
-	int attack = CalculateAttack(characterLevel, 15, 20);
+	int attack = CalculateAttack(characterLevel, 10, 13);
 	int gold = CalculateGold(100, 150);
 	int experience = 100;
 	Monster dragon("드래곤", health, attack, gold, experience);
