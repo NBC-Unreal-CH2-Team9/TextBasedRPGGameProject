@@ -34,7 +34,7 @@ int Actor::ApplyCriticalAttack()
 {
 	if (isCriticalHit())
 	{
-		return attack * criticalPower;
+		return (int)(attack * criticalPower);
 	}
 	else
 	{

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../Types/Character/Character.h"
 #include "../Types/Actor.h"
 #include "../Types/Monster/Monster.h"

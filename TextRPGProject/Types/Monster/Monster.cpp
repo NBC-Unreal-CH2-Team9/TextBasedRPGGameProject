@@ -59,10 +59,10 @@ Monster* MonsterManager::CreateTroll(int characterLevel)
 Monster* MonsterManager::CreateBoss(Monster& monster)
 {
 	std::string name = "보스 " + monster.GetName();
-	int health = monster.GetHealth() * 1.5;
-	int attack = monster.GetAttack() * 1.5;
-	int gold = monster.GetGold() * 1.5;
-	int experience = monster.GetExperience() * 1.5;
+	int health = (int)(monster.GetHealth() * 1.5f);
+	int attack = (int)(monster.GetAttack() * 1.5f);
+	int gold = (int)(monster.GetGold() * 1.5f);
+	int experience = (int)(monster.GetExperience() * 1.5f);
 	Monster* bossMonster = new BossMonster(name, health, attack, gold, experience);
 
 	return bossMonster;

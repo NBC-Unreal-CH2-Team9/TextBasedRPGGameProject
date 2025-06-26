@@ -1,6 +1,8 @@
 ﻿#pragma once
 
 #include <vector>
+#include "../Item/Item.h"
+#include "../Equipment/Equipment.h"
 
 template<typename T>
 class Inventory {
@@ -25,14 +27,7 @@ public:
 		return items.size();
 	}
 
-	void Clear() {
-		for (int n = 0; n < items.size(); n++) {
-			if (items[n] != nullptr) {
-				delete items[n];
-			}
-		}
-		items.clear();
-	}
+	void Clear();
 
 private:
 	std::vector<T*> items;
@@ -65,4 +60,15 @@ template<typename T>
 T* Inventory<T>::Get(unsigned int index)
 {
 	return items[index];
+}
+
+template<typename T>
+inline void Inventory<T>::Clear()
+{
+	for (int n = 0; n < items.size(); n++) {
+		if (items[n] != nullptr) {
+			delete items[n];
+		}
+	}
+	items.clear();
 }
