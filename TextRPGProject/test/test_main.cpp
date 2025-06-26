@@ -260,6 +260,4 @@ void dropTest() {
 
 
 int main() {
-    //testMonster();
-    BattleTest();
 }
