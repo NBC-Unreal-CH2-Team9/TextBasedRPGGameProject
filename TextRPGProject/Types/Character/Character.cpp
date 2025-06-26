@@ -4,11 +4,9 @@
 
 void Character::LevelUp()
 {	
-	if (level < MAX_LEVEL) {
-		level++;
-		OnLevelChangedHealth();
-		OnLevelChangedAttack();
-	}	
+	level++;
+	OnLevelChangedHealth();
+	OnLevelChangedAttack();
 }
 
 void Character::OnLevelChangedHealth() {}
@@ -18,10 +16,16 @@ void Character::OnLevelChangedAttack() {}
 bool Character::AddExperienceAndCheckLevelUp(int exp)
 {
 	int newExp = experience + exp;
-	if(newExp >= 100) {		
-		LevelUp();
-		experience = 0; 
-		return true;
+	if(newExp >= 100) {
+		if (level < MAX_LEVEL) {
+			LevelUp();
+			experience = 0;
+			return true;
+		}
+		else {
+			experience = 100;
+			return false;
+		}
 	}
 	else {
 		experience = newExp;

@@ -34,6 +34,7 @@ int main() {
 	gameMamager.CreateCharacter();
 	
 	// 캐릭터가 죽을 때 까지 게임 플로우 반복
+	bool isGameClear = false;
 	while (true) {
 
 		ConsoleOutput::ShowCharacterStatus(*(gameMamager.GetCharacter()));
@@ -41,17 +42,27 @@ int main() {
 		BattleResult result = gameMamager.Battle();
 		if (result.isWin) {
 			if (result.battleType == BattleResult::FINAL_BOSS) {
-				// 전투 승리
+				// 게임 승리
+				isGameClear = true;
 				break;
 			}
 		}
 		else {
-			// 전투 패배
+			// 게임 패배
+			isGameClear = false;
 			break;
 		}
 		ConsoleOutput::ShowCharacterStatus(*(gameMamager.GetCharacter()));
 		ConsoleOutput::ShowCharacterGoldAndItem(*(gameMamager.GetCharacter()));
 		gameMamager.Shop();
+	}
+
+	if (isGameClear) {
+		ConsoleOutput::ShowGameClear();
+		ConsoleOutput::ShowCredit();
+	}
+	else {
+		ConsoleOutput::ShowGameOver();
 	}
 
 	return 0;
