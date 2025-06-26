@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
+#include <ctime>
 
 #include "Core/GameManager.h"
 #include "Console/ConsoleInput.h"
@@ -8,6 +9,8 @@
 
 int main() {
 	
+	srand(time(nullptr));
+
 	ConsoleOutput::ShowIntro();
 
 	// 게임 메뉴

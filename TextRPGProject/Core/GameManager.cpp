@@ -27,7 +27,7 @@
 
 GameManager::GameManager()
 {
-	character == nullptr;
+	character = nullptr;
 }
 
 GameManager::~GameManager()
@@ -134,14 +134,16 @@ BattleResult GameManager::Battle()
 	}
 	Monster* monster = GenerateMonster(character->GetLevel(), result.battleType);
 
+	UseAttackBooster();
+
 	//전투중
 	while(isFighting)
 	{
 		if (isMyTurn)
 		{
 			ConsoleOutput::ShowCharacterTurn();
-			UseItemRandom("Health Potion", character->GetHealth() < character->GetMaxHealth() / 2);
-			UseItemRandom("Attack Boost", rand()%100<50);
+			UseHealthPotion();
+	
 			character->Attack(*monster);
 			if (monster->GetHealth() <= 0)
 			{
@@ -191,9 +193,9 @@ BattleResult GameManager::Battle()
 }
 
 
-void GameManager::UseItemRandom(std::string itemName, bool canUse)
+void GameManager::UseHealthPotion()
 {
-	if (!canUse) {
+	if (character->GetHealth() > character->GetMaxHealth() / 2) {
 		return;
 	}
 
@@ -205,24 +207,40 @@ void GameManager::UseItemRandom(std::string itemName, bool canUse)
 
 	for (int i = 0; i < Items.size(); i++)
 	{
-		if (Items[i] && Items[i]->GetName() == itemName)
+		if (Items[i] && Items[i]->GetName() == "Health Potion")
 		{
 			Items[i]->Use(*character);
-			if (Items[i]->GetName() == "Health Potion") {
-				HealthPotion* potion = dynamic_cast<HealthPotion*>(Items[i]);
-				ConsoleOutput::ShowUseHealthPotion(*character, *potion);
-			}
-			else if (Items[i]->GetName() == "Attack Boost") {
-				AttackBoost* boost = dynamic_cast<AttackBoost*>(Items[i]);
-				ConsoleOutput::ShowUseAttackBoost(*character, *boost);
-			}
-			else {
-				ConsoleOutput::ShowUseItem(*character, *Items[i]);
-			}
+			HealthPotion* potion = dynamic_cast<HealthPotion*>(Items[i]);
+			ConsoleOutput::ShowUseHealthPotion(*character, *potion);
 			delete Items[i];
 			character->GetItemInventory()->Remove(i);
 			break;
 		}
+	}
+}
+
+void GameManager::UseAttackBooster()
+{
+	if (!character->GetItemInventory()->Count()) {
+		return;
+	}
+
+	std::vector<Item*> Items = character->GetItemInventory()->GetItems();
+
+	int attackBoostNum = 0;
+
+	for (int i = 0; i < Items.size(); i++)
+	{
+		if (Items[i]->GetName() == "Attack Boost") 
+		{
+			Items[i]->Use(*character);
+			AttackBoost* boost = dynamic_cast<AttackBoost*>(Items[i]);
+			ConsoleOutput::ShowUseAttackBoost(*character, *boost);
+			delete Items[i];
+			character->GetItemInventory()->Remove(i-attackBoostNum);
+			attackBoostNum++;
+		}
+
 	}
 }
 
