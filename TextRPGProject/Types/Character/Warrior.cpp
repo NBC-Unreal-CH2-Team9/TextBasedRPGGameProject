@@ -8,5 +8,5 @@ void Warrior::OnLevelChangedHealth() {
 }
 
 void Warrior::OnLevelChangedAttack() {
-	attack += (level * 5);
+	attack += (level * 4);
 }

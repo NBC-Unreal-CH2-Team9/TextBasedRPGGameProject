@@ -51,13 +51,13 @@ Character* GameManager::CreateCharacter()
 	switch (jobChoice)
 	{
 	case 0:
-		character = new Warrior(1, name, 200, 30, 0);
+		character = new Warrior(1, name, 300, 35, 0);
 		break;
 	case 1:
-		character = new Mage(1, name, 100, 45, 0);
+		character = new Mage(1, name, 200, 50, 0);
 		break;
 	case 2:
-		character = new Tanker(1, name, 350, 15, 0);
+		character = new Tanker(1, name, 500, 20, 0);
 		break;
 	default:
 		break;
